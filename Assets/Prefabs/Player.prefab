@@ -249,6 +249,7 @@ MonoBehaviour:
   _arrow: {fileID: 7298402198344734491}
   _minXScaleArrow: 0.1
   _maxXScaleArrow: 0.18
+  _ballOffsetArrow: 0
   forceMultiplier: 0.1
 --- !u!1 &7298402198344734491
 GameObject:

@@ -11,6 +11,7 @@ public class InputController : MonoBehaviour
     [Header("Input Settings")]
     [SerializeField] private float _holdInterval;
     [SerializeField] private float _deathZoneRadius;
+    [SerializeField] private float _maxDragRadius;
 
     //--Controlling drag times--//
     public float prevClickTime;
@@ -46,7 +47,13 @@ public class InputController : MonoBehaviour
             {
                 //Debug.Log("Left Click - DRAGGING");
 
-                _throwController.UpdateArrowUI((new Vector2(Input.mousePosition.x, Input.mousePosition.y) - startClickPos) * -1.0f, (new Vector2(Input.mousePosition.x, Input.mousePosition.y) - startClickPos).magnitude);
+                if(((Vector2)Input.mousePosition-startClickPos).magnitude < _maxDragRadius)
+                    _throwController.UpdateArrowUI((new Vector2(Input.mousePosition.x, Input.mousePosition.y) - startClickPos) * -1.0f, (new Vector2(Input.mousePosition.x, Input.mousePosition.y) - startClickPos).magnitude, true);
+                else
+                {
+                    Debug.Log("Outside Max Drag Radius");
+                    _throwController.UpdateArrowUI((new Vector2(Input.mousePosition.x, Input.mousePosition.y) - startClickPos) * -1.0f, (new Vector2(Input.mousePosition.x, Input.mousePosition.y) - startClickPos).magnitude, false);
+                }
             }
 
         }
@@ -88,9 +95,13 @@ public class InputController : MonoBehaviour
 
         if (inputMag >= _deathZoneRadius)
         {
-            _throwController.ThrowBall(inputDir, inputMag);
+            if(inputMag > _maxDragRadius)
+                _throwController.ThrowBall(inputDir, _maxDragRadius);
+            else
+                _throwController.ThrowBall(inputDir, inputMag);
         }
     }
+
 
 
 }

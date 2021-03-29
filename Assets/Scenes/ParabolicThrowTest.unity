@@ -152,7 +152,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _throwController: {fileID: 1997110449707703092}
   _holdInterval: 0.1
-  _deathZoneRadius: 80
+  _deathZoneRadius: 40
+  _maxDragRadius: 250
   prevClickTime: 0
 --- !u!4 &139549144
 Transform:
@@ -1443,12 +1444,17 @@ PrefabInstance:
     - target: {fileID: 6186718229199066176, guid: d7e1928f177fe494996ecf278c322b09,
         type: 3}
       propertyPath: _maxXScaleArrow
-      value: 1.8
+      value: 2.8
       objectReference: {fileID: 0}
     - target: {fileID: 6186718229199066176, guid: d7e1928f177fe494996ecf278c322b09,
         type: 3}
       propertyPath: _ballOffsetArrow
       value: 0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 6186718229199066176, guid: d7e1928f177fe494996ecf278c322b09,
+        type: 3}
+      propertyPath: forceMultiplier
+      value: 110
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d7e1928f177fe494996ecf278c322b09, type: 3}
