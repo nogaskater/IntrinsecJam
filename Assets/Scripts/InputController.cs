@@ -7,6 +7,7 @@ public class InputController : MonoBehaviour
 
     [Header("GameObject References")]
     [SerializeField] private ThrowController _throwController;
+    [SerializeField] private NPC_ThrowController _NPCthrowController;      //Debug-Only
 
     [Header("Input Settings")]
     [SerializeField] private float _holdInterval;
@@ -29,6 +30,7 @@ public class InputController : MonoBehaviour
         CheckLeftClick();
         CheckEscClick();
         CheckResetBall();
+        CheckNPCThrowBall();
     }
 
     public void CheckLeftClick()        //Remains To-Do the raycast part to the player. to know if its a fire action or another thing
@@ -83,6 +85,14 @@ public class InputController : MonoBehaviour
         if(Input.GetButtonDown("Reset Ball"))
         {
             _throwController.ResetBall();
+        }
+    }
+
+    public void CheckNPCThrowBall()         //Debug-Only
+    {
+        if(Input.GetButtonDown("NPC Throw Ball"))
+        {
+            _NPCthrowController.ThrowBall();
         }
     }
 
