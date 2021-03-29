@@ -31,17 +31,17 @@ public class ThrowController : MonoBehaviour
         
     }
 
-    public void ThrowBall(Vector2 initialDirection, float initialMagnitude)
+    public void ThrowBall(Vector2 initialDirection, float initialMagnitude, float minRadPossible, float maxRadPossible)
     {
-        Vector2 ballForce = ComputeInitialForce(initialDirection, initialMagnitude);
+        Vector2 ballForce = ComputeInitialForce(initialDirection, initialMagnitude, minRadPossible, maxRadPossible);
         _activeBall.bodyType = RigidbodyType2D.Dynamic;
         _activeBall.AddForce(ballForce, ForceMode2D.Impulse);
     }
 
-    private Vector2 ComputeInitialForce(Vector2 initialDirection, float initialMagnitude)
+    private Vector2 ComputeInitialForce(Vector2 initialDirection, float initialMagnitude, float minRadPossible, float maxRadPossible)
     {
-        Debug.Log("Magnitude raw: " + initialMagnitude + " //// Magnitude normalized: " + ReMap(initialMagnitude, 40.0f, 250.0f, 0.01f, 1.0f));
-        return (initialDirection.normalized * -1.0f) * ReMap(initialMagnitude, 40.0f, 250.0f, 0.01f, 1.0f) * forceMultiplier;
+        //Debug.Log("Magnitude raw: " + initialMagnitude + " //// Magnitude normalized: " + ReMap(initialMagnitude, 40.0f, 250.0f, 0.01f, 1.0f));
+        return (initialDirection.normalized * -1.0f) * ReMap(initialMagnitude, minRadPossible, maxRadPossible, 0.01f, 1.0f) * forceMultiplier;
     }
 
     public void ResetBall()        //Debug-Only
@@ -52,7 +52,7 @@ public class ThrowController : MonoBehaviour
         _activeBall.bodyType = RigidbodyType2D.Kinematic;
     }
 
-    public void UpdateArrowUI(Vector2 initialDirection, float initialMagnitude, bool inMaxRadius)
+    public void UpdateArrowUI(Vector2 initialDirection, float initialMagnitude, bool inMaxRadius, float maxRadPossible)
     {
         _arrow.SetActive(true);  
         _arrow.transform.position = _throwStartingPoint.position + (Vector3)initialDirection.normalized * _ballOffsetArrow;            
@@ -60,7 +60,7 @@ public class ThrowController : MonoBehaviour
 
         if(inMaxRadius)
         {
-            float newScale = ReMap(initialMagnitude, 0.0f, 250.0f, _minXScaleArrow, _maxXScaleArrow);
+            float newScale = ReMap(initialMagnitude, 0.0f, maxRadPossible, _minXScaleArrow, _maxXScaleArrow);
             _arrow.transform.localScale = new Vector3(newScale, _arrow.transform.localScale.y, _arrow.transform.localScale.z);
         }
     }

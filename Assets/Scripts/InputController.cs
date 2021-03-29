@@ -31,7 +31,7 @@ public class InputController : MonoBehaviour
         CheckResetBall();
     }
 
-    public void CheckLeftClick()
+    public void CheckLeftClick()        //Remains To-Do the raycast part to the player. to know if its a fire action or another thing
     {
         if(Input.GetButtonDown("Fire1"))
         {
@@ -48,11 +48,11 @@ public class InputController : MonoBehaviour
                 //Debug.Log("Left Click - DRAGGING");
 
                 if(((Vector2)Input.mousePosition-startClickPos).magnitude < _maxDragRadius)
-                    _throwController.UpdateArrowUI((new Vector2(Input.mousePosition.x, Input.mousePosition.y) - startClickPos) * -1.0f, (new Vector2(Input.mousePosition.x, Input.mousePosition.y) - startClickPos).magnitude, true);
+                    _throwController.UpdateArrowUI((new Vector2(Input.mousePosition.x, Input.mousePosition.y) - startClickPos) * -1.0f, (new Vector2(Input.mousePosition.x, Input.mousePosition.y) - startClickPos).magnitude, true, _maxDragRadius);
                 else
                 {
-                    Debug.Log("Outside Max Drag Radius");
-                    _throwController.UpdateArrowUI((new Vector2(Input.mousePosition.x, Input.mousePosition.y) - startClickPos) * -1.0f, (new Vector2(Input.mousePosition.x, Input.mousePosition.y) - startClickPos).magnitude, false);
+                    //Debug.Log("Outside Max Drag Radius");
+                    _throwController.UpdateArrowUI((new Vector2(Input.mousePosition.x, Input.mousePosition.y) - startClickPos) * -1.0f, (new Vector2(Input.mousePosition.x, Input.mousePosition.y) - startClickPos).magnitude, false, _maxDragRadius);
                 }
             }
 
@@ -96,9 +96,9 @@ public class InputController : MonoBehaviour
         if (inputMag >= _deathZoneRadius)
         {
             if(inputMag > _maxDragRadius)
-                _throwController.ThrowBall(inputDir, _maxDragRadius);
+                _throwController.ThrowBall(inputDir, _maxDragRadius, _deathZoneRadius, _maxDragRadius);
             else
-                _throwController.ThrowBall(inputDir, inputMag);
+                _throwController.ThrowBall(inputDir, inputMag, _deathZoneRadius, _maxDragRadius);
         }
     }
 
