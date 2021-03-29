@@ -27,6 +27,7 @@ public class InputController : MonoBehaviour
     {
         CheckLeftClick();
         CheckEscClick();
+        CheckResetBall();
     }
 
     public void CheckLeftClick()
@@ -44,12 +45,15 @@ public class InputController : MonoBehaviour
             if(Time.time - prevClickTime >= _holdInterval)
             {
                 //Debug.Log("Left Click - DRAGGING");
+
+                _throwController.UpdateArrowUI((new Vector2(Input.mousePosition.x, Input.mousePosition.y) - startClickPos) * -1.0f, (new Vector2(Input.mousePosition.x, Input.mousePosition.y) - startClickPos).magnitude);
             }
 
         }
         else
         {
             endClickPos = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+            _throwController.DisableArrow();
 
             if (prevClickTime > 0.0f)
                 CheckDeathZone();
@@ -67,12 +71,20 @@ public class InputController : MonoBehaviour
         }
     }
 
+    public void CheckResetBall()
+    {
+        if(Input.GetButtonDown("Reset Ball"))
+        {
+            _throwController.ResetBall();
+        }
+    }
+
     private void CheckDeathZone()
     {
         Vector2 inputDir = endClickPos - startClickPos;
         float inputMag = (endClickPos - startClickPos).magnitude;
 
-        Debug.Log(ReMap(inputMag, 0, 1000, 0, 1));
+        //Debug.Log(inputMag);
 
         if (inputMag >= _deathZoneRadius)
         {
@@ -80,8 +92,5 @@ public class InputController : MonoBehaviour
         }
     }
 
-    private float ReMap(float s, float a1, float a2, float b1, float b2)
-    {
-        return b1 + (s - a1) * (b2 - b1) / (a2 - a1);
-    }
+
 }

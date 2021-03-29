@@ -12,7 +12,7 @@ public class BallController : MonoBehaviour
     [SerializeField] private int _maxBounces;
 
     //--Controlling bouncing times--//
-    public int contCollisions = 0;
+    private int contCollisions = 0;
 
     //--Controlling original gravity scale--//
     private float originalGScale;
@@ -63,14 +63,17 @@ public class BallController : MonoBehaviour
     {
         if (contCollisions > _maxBounces)
         {
-            Debug.Log("Collision limit reached");
+            //Debug.Log("Collision limit reached");
+
             StopMovement();
+            contCollisions = 0;
         }
     }
 
     private void StopMovement()
     {
         _rb.velocity = Vector2.zero;
+        _rb.angularVelocity = 0.0f;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
