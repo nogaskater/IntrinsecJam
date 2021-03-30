@@ -11,7 +11,6 @@ public class ThrowController : MonoBehaviour
 
     [Header("UI References")]
     [SerializeField] private GameObject _arrow;
-    //[SerializeField] private GameObject _deadZone;
 
     [Header("UI Settings")]
     [SerializeField] private float _minXScaleArrow;
