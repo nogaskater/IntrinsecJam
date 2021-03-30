@@ -37,7 +37,7 @@ public class GeneralBallManager : MonoBehaviour
 
         GameObject instance = Instantiate(_ballPrefab, _npcs[randomNPC].GetThrowStartingPoint().position, Quaternion.identity);    
         instance.GetComponent<BallController>()._ballPaper.student_ID = _npcs[randomNPC].GetComponent<Student>().id; 
-        instance.GetComponent<BallController>()._ballPaper.answer = AnswerType.NONE; 
+        instance.GetComponent<BallController>()._ballPaper.answer = ExamElement.NONE; 
 
         lastSpawnTime = Time.time;
 
