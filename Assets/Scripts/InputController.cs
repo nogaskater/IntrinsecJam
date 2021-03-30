@@ -1,13 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
+public enum CurrentObject { NONE, PLAYER, BALL, NPC };
 public class InputController : MonoBehaviour
 {
 
     [Header("GameObject References")]
     [SerializeField] private ThrowController _throwController;
-    [SerializeField] private NPC_ThrowController _NPCthrowController;      //Debug-Only
+    [SerializeField] private NPC_ThrowController _NPCThrowController1;      //Debug-Only
 
     [Header("Input Settings")]
     [SerializeField] private float _holdInterval;
@@ -20,6 +22,10 @@ public class InputController : MonoBehaviour
     //--Controlling distance between drags--// 
     private Vector2 startClickPos;
     private Vector2 endClickPos;
+
+    //--Controlling selected object--//
+    private CurrentObject currentObject;
+    private CurrentObject lastClickedObj;
 
     void Start()
     {
@@ -35,17 +41,20 @@ public class InputController : MonoBehaviour
 
     public void CheckLeftClick()        //Remains To-Do the raycast part to the player. to know if its a fire action or another thing
     {
+        SetCurrentObject();
+
         if(Input.GetButtonDown("Fire1"))
         {
             prevClickTime = Time.time;
             startClickPos = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+            lastClickedObj = currentObject;
 
             //Debug.Log("Left Click - CLICKED");
         }
         else if(Input.GetButton("Fire1"))
         {
             
-            if(Time.time - prevClickTime >= _holdInterval)
+            if(Time.time - prevClickTime >= _holdInterval && lastClickedObj==CurrentObject.PLAYER)
             {
                 //Debug.Log("Left Click - DRAGGING");
 
@@ -68,7 +77,34 @@ public class InputController : MonoBehaviour
                 CheckDeathZone();
 
             prevClickTime = 0.0f;
+            lastClickedObj = CurrentObject.NONE;
 
+        }
+    }
+
+    private void SetCurrentObject()
+    {
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit2D hit = Physics2D.GetRayIntersection(ray);
+
+        if (hit.collider != null)
+        {
+            //Debug.Log(hit.transform.tag);
+            switch (hit.transform.tag)
+            {
+                case "Player":
+                    currentObject = CurrentObject.PLAYER;
+                    break;
+                case "Ball":
+                    currentObject = CurrentObject.BALL;
+                    break;
+                case "NPC":
+                    currentObject = CurrentObject.NPC;
+                    break;
+                default:
+                    currentObject = CurrentObject.NONE;
+                    break;
+            }
         }
     }
 
@@ -92,7 +128,7 @@ public class InputController : MonoBehaviour
     {
         if(Input.GetButtonDown("NPC Throw Ball"))
         {
-            _NPCthrowController.ThrowBall();
+            _NPCThrowController1.ThrowBall();
         }
     }
 
@@ -103,7 +139,7 @@ public class InputController : MonoBehaviour
 
         //Debug.Log(inputMag);
 
-        if (inputMag >= _deathZoneRadius)
+        if (inputMag >= _deathZoneRadius && lastClickedObj == CurrentObject.PLAYER)
         {
             if(inputMag > _maxDragRadius)
                 _throwController.ThrowBall(inputDir, _maxDragRadius, _deathZoneRadius, _maxDragRadius);
@@ -111,7 +147,4 @@ public class InputController : MonoBehaviour
                 _throwController.ThrowBall(inputDir, inputMag, _deathZoneRadius, _maxDragRadius);
         }
     }
-
-
-
 }

@@ -47,6 +47,6 @@ public class NPC_ThrowController : MonoBehaviour
 
     private float ComputeRandomHeight()
     {
-        return Random.Range(_minHeight, _maxHeight);
+        return Random.Range(_player.position.y + _minHeight, _player.position.y + _maxHeight);
     }
 }
