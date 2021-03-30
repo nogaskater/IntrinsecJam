@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3987182123939967942}
   - component: {fileID: 3832883202021553059}
   - component: {fileID: 7480127787944639275}
+  - component: {fileID: 133624703549833459}
   m_Layer: 0
   m_Name: NPC_Trigger
   m_TagString: NPC
@@ -96,6 +97,20 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 0.99999994, y: 1.9999999}
   m_Direction: 0
+--- !u!114 &133624703549833459
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 136561935908996172}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1dbe22ae661479d4ebc396729eace1eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _ballTransitionController: {fileID: 4292169792073318370}
+  _student: {fileID: 3693566606836800573}
 --- !u!1 &1614490770970981426
 GameObject:
   m_ObjectHideFlags: 0
@@ -105,7 +120,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8408129615785044372}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: ThrowStartingPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -137,7 +152,6 @@ GameObject:
   - component: {fileID: 3834723674461470208}
   - component: {fileID: 9138767384056578505}
   - component: {fileID: 7168844605963669428}
-  - component: {fileID: 7120981319806503088}
   m_Layer: 11
   m_Name: NPC_Model
   m_TagString: NPC
@@ -207,22 +221,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!70 &7120981319806503088
-CapsuleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5905463818514118195}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_Size: {x: 0.99999994, y: 1.9999999}
-  m_Direction: 0
 --- !u!1 &7130010869826639264
 GameObject:
   m_ObjectHideFlags: 0
@@ -232,8 +230,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 446177200266943891}
+  - component: {fileID: 6135916819409684319}
   - component: {fileID: 5827704726459962492}
-  m_Layer: 0
+  - component: {fileID: 3693566606836800573}
+  - component: {fileID: 4292169792073318370}
+  m_Layer: 11
   m_Name: NPC
   m_TagString: NPC
   m_Icon: {fileID: 0}
@@ -256,6 +257,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!70 &6135916819409684319
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7130010869826639264}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.0048567057, y: 0.0012037754}
+  m_Size: {x: 0.6316531, y: 1.2767568}
+  m_Direction: 0
 --- !u!114 &5827704726459962492
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -268,8 +285,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebe244d2bc15df04fb836ccd47272abe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _npcBall: {fileID: 0}
   _throwStartingPoint: {fileID: 8408129615785044372}
   _player: {fileID: 0}
-  _minHeight: 2.5
-  _maxHeight: 3.5
+  _minHeight: 1.5
+  _maxHeight: 2.5
+--- !u!114 &3693566606836800573
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7130010869826639264}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e75b8d0fa0b9a7947b87338b4f443869, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: 1
+  _checkStudent: {fileID: 0}
+--- !u!114 &4292169792073318370
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7130010869826639264}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7dc0b21edd3b2424585be4d9b53987ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _gBallManager: {fileID: 0}

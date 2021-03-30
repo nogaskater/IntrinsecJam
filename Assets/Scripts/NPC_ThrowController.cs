@@ -5,7 +5,7 @@ using UnityEngine;
 public class NPC_ThrowController : MonoBehaviour
 {
     [Header("GameObject References")]
-    [SerializeField] private Rigidbody2D _npcBall;
+    //[SerializeField] private Rigidbody2D _npcBall;
     [SerializeField] private Transform _throwStartingPoint;
     [SerializeField] private Transform _player;
 
@@ -21,6 +21,15 @@ public class NPC_ThrowController : MonoBehaviour
     private float vy;
     private float vx;
 
+    public Transform GetThrowStartingPoint()
+    {
+        return _throwStartingPoint;
+    }
+    public Transform GetPlayer()
+    {
+        return _player;
+    }
+
     void Start()
     {
         
@@ -30,16 +39,16 @@ public class NPC_ThrowController : MonoBehaviour
         
     }
 
-    public void ThrowBall()
+    public void ThrowBall(Rigidbody2D _npcBall)
     {
         height = ComputeRandomHeight();
         gravity = (_npcBall.gravityScale * Physics2D.gravity.magnitude);
-        Debug.Log(gravity);
+        //Debug.Log(gravity);
         vy = Mathf.Sqrt(-2 * -gravity * height);
         px = _player.position.x - _throwStartingPoint.position.x;
         py = _player.position.y - _throwStartingPoint.position.y;
         vx = px / (Mathf.Sqrt(- ((2 * height) / -gravity)) + Mathf.Sqrt((2 * (py - height)) / -gravity));
-        Debug.Log("Vy: " + vy + " /// Vx: " + vx);
+        //Debug.Log("Vy: " + vy + " /// Vx: " + vx);
 
         _npcBall.bodyType = RigidbodyType2D.Dynamic;
         _npcBall.velocity = new Vector2(vx, vy);
