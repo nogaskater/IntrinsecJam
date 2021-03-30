@@ -20,4 +20,16 @@ public class FoundBall : State
 
         base.FinishAction();
     }
+
+    public override void UpdateState()
+    {
+        if (_target == null)
+        {
+            _teacherAI.ChangeState(_goToState);
+
+            return;
+        }
+
+        base.UpdateState();
+    }
 }

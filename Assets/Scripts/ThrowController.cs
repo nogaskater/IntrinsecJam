@@ -51,6 +51,8 @@ public class ThrowController : MonoBehaviour
             _activeBall.bodyType = RigidbodyType2D.Dynamic;
             _activeBall.AddForce(ballForce, ForceMode2D.Impulse);
 
+            _activeBall.gameObject.layer = LayerMask.NameToLayer("Ball");
+
             _activeBall = null;
         }
     }
@@ -96,7 +98,7 @@ public class ThrowController : MonoBehaviour
 
     private void ChangeArrowColorGradient(float value)
     {
-        Debug.Log(value);
+        //Debug.Log(value);
 
         Color c = new Color(value, 1.0f - value, 0.0f);
         _arrow.transform.GetChild(0).GetComponent<Image>().color = c;

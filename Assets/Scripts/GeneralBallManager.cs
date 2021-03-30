@@ -14,6 +14,9 @@ public class GeneralBallManager : MonoBehaviour
     //[SerializeField] private int _maxConcurrentBalls;
     [SerializeField] private float _minSpawnInterval;
     [SerializeField] private float _maxSpawnInterval;
+    [Header("First interval")]
+    [SerializeField] private float _minFirstSpawnInterval = 2.0f;
+    [SerializeField] private float _maxFirstSpawnInterval = 4.0f;
 
     //--Controlling papersID's--//
     private int _currentBallID = 0;
@@ -24,7 +27,7 @@ public class GeneralBallManager : MonoBehaviour
 
     void Start()
     {
-        intervalToSpawn = Random.Range(_minSpawnInterval, _maxSpawnInterval);
+        intervalToSpawn = Random.Range(_minFirstSpawnInterval, _maxFirstSpawnInterval);
     }
     void Update()
     {

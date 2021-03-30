@@ -13,7 +13,6 @@ public class NPCBallTransitionController : MonoBehaviour
     {
         Debug.Log("Student Received Ball");
 
-        ball.SetActive(false);
 
         
         OnBallReceived?.Invoke(1);
@@ -22,5 +21,7 @@ public class NPCBallTransitionController : MonoBehaviour
 
 
         _gBallManager.RemoveCurrentBallFromController(ball.GetComponent<Rigidbody2D>());
+
+        Destroy(ball.gameObject);
     }
 }
