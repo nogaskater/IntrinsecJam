@@ -71,18 +71,35 @@ public class ThrowController : MonoBehaviour
 
     public void UpdateArrowUI(Vector2 initialDirection, float initialMagnitude, bool inMaxRadius, float maxRadPossible)
     {
-        if(_activeBall!=null)
+        float newScale = 0.0f;
+        float colorValue = 0.0f;
+
+        if (_activeBall!=null)
         {
             _arrow.SetActive(true);
             _arrow.transform.position = _throwStartingPoint.position + (Vector3)initialDirection.normalized * _ballOffsetArrow;
             _arrow.transform.localRotation = Quaternion.AngleAxis(Vector2.SignedAngle(new Vector2(1.0f, 0.0f), initialDirection.normalized), new Vector3(0.0f, 0.0f, 1.0f));
 
+            colorValue = ReMap(initialMagnitude, 0.0f, maxRadPossible, 0.0f, 1.0f);
+
             if (inMaxRadius)
             {
-                float newScale = ReMap(initialMagnitude, 0.0f, maxRadPossible, _minXScaleArrow, _maxXScaleArrow);
+                newScale = ReMap(initialMagnitude, 0.0f, maxRadPossible, _minXScaleArrow, _maxXScaleArrow);
                 _arrow.transform.localScale = new Vector3(newScale, _arrow.transform.localScale.y, _arrow.transform.localScale.z);
+
+                colorValue = ReMap(newScale, _minXScaleArrow, _maxXScaleArrow, 0.0f, 1.0f);
             }
+
+            ChangeArrowColorGradient(colorValue);
         }
+    }
+
+    private void ChangeArrowColorGradient(float value)
+    {
+        Debug.Log(value);
+
+        Color c = new Color(value, 1.0f - value, 0.0f);
+        _arrow.transform.GetChild(0).GetComponent<Image>().color = c;
     }
 
     public void DisableArrow()
