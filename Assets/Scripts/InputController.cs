@@ -38,7 +38,7 @@ public class InputController : MonoBehaviour
         CheckEscClick();
         CheckResetBall();
 
-        //CheckSpawnBallPlayer();
+        CheckSpawnBallPlayer();
     }
 
     public void CheckLeftClick()        //Remains To-Do the raycast part to the player. to know if its a fire action or another thing

@@ -15,6 +15,8 @@ public class BallDetection : MonoBehaviour
         if(collision.gameObject.tag == "Ball")
         {
             _foundBallState.BallDetected(collision.transform);
+
+            collision.gameObject.layer = LayerMask.NameToLayer("Ball2");
         }
     }
 }

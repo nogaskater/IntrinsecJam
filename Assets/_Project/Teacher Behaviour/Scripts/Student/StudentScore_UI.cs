@@ -15,6 +15,8 @@ public class StudentScore_UI : MonoBehaviour
 
         if (_studentScoreText == null)
             throw new ArgumentNullException("_studentScoreText");
+
+        ModifyScoreText(_studentScore.Score);
     }
 
     private void OnEnable()
