@@ -4,7 +4,7 @@ using UnityEngine.EventSystems;
 
 public class Student : MonoBehaviour
 {
-    public int Id { get; set; }
+    public int id;
 
     [SerializeField] private CheckStudent _checkStudent;
 

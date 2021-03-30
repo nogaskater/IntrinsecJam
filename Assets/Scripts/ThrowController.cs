@@ -19,6 +19,19 @@ public class ThrowController : MonoBehaviour
 
     [Header("Throw Settings")]
     [SerializeField] private float forceMultiplier;
+
+    public Rigidbody2D GetActiveBall()
+    {
+        return _activeBall;
+    }
+    public void SetActiveBall(Rigidbody2D rb)
+    {
+        _activeBall = rb;
+    }
+    public Transform GetThrowStartingPoint()
+    {
+        return _throwStartingPoint;
+    }
     
 
     void Start()
@@ -32,9 +45,14 @@ public class ThrowController : MonoBehaviour
 
     public void ThrowBall(Vector2 initialDirection, float initialMagnitude, float minRadPossible, float maxRadPossible)
     {
-        Vector2 ballForce = ComputeInitialForce(initialDirection, initialMagnitude, minRadPossible, maxRadPossible);
-        _activeBall.bodyType = RigidbodyType2D.Dynamic;
-        _activeBall.AddForce(ballForce, ForceMode2D.Impulse);
+        if(_activeBall!=null)
+        {
+            Vector2 ballForce = ComputeInitialForce(initialDirection, initialMagnitude, minRadPossible, maxRadPossible);
+            _activeBall.bodyType = RigidbodyType2D.Dynamic;
+            _activeBall.AddForce(ballForce, ForceMode2D.Impulse);
+
+            _activeBall = null;
+        }
     }
 
     private Vector2 ComputeInitialForce(Vector2 initialDirection, float initialMagnitude, float minRadPossible, float maxRadPossible)
@@ -43,7 +61,7 @@ public class ThrowController : MonoBehaviour
         return (initialDirection.normalized * -1.0f) * ReMap(initialMagnitude, minRadPossible, maxRadPossible, 0.01f, 1.0f) * forceMultiplier;
     }
 
-    public void ResetBall()        //Debug-Only
+    public void ResetBall()        
     {
         _activeBall.transform.position = _throwStartingPoint.position;
         _activeBall.velocity = Vector2.zero;
@@ -53,14 +71,17 @@ public class ThrowController : MonoBehaviour
 
     public void UpdateArrowUI(Vector2 initialDirection, float initialMagnitude, bool inMaxRadius, float maxRadPossible)
     {
-        _arrow.SetActive(true);  
-        _arrow.transform.position = _throwStartingPoint.position + (Vector3)initialDirection.normalized * _ballOffsetArrow;            
-        _arrow.transform.localRotation = Quaternion.AngleAxis(Vector2.SignedAngle(new Vector2(1.0f, 0.0f), initialDirection.normalized), new Vector3(0.0f, 0.0f, 1.0f));
-
-        if(inMaxRadius)
+        if(_activeBall!=null)
         {
-            float newScale = ReMap(initialMagnitude, 0.0f, maxRadPossible, _minXScaleArrow, _maxXScaleArrow);
-            _arrow.transform.localScale = new Vector3(newScale, _arrow.transform.localScale.y, _arrow.transform.localScale.z);
+            _arrow.SetActive(true);
+            _arrow.transform.position = _throwStartingPoint.position + (Vector3)initialDirection.normalized * _ballOffsetArrow;
+            _arrow.transform.localRotation = Quaternion.AngleAxis(Vector2.SignedAngle(new Vector2(1.0f, 0.0f), initialDirection.normalized), new Vector3(0.0f, 0.0f, 1.0f));
+
+            if (inMaxRadius)
+            {
+                float newScale = ReMap(initialMagnitude, 0.0f, maxRadPossible, _minXScaleArrow, _maxXScaleArrow);
+                _arrow.transform.localScale = new Vector3(newScale, _arrow.transform.localScale.y, _arrow.transform.localScale.z);
+            }
         }
     }
 

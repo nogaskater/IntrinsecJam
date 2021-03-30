@@ -10,6 +10,7 @@ public class InputController : MonoBehaviour
     [Header("GameObject References")]
     [SerializeField] private ThrowController _throwController;
     [SerializeField] private NPC_ThrowController _NPCThrowController1;      //Debug-Only
+    [SerializeField] private GameObject _ballPrefab;      
 
     [Header("Input Settings")]
     [SerializeField] private float _holdInterval;
@@ -36,7 +37,8 @@ public class InputController : MonoBehaviour
         CheckLeftClick();
         CheckEscClick();
         CheckResetBall();
-        CheckNPCThrowBall();
+
+        //CheckSpawnBallPlayer();
     }
 
     public void CheckLeftClick()        //Remains To-Do the raycast part to the player. to know if its a fire action or another thing
@@ -124,11 +126,15 @@ public class InputController : MonoBehaviour
         }
     }
 
-    public void CheckNPCThrowBall()         //Debug-Only
+    public void CheckSpawnBallPlayer()      //Debug-Only
     {
-        if(Input.GetButtonDown("NPC Throw Ball"))
+        if (Input.GetButtonDown("Spawn Ball Player") /*&& _throwController.GetActiveBall()!=null*/)
         {
-            _NPCThrowController1.ThrowBall();
+            GameObject pBall = Instantiate(_ballPrefab, _throwController.GetThrowStartingPoint().position, Quaternion.identity);
+            pBall.GetComponent<BallController>()._ballPaper.student_ID = 1;
+            pBall.GetComponent<BallController>()._ballPaper.answer = AnswerType.ANSWER_10;
+            _throwController.SetActiveBall(pBall.GetComponent<Rigidbody2D>());
+
         }
     }
 
