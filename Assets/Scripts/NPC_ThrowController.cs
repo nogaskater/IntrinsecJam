@@ -21,6 +21,11 @@ public class NPC_ThrowController : MonoBehaviour
     private float vy;
     private float vx;
 
+    public Transform GetThrowStartingPoint()
+    {
+        return _throwStartingPoint;
+    }
+
     void Start()
     {
         

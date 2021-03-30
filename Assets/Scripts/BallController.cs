@@ -10,6 +10,7 @@ public class BallController : MonoBehaviour
     [Header("Ball Settings")]
     [SerializeField] private float _gravityFactor;
     [SerializeField] private int _maxBounces;
+    //[SerializeField] private Paper _paperID;
 
     //--Controlling bouncing times--//
     private int contCollisions = 0;
@@ -20,6 +21,8 @@ public class BallController : MonoBehaviour
     //--Controlling falling process--//
     private bool isfalling;
     private int contFalling = 0;
+    
+
 
     void Start()
     {
