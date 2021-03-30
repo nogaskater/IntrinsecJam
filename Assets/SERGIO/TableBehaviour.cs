@@ -53,7 +53,7 @@ public class TableBehaviour : MonoBehaviour
     [SerializeField] float animationSpeed;
 
     [Header("BUTTONS")]
-    [SerializeField] Image openButton;
+    [SerializeField] GameObject openButton;
 
     [Header("TO ANSWER")]
     [SerializeField] List<Paper> toAnswerQueue;
@@ -61,7 +61,7 @@ public class TableBehaviour : MonoBehaviour
 
     [Header("ANSWERED")]
     [SerializeField] List<Paper> answeredQueue;
-    [SerializeField] List<Image> papersDone;
+    [SerializeField] List<GameObject> papersDone;
 
     [Header("TABLE ELEMENTS")]
     [SerializeField] GameObject currentPaperToAnswer;
@@ -73,6 +73,12 @@ public class TableBehaviour : MonoBehaviour
     void Start()
     {
         initialPosition = table.position;
+
+        //Inicializamos las listas
+        toAnswerQueue = new List<Paper>();
+        answeredQueue = new List<Paper>();
+
+        //UpdatePaperUI();
     }
     #endregion
 
@@ -93,7 +99,7 @@ public class TableBehaviour : MonoBehaviour
 
             mask.DOMoveY(mask.transform.position.y + movementY, animationSpeed);
 
-            openButton.raycastTarget = false;
+            openButton.SetActive(false);
         }
     }
     #endregion
@@ -108,7 +114,7 @@ public class TableBehaviour : MonoBehaviour
             mask.DOMoveY(mask.transform.position.y - movementY, animationSpeed);
 
             //Reactivamos el boton
-            openButton.raycastTarget = true;
+            openButton.SetActive(true);
         }
     }
     #endregion
@@ -116,7 +122,11 @@ public class TableBehaviour : MonoBehaviour
     #region ADD NEW PAPER
     public void AddNewPaper(Paper _newPaper)
     {
+        //Añadimos el papel
         toAnswerQueue.Add(_newPaper);
+
+        //Updateamos la UI
+        UpdatePaperUI();
     }
     #endregion
 
@@ -144,7 +154,7 @@ public class TableBehaviour : MonoBehaviour
     #region UPDATE PAPER UI
     public void UpdatePaperUI()
     {
-
+        //Actualizamos los papeles por contestar
         if (toAnswerQueue.Count == 0)
         {
             foreach (GameObject item in papersToAnswer)
@@ -164,18 +174,35 @@ public class TableBehaviour : MonoBehaviour
                 papersToAnswer[i].SetActive(true);
             }
         }
-        
+
+        //Actualizamos los papeles contestados
+        if (answeredQueue.Count == 0)
+        {
+            foreach (GameObject item in papersDone)
+            {
+                item.SetActive(false);
+            }
+        }
+        else
+        {
+            foreach (GameObject item in papersDone)
+            {
+                item.SetActive(false);
+            }
+
+            for (int i = 0; i < answeredQueue.Count; i++)
+            {
+                papersToAnswer[i].SetActive(true);
+            }
+        }
 
     }
     #endregion
 
+    #region SELECT
     #region SELECT PAPER 1
     public void SelectPaper1()
     {
-        //papersToAnswer.Remove(papersToAnswer[0]);
-
-        Debug.Log(toAnswerQueue.Count);
-
         UpdatePaperUI();
 
         currentPaperToAnswer.SetActive(true);
@@ -226,4 +253,77 @@ public class TableBehaviour : MonoBehaviour
         currentPaperToAnswer.SetActive(true);
     }
     #endregion
+    #endregion
+
+    #region LAUNCH
+    #region LAUNCH PAPER 1
+    public void LaunchPaper1()
+    {
+        UpdatePaperUI();
+
+
+        //LLAMAR A LA FUNCIÓN DEL ADRI
+
+        //Eliminamos el paper de la lista
+        answeredQueue.Remove(answeredQueue[0]);
+    }
+    #endregion
+
+    #region LAUNCH PAPER 2
+    public void LaunchPaper2()
+    {
+
+        UpdatePaperUI();
+
+
+        //LLAMAR A LA FUNCIÓN DEL ADRI
+
+        //Eliminamos el paper de la lista
+        answeredQueue.Remove(answeredQueue[1]);
+    }
+    #endregion
+
+    #region LAUNCH PAPER 3
+    public void LaunchPaper3()
+    {
+        UpdatePaperUI();
+
+
+        //LLAMAR A LA FUNCIÓN DEL ADRI
+
+        //Eliminamos el paper de la lista
+        answeredQueue.Remove(answeredQueue[2]);
+    }
+    #endregion
+
+    #region LAUNCH PAPER 4
+    public void LaunchPaper4()
+    {
+        UpdatePaperUI();
+
+        //LLAMAR A LA FUNCIÓN DEL ADRI
+
+        //Eliminamos el paper de la lista
+        answeredQueue.Remove(answeredQueue[3]);
+    }
+    #endregion
+
+    #region LAUNCH PAPER 5
+    public void LaunchPaper5()
+    {
+        UpdatePaperUI();
+
+
+        //LLAMAR A LA FUNCIÓN DEL ADRI
+
+        //Eliminamos el paper de la lista
+        answeredQueue.Remove(answeredQueue[4]);
+    }
+    #endregion
+    #endregion
+
+    #region
+
+
+
 }
