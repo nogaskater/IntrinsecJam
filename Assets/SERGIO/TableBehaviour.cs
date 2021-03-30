@@ -4,41 +4,29 @@ using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 
-public enum QuestionType
-{
-    QUESTION_0,
-    QUESTION_1,
-    QUESTION_2,
-    QUESTION_3,
-    QUESTION_4,
-    QUESTION_5,
-    QUESTION_6,
-    QUESTION_7,
-    QUESTION_8,
-    QUESTION_9
-};
-
-public enum AnswerType
+public enum ExamElement
 {
     NONE,
-    ANSWER_0,
-    ANSWER_1,
-    ANSWER_2,
-    ANSWER_3,
-    ANSWER_4,
-    ANSWER_5,
-    ANSWER_6,
-    ANSWER_7,
-    ANSWER_8,
-    ANSWER_9    
+    EXAM_ELEMENT_1,
+    EXAM_ELEMENT_2,
+    EXAM_ELEMENT_3,
+    EXAM_ELEMENT_4,
+    EXAM_ELEMENT_5,
+    EXAM_ELEMENT_6,
+    EXAM_ELEMENT_7,
+    EXAM_ELEMENT_8,
+    EXAM_ELEMENT_9,
+    EXAM_ELEMENT_10
 };
+
+
 
 public struct Paper
 {
     public int paper_ID;
     public int student_ID;
-    public QuestionType question;
-    public AnswerType answer;
+    public ExamElement question;
+    public ExamElement answer;
 };
 
 public class TableBehaviour : MonoBehaviour
@@ -74,8 +62,8 @@ public class TableBehaviour : MonoBehaviour
     [Header("ANSWER IMAGES")]
     [SerializeField] Sprite[] answerImages;
 
-    QuestionType[] examQuestions = new QuestionType[10];
-    AnswerType[] examAnswers = new AnswerType[10];
+    ExamElement[] examQuestions = new ExamElement[10];
+    ExamElement[] examAnswers = new ExamElement[10];
 
     bool isOpened = false;
     bool paperOpened = false;
@@ -98,16 +86,16 @@ public class TableBehaviour : MonoBehaviour
         UpdatePaperUI();
 
         //PROVISIONAL
-        examAnswers[0] = AnswerType.ANSWER_0;
-        examAnswers[1] = AnswerType.ANSWER_1;
-        examAnswers[2] = AnswerType.ANSWER_2;
-        examAnswers[3] = AnswerType.ANSWER_3;
-        examAnswers[4] = AnswerType.ANSWER_4;
-        examAnswers[5] = AnswerType.ANSWER_5;
-        examAnswers[6] = AnswerType.ANSWER_6;
-        examAnswers[7] = AnswerType.ANSWER_7;
-        examAnswers[8] = AnswerType.ANSWER_8;
-        examAnswers[9] = AnswerType.ANSWER_9;
+        examAnswers[0] = ExamElement.EXAM_ELEMENT_1;
+        examAnswers[1] = ExamElement.EXAM_ELEMENT_2;
+        examAnswers[2] = ExamElement.EXAM_ELEMENT_3;
+        examAnswers[3] = ExamElement.EXAM_ELEMENT_4;
+        examAnswers[4] = ExamElement.EXAM_ELEMENT_5;
+        examAnswers[5] = ExamElement.EXAM_ELEMENT_6;
+        examAnswers[6] = ExamElement.EXAM_ELEMENT_7;
+        examAnswers[7] = ExamElement.EXAM_ELEMENT_8;
+        examAnswers[8] = ExamElement.EXAM_ELEMENT_9;
+        examAnswers[9] = ExamElement.EXAM_ELEMENT_10;
         
 
 
@@ -344,60 +332,69 @@ public class TableBehaviour : MonoBehaviour
     #region LAUNCH PAPER 1
     public void LaunchPaper1()
     {
-        UpdatePaperUI();
-
         //LLAMAR A LA FUNCIÓN DEL ADRI
+        // --- FUNCION ADRI --- ///
+
 
         //Eliminamos el paper de la lista
         answeredQueue.Remove(answeredQueue[0]);
+
+        UpdatePaperUI();
     }
     #endregion
 
     #region LAUNCH PAPER 2
     public void LaunchPaper2()
     {
-        UpdatePaperUI();
-
         //LLAMAR A LA FUNCIÓN DEL ADRI
+        // --- FUNCION ADRI --- ///
 
         //Eliminamos el paper de la lista
         answeredQueue.Remove(answeredQueue[1]);
+
+        UpdatePaperUI();
     }
     #endregion
 
     #region LAUNCH PAPER 3
     public void LaunchPaper3()
     {
-        UpdatePaperUI();
-
         //LLAMAR A LA FUNCIÓN DEL ADRI
+        // --- FUNCION ADRI --- ///
+
 
         //Eliminamos el paper de la lista
         answeredQueue.Remove(answeredQueue[2]);
+
+        UpdatePaperUI();
     }
     #endregion
 
     #region LAUNCH PAPER 4
     public void LaunchPaper4()
     {
-        UpdatePaperUI();
-
         //LLAMAR A LA FUNCIÓN DEL ADRI
+        // --- FUNCION ADRI --- ///
+
 
         //Eliminamos el paper de la lista
         answeredQueue.Remove(answeredQueue[3]);
+
+        UpdatePaperUI();
     }
     #endregion
 
     #region LAUNCH PAPER 5
     public void LaunchPaper5()
     {
-        UpdatePaperUI();
-
         //LLAMAR A LA FUNCIÓN DEL ADRI
+        // --- FUNCION ADRI --- ///
+
 
         //Eliminamos el paper de la lista
         answeredQueue.Remove(answeredQueue[4]);
+
+        UpdatePaperUI();
     }
     #endregion
     #endregion
@@ -495,9 +492,7 @@ public class TableBehaviour : MonoBehaviour
     #region CONFIRM ANSWER
     public void ConfirmAnswer()
     {
-        Debug.Log("CONFIRMAMOS?");
-
-        if (paperOpened && currentPaper.answer != AnswerType.NONE)
+        if (paperOpened && currentPaper.answer != ExamElement.NONE)
         {
             //Desactivamos la imagen
             answer.SetActive(false);
@@ -519,7 +514,7 @@ public class TableBehaviour : MonoBehaviour
 
         paper.paper_ID = GetIdForNewPaper();
         paper.student_ID = Random.Range(0,5);
-        paper.question = QuestionType.QUESTION_1;
+        paper.question = ExamElement.EXAM_ELEMENT_1;
 
         //Añadimos el papel
         toAnswerQueue.Add(paper);
@@ -527,7 +522,4 @@ public class TableBehaviour : MonoBehaviour
         UpdatePaperUI();
     }
     #endregion
-
-
-
 }

@@ -132,7 +132,7 @@ public class InputController : MonoBehaviour
         {
             GameObject pBall = Instantiate(_ballPrefab, _throwController.GetThrowStartingPoint().position, Quaternion.identity);
             pBall.GetComponent<BallController>()._ballPaper.student_ID = 1;
-            pBall.GetComponent<BallController>()._ballPaper.answer = AnswerType.ANSWER_10;
+            pBall.GetComponent<BallController>()._ballPaper.answer = ExamElement.EXAM_ELEMENT_10;
             _throwController.SetActiveBall(pBall.GetComponent<Rigidbody2D>());
 
         }

@@ -6,11 +6,15 @@ public class PlayerBallTransitionController : MonoBehaviour
 {
     [Header("GameObject Referemces")]
     [SerializeField] private ThrowController _throwController;
+    [SerializeField] TableBehaviour table;
+
     public void PutBallInBox(GameObject ball)
     {
         ball.SetActive(false);
 
         Debug.Log("Ball to the box");
+
+        table.AddNewPaper(ball.GetComponent<BallController>()._ballPaper);
         //Sergio cariño te toca
         //Create a new paper in the box with the data from the ball(paper)
         //--TO-DO--//
