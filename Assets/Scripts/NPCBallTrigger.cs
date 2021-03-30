@@ -11,7 +11,7 @@ public class NPCBallTrigger : MonoBehaviour
     {
         if (collision.gameObject.tag == "Ball")
         {
-            if (collision.gameObject.GetComponent<BallController>()._ballPaper.student_ID == _student.id)
+            if (collision.gameObject.GetComponent<BallController>().Student == _student)
             {
                 _ballTransitionController.CheckBallAnswers(collision.gameObject);
             }
