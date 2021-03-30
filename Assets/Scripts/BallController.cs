@@ -10,7 +10,6 @@ public class BallController : MonoBehaviour
     [Header("Ball Settings")]
     [SerializeField] private float _gravityFactor;
     [SerializeField] private int _maxBounces;
-    public Paper _ballPaper = new Paper();
 
     //--Controlling bouncing times--//
     private int contCollisions = 0;
@@ -21,8 +20,18 @@ public class BallController : MonoBehaviour
     //--Controlling falling process--//
     private bool isfalling;
     private int contFalling = 0;
-    
 
+    [SerializeField] private Paper _ballPaper;
+    public Paper BallPaper => _ballPaper;
+
+    public Student Student { get; private set; }
+
+
+    private void Awake()
+    {
+        if (_ballPaper == null)
+            throw new System.ArgumentNullException("BallPaper");
+    }
 
     void Start()
     {
@@ -32,6 +41,12 @@ public class BallController : MonoBehaviour
     {
         CheckIsFalling();
         CheckCollisionLimit();
+    }
+
+    public void Initialize(Student student, ExamElement element)
+    {
+        Student = student;
+        _ballPaper.question = element;
     }
 
     private void CheckIsFalling()

@@ -4,8 +4,6 @@ using UnityEngine.EventSystems;
 
 public class Student : MonoBehaviour
 {
-    public int id;
-
     [SerializeField] private CheckStudent _checkStudent;
 
     private void Awake()

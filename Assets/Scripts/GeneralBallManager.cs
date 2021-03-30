@@ -35,9 +35,8 @@ public class GeneralBallManager : MonoBehaviour
     {
         int randomNPC = Random.Range(0, _npcs.Count);
 
-        GameObject instance = Instantiate(_ballPrefab, _npcs[randomNPC].GetThrowStartingPoint().position, Quaternion.identity);    
-        instance.GetComponent<BallController>()._ballPaper.student_ID = _npcs[randomNPC].GetComponent<Student>().id; 
-        instance.GetComponent<BallController>()._ballPaper.answer = ExamElement.NONE; 
+        BallController instance = Instantiate(_ballPrefab, _npcs[randomNPC].GetThrowStartingPoint().position, Quaternion.identity).GetComponent<BallController>();    
+        instance.Initialize(_npcs[randomNPC].GetComponent<Student>(), ExamElement.NONE);
 
         lastSpawnTime = Time.time;
 

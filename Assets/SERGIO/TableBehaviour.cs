@@ -1,36 +1,15 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 
-public enum ExamElement
-{
-    NONE,
-    EXAM_ELEMENT_1,
-    EXAM_ELEMENT_2,
-    EXAM_ELEMENT_3,
-    EXAM_ELEMENT_4,
-    EXAM_ELEMENT_5,
-    EXAM_ELEMENT_6,
-    EXAM_ELEMENT_7,
-    EXAM_ELEMENT_8,
-    EXAM_ELEMENT_9,
-    EXAM_ELEMENT_10
-};
-
-
-
-public struct Paper
-{
-    public int paper_ID;
-    public int student_ID;
-    public ExamElement question;
-    public ExamElement answer;
-};
 
 public class TableBehaviour : MonoBehaviour
 {
+    [SerializeField] private PlayerBallTransitionController _playerBallTransitionController;
+
     #region VARIABLES
     [Header("UI ELEMENTS")]
     [SerializeField] RectTransform table;
@@ -44,13 +23,17 @@ public class TableBehaviour : MonoBehaviour
     [Header("BUTTONS")]
     [SerializeField] GameObject openButton;
 
+    public int MaxListSize { get; } = 4;
+
     [Header("TO ANSWER")]
     [SerializeField] List<Paper> toAnswerQueue;
     [SerializeField] List<GameObject> papersToAnswer;
+    public int ToAnserQueueCount => toAnswerQueue.Count;
 
     [Header("ANSWERED")]
     [SerializeField] List<Paper> answeredQueue;
     [SerializeField] List<GameObject> papersDone;
+    public int AnsweredQueueCount => answeredQueue.Count;
 
     [Header("PAPER ELEMENTS")]
     [SerializeField] GameObject currentPaperToAnswer;    
@@ -69,6 +52,12 @@ public class TableBehaviour : MonoBehaviour
     bool paperOpened = false;
 
     #endregion
+
+    private void Awake()
+    {
+        if (_playerBallTransitionController == null)
+            throw new ArgumentNullException("_playerBallTransitionController");
+    }
 
     #region START
     void Start()
@@ -96,9 +85,6 @@ public class TableBehaviour : MonoBehaviour
         examAnswers[7] = ExamElement.EXAM_ELEMENT_8;
         examAnswers[8] = ExamElement.EXAM_ELEMENT_9;
         examAnswers[9] = ExamElement.EXAM_ELEMENT_10;
-        
-
-
 
     }
     #endregion
@@ -227,250 +213,37 @@ public class TableBehaviour : MonoBehaviour
     }
     #endregion
 
-    #region SELECT PAPER
-    #region SELECT PAPER 1
-    public void SelectPaper1()
+    public void SelectPaper(int index)
     {
         if (!paperOpened)
         {
             paperOpened = true;
 
-            currentPaper = toAnswerQueue[0];
-            toAnswerQueue.Remove(toAnswerQueue[0]);
+            currentPaper = toAnswerQueue[index];
+            toAnswerQueue.Remove(toAnswerQueue[index]);
 
             UpdatePaperUI();
 
             currentPaperToAnswer.SetActive(true);
         }
     }
-    #endregion
-
-    #region SELECT PAPER 2
-    public void SelectPaper2()
+    public void LaunchPaper(int index)
     {
-        if (!paperOpened)
-        {
-            paperOpened = true;
-
-            //Nos guardamos el papel
-            currentPaper = toAnswerQueue[1];
-
-            //Quitamos la pelota de la lista por contestar
-            papersToAnswer.Remove(papersToAnswer[1]);
-
-            
-
-            UpdatePaperUI();
-
-            currentPaperToAnswer.SetActive(true);
-        }
-    }
-    #endregion
-
-    #region SELECT PAPER 3
-    public void SelectPaper3()
-    {
-        if (!paperOpened)
-        {
-            paperOpened = true;
-
-            //Nos guardamos el papel
-            currentPaper = toAnswerQueue[2];
-
-            //Quitamos la pelota de la lista por contestar
-            papersToAnswer.Remove(papersToAnswer[2]);
-
-            UpdatePaperUI();
-
-            currentPaperToAnswer.SetActive(true);
-        }
-    }
-    #endregion
-
-    #region SELECT PAPER 4
-    public void SelectPaper4()
-    {
-        if (!paperOpened)
-        {
-            paperOpened = true;
-
-            //Nos guardamos el papel
-            currentPaper = toAnswerQueue[3];
-
-            //Quitamos la pelota de la lista por contestar
-            papersToAnswer.Remove(papersToAnswer[3]);
-
-            UpdatePaperUI();
-
-            currentPaperToAnswer.SetActive(true);
-        }
-    }
-    #endregion
-
-    #region SELECT PAPER 5
-    public void SelectPaper5()
-    {
-        if (!paperOpened)
-        {
-            paperOpened = true;
-
-            //Nos guardamos el papel
-            currentPaper = toAnswerQueue[1];
-
-            //Quitamos la pelota de la lista por contestar
-            papersToAnswer.Remove(papersToAnswer[4]);
-
-            UpdatePaperUI();
-
-            currentPaperToAnswer.SetActive(true);
-        }
-    }
-    #endregion
-    #endregion
-
-    #region LAUNCH
-    #region LAUNCH PAPER 1
-    public void LaunchPaper1()
-    {
-        //LLAMAR A LA FUNCIÓN DEL ADRI
-        // --- FUNCION ADRI --- ///
-
+        print(answeredQueue[index]);
+        
+        _playerBallTransitionController.PutBallInHand(answeredQueue[index].gameObject);
 
         //Eliminamos el paper de la lista
         answeredQueue.Remove(answeredQueue[0]);
 
         UpdatePaperUI();
-    }
-    #endregion
 
-    #region LAUNCH PAPER 2
-    public void LaunchPaper2()
+        CloseTable();
+    }
+    public void SelectAnswer(int index)
     {
-        //LLAMAR A LA FUNCIÓN DEL ADRI
-        // --- FUNCION ADRI --- ///
-
-        //Eliminamos el paper de la lista
-        answeredQueue.Remove(answeredQueue[1]);
-
-        UpdatePaperUI();
+        SelectAnAnswer(index);        
     }
-    #endregion
-
-    #region LAUNCH PAPER 3
-    public void LaunchPaper3()
-    {
-        //LLAMAR A LA FUNCIÓN DEL ADRI
-        // --- FUNCION ADRI --- ///
-
-
-        //Eliminamos el paper de la lista
-        answeredQueue.Remove(answeredQueue[2]);
-
-        UpdatePaperUI();
-    }
-    #endregion
-
-    #region LAUNCH PAPER 4
-    public void LaunchPaper4()
-    {
-        //LLAMAR A LA FUNCIÓN DEL ADRI
-        // --- FUNCION ADRI --- ///
-
-
-        //Eliminamos el paper de la lista
-        answeredQueue.Remove(answeredQueue[3]);
-
-        UpdatePaperUI();
-    }
-    #endregion
-
-    #region LAUNCH PAPER 5
-    public void LaunchPaper5()
-    {
-        //LLAMAR A LA FUNCIÓN DEL ADRI
-        // --- FUNCION ADRI --- ///
-
-
-        //Eliminamos el paper de la lista
-        answeredQueue.Remove(answeredQueue[4]);
-
-        UpdatePaperUI();
-    }
-    #endregion
-    #endregion
-
-    #region SELECT ANSWER
-
-    #region SELECT ANSWER 0
-    public void SelecAnswer0()
-    {        
-        SelectAnAnswer(0);
-    }
-    #endregion
-
-    #region SELECT ANSWER 1
-    public void SelecAnswer1()
-    {
-        SelectAnAnswer(1);        
-    }
-    #endregion
-
-    #region SELECT ANSWER 2
-    public void SelecAnswer2()
-    {
-        SelectAnAnswer(2);
-    }
-    #endregion
-
-    #region SELECT ANSWER 3
-    public void SelecAnswer3()
-    {
-        SelectAnAnswer(3);
-    }
-    #endregion
-
-    #region SELECT ANSWER 4
-    public void SelecAnswer4()
-    {
-        SelectAnAnswer(4);
-    }
-    #endregion
-
-    #region SELECT ANSWER 5
-    public void SelecAnswer5()
-    {
-        SelectAnAnswer(5);
-    }
-    #endregion
-
-    #region SELECT ANSWER 6
-    public void SelecAnswer6()
-    {
-        SelectAnAnswer(6);
-    }
-    #endregion
-
-    #region SELECT ANSWER 7
-    public void SelecAnswer7()
-    {
-        SelectAnAnswer(7);
-    }
-    #endregion
-
-    #region SELECT ANSWER 8
-    public void SelecAnswer8()
-    {
-        SelectAnAnswer(8);
-    }
-    #endregion
-
-    #region SELECT ANSWER 9
-    public void SelecAnswer9()
-    {
-        SelectAnAnswer(9);
-    }
-    #endregion   
-
 
     #region SELECT AN ANSWER
     void SelectAnAnswer(int _answer)
@@ -487,39 +260,39 @@ public class TableBehaviour : MonoBehaviour
 
     }
     #endregion
-    #endregion
 
     #region CONFIRM ANSWER
     public void ConfirmAnswer()
     {
         if (paperOpened && currentPaper.answer != ExamElement.NONE)
         {
-            //Desactivamos la imagen
-            answer.SetActive(false);
-            currentPaperToAnswer.SetActive(false);
+            paperOpened = false;
 
             answeredQueue.Add(currentPaper);
 
-            paperOpened = false;
 
             UpdatePaperUI();
+
+            //Desactivamos la imagen
+            currentPaperToAnswer.SetActive(false);
+            answer.SetActive(false);
         }
     }
     #endregion
 
-    #region DEBUG ADD PAPER
-    public void DebugAddPaper()
-    {
-        Paper paper = new Paper();
+    //#region DEBUG ADD PAPER
+    //public void DebugAddPaper()
+    //{
+    //    Paper paper = new Paper();
 
-        paper.paper_ID = GetIdForNewPaper();
-        paper.student_ID = Random.Range(0,5);
-        paper.question = ExamElement.EXAM_ELEMENT_1;
+    //    //paper.paper_ID = GetIdForNewPaper();
+    //    paper.student_ID = UnityEngine.Random.Range(0,5);
+    //    paper.question = ExamElement.EXAM_ELEMENT_1;
 
-        //Añadimos el papel
-        toAnswerQueue.Add(paper);
+    //    //Añadimos el papel
+    //    toAnswerQueue.Add(paper);
 
-        UpdatePaperUI();
-    }
-    #endregion
+    //    UpdatePaperUI();
+    //}
+    //#endregion
 }

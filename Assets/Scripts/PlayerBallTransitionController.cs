@@ -10,15 +10,14 @@ public class PlayerBallTransitionController : MonoBehaviour
 
     public void PutBallInBox(GameObject ball)
     {
+        if (table.ToAnserQueueCount >= table.MaxListSize)
+            return;
+
         ball.SetActive(false);
 
         Debug.Log("Ball to the box");
 
-        table.AddNewPaper(ball.GetComponent<BallController>()._ballPaper);
-        //Sergio cariño te toca
-        //Create a new paper in the box with the data from the ball(paper)
-        //--TO-DO--//
-
+        table.AddNewPaper(ball.GetComponent<BallController>().BallPaper);
     }
 
     public void PutBallInHand(GameObject ball)

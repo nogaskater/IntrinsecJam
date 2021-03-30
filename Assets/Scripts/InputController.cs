@@ -38,7 +38,7 @@ public class InputController : MonoBehaviour
         CheckEscClick();
         CheckResetBall();
 
-        CheckSpawnBallPlayer();
+        //CheckSpawnBallPlayer();
     }
 
     public void CheckLeftClick()        //Remains To-Do the raycast part to the player. to know if its a fire action or another thing
@@ -126,17 +126,17 @@ public class InputController : MonoBehaviour
         }
     }
 
-    public void CheckSpawnBallPlayer()      //Debug-Only
-    {
-        if (Input.GetButtonDown("Spawn Ball Player") /*&& _throwController.GetActiveBall()!=null*/)
-        {
-            GameObject pBall = Instantiate(_ballPrefab, _throwController.GetThrowStartingPoint().position, Quaternion.identity);
-            pBall.GetComponent<BallController>()._ballPaper.student_ID = 1;
-            pBall.GetComponent<BallController>()._ballPaper.answer = ExamElement.EXAM_ELEMENT_10;
-            _throwController.SetActiveBall(pBall.GetComponent<Rigidbody2D>());
+    //public void CheckSpawnBallPlayer()      //Debug-Only
+    //{
+    //    if (Input.GetButtonDown("Spawn Ball Player") /*&& _throwController.GetActiveBall()!=null*/)
+    //    {
+    //        GameObject pBall = Instantiate(_ballPrefab, _throwController.GetThrowStartingPoint().position, Quaternion.identity);
+    //        pBall.GetComponent<BallController>().BallPaper.student_ID = 1;
+    //        pBall.GetComponent<BallController>().BallPaper.answer = ExamElement.EXAM_ELEMENT_10;
+    //        _throwController.SetActiveBall(pBall.GetComponent<Rigidbody2D>());
 
-        }
-    }
+    //    }
+    //}
 
     private void CheckDeathZone()
     {
