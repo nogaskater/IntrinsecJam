@@ -10,10 +10,13 @@ public class BallController : MonoBehaviour
     [Header("Ball Settings")]
     [SerializeField] private float _gravityFactor;
     [SerializeField] private int _maxBounces;
+    [SerializeField] private float _rollCountAsBounceInterval;
     public Paper _ballPaper = new Paper();
 
     //--Controlling bouncing times--//
     private int contCollisions = 0;
+    private float lastRollAsInterval;
+    private int contRollAsInterval=0;
 
     //--Controlling original gravity scale--//
     private float originalGScale;
@@ -27,6 +30,7 @@ public class BallController : MonoBehaviour
     void Start()
     {
         originalGScale = _rb.gravityScale;
+        lastRollAsInterval = 0.0f;
     }
     void FixedUpdate()
     {
@@ -82,5 +86,23 @@ public class BallController : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         contCollisions++;
+    }
+
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        if(contRollAsInterval==0)
+        {
+            lastRollAsInterval = Time.time;
+        }
+        else
+        {
+            if (Time.time > lastRollAsInterval + _rollCountAsBounceInterval)
+                StopMovement();
+        }
+        contRollAsInterval++;
+    }
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        contRollAsInterval = 0;
     }
 }
