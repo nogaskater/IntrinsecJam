@@ -34,10 +34,10 @@ public enum AnswerType
 
 public struct Paper
 {
-    int paper_ID;
-    int student_ID;
-    QuestionType question;
-    AnswerType answer;
+    public int paper_ID;
+    public int student_ID;
+    public QuestionType question;
+    public AnswerType answer;
 };
 
 public class TableBehaviour : MonoBehaviour

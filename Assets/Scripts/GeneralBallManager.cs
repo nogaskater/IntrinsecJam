@@ -37,6 +37,8 @@ public class GeneralBallManager : MonoBehaviour
         int randomNPC = Random.Range(0, _npcs.Count);
 
         GameObject instance = Instantiate(_ballPrefab, _npcs[randomNPC].GetComponent<NPC_ThrowController>().GetThrowStartingPoint().position, Quaternion.identity);     //Not ideal using the get component...
+        instance.GetComponent<BallController>()._ballPaper.paper_ID = 1;    //Sergio change this pls
+        instance.GetComponent<BallController>()._ballPaper.student_ID = 1;  //Kaneri change this pls
 
         currentConcurrentBalls++;
 
@@ -52,14 +54,15 @@ public class GeneralBallManager : MonoBehaviour
         }
     }
 
-    public void RemoveCurrentBallFromController(int pID)
+    public void RemoveCurrentBallFromController(Paper p)
     {
         foreach(GameObject b in _balls)
         {
-            if(b.GetComponent<BallController>().GetPaperID() == pID)
+            if(b.GetComponent<BallController>()._ballPaper.paper_ID == p.paper_ID)
             {
                 //Check if the answer is correct or not
                 //--TO-DO--//
+
                 _balls.Remove(b);
                 GameObject.Destroy(b);
                 currentConcurrentBalls--;
