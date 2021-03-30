@@ -9,10 +9,21 @@ public class TeacherAI : MonoBehaviour
     public State CurrentState { get; private set; }
     public State GetState() => CurrentState;
 
+
+    [Header("Triggers")]
+    [SerializeField] private GameObject _rightTrigger;
+    [SerializeField] private GameObject _leftTrigger;
+
     private void Awake()
     {
         if (_startingState == null)
             throw new ArgumentNullException("_startingState");
+
+
+        if (_rightTrigger == null)
+            throw new ArgumentNullException("_rightTrigger");
+        if (_leftTrigger == null)
+            throw new ArgumentNullException("_leftTrigger");
     }
 
     private void Start()
@@ -26,8 +37,20 @@ public class TeacherAI : MonoBehaviour
 
     public void ChangeState(State toState)
     {
-        CurrentState = toState;
+        toState.EnterState();
 
-        CurrentState.EnterState();
+        CurrentState = toState;
     }
+
+
+    public void RightTriggerActive(bool active)
+    {
+        _rightTrigger.SetActive(active);
+    }
+    public void LeftTriggerActive(bool active)
+    {
+        _leftTrigger.SetActive(active);
+    }
+
 }
+

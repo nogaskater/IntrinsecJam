@@ -7,9 +7,6 @@ public class Patrol : State
     [SerializeField] private Transform _parentTargets;
     private List<Transform> _targets = new List<Transform>();
 
-    [SerializeField] private GameObject _rightTrigger;
-    [SerializeField] private GameObject _leftTrigger;
-
 
     private void Awake()
     {
@@ -26,9 +23,6 @@ public class Patrol : State
     {
         base.EnterState();
 
-        _rightTrigger.SetActive(false);
-        _leftTrigger.SetActive(false);
-
         List<Transform> targets = new List<Transform>(_targets);
         targets.Remove(_target);
 
@@ -38,11 +32,11 @@ public class Patrol : State
 
         if (_target.position.x < transform.position.x)
         {
-            _leftTrigger.SetActive(true);
+            _teacherAI.LeftTriggerActive(true);
         }
         else
         {
-            _rightTrigger.SetActive(true);
+            _teacherAI.RightTriggerActive(true);
         }
     }
 
