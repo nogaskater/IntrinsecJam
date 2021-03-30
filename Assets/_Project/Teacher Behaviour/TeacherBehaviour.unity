@@ -616,6 +616,7 @@ GameObject:
   - component: {fileID: 1341279725}
   - component: {fileID: 1341279727}
   - component: {fileID: 1341279726}
+  - component: {fileID: 1341279728}
   m_Layer: 0
   m_Name: Teacher
   m_TagString: Untagged
@@ -717,7 +718,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1341279719}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.61, z: 0}
+  m_LocalPosition: {x: 0.26, y: 1.61, z: 0}
   m_LocalScale: {x: 1, y: 2.4797564, z: 1}
   m_Children:
   - {fileID: 1923250934}
@@ -779,6 +780,24 @@ MonoBehaviour:
   _stopDistance: 0.2
   _actionTime: 3
   _goToState: {fileID: 1341279725}
+--- !u!114 &1341279728
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1341279719}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e660fbe44be83814b82b87632b51e87d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _teacherAI: {fileID: 1341279721}
+  _movementSpeed: 2
+  _stopDistance: 0.1
+  _actionTime: 3
+  _goToState: {fileID: 1341279726}
+  _foundBallState: {fileID: 0}
 --- !u!1 &1639536509
 GameObject:
   m_ObjectHideFlags: 0
