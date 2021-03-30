@@ -20,6 +20,7 @@ public enum QuestionType
 
 public enum AnswerType
 {
+    NONE,
     ANSWER_1,
     ANSWER_2,
     ANSWER_3,
@@ -34,7 +35,7 @@ public enum AnswerType
 
 public struct Paper
 {
-    public int paper_ID;
+    //public int paper_ID;
     public int student_ID;
     public QuestionType question;
     public AnswerType answer;

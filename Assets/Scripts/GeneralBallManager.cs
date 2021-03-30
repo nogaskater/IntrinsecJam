@@ -5,67 +5,67 @@ using UnityEngine;
 public class GeneralBallManager : MonoBehaviour
 {
     [Header("GameObject References")]
-    [SerializeField] private List<GameObject> _npcs = new List<GameObject>();
-    [SerializeField] private List<GameObject> _balls = new List<GameObject>();
+    [SerializeField] private List<NPC_ThrowController> _npcs = new List<NPC_ThrowController>();
+    [SerializeField] private List<Rigidbody2D> _balls = new List<Rigidbody2D>();
     [SerializeField] private GameObject _ballPrefab;
+    [SerializeField] private ThrowController _player;
 
     [Header("Manager Settings")]
-    [SerializeField] private int _maxConcurrentBalls;
+    //[SerializeField] private int _maxConcurrentBalls;
     [SerializeField] private float _minSpawnInterval;
     [SerializeField] private float _maxSpawnInterval;
-
-    //--Controlling amount of NPC's ball--//
-    private int currentConcurrentBalls = 0;
 
     //--Controlling papersID's--//
     private int _currentBallID = 0;
 
     //--Controlling spawn times--//
     private float lastSpawnTime= 0.0f;
+    private float intervalToSpawn;
 
     void Start()
     {
-        
+        intervalToSpawn = Random.Range(_minSpawnInterval, _maxSpawnInterval);
     }
     void Update()
     {
-        
+        CheckBallSpawnAvailability();
     }
 
     private void GenerateRandomBall()
     {
         int randomNPC = Random.Range(0, _npcs.Count);
 
-        GameObject instance = Instantiate(_ballPrefab, _npcs[randomNPC].GetComponent<NPC_ThrowController>().GetThrowStartingPoint().position, Quaternion.identity);     //Not ideal using the get component...
-        instance.GetComponent<BallController>()._ballPaper.paper_ID = 1;    //Sergio change this pls
-        instance.GetComponent<BallController>()._ballPaper.student_ID = 1;  //Kaneri change this pls
+        GameObject instance = Instantiate(_ballPrefab, _npcs[randomNPC].GetThrowStartingPoint().position, Quaternion.identity);    
+        instance.GetComponent<BallController>()._ballPaper.student_ID = _npcs[randomNPC].GetComponent<Student>().id; 
+        instance.GetComponent<BallController>()._ballPaper.answer = AnswerType.NONE; 
 
-        currentConcurrentBalls++;
+        lastSpawnTime = Time.time;
+
+        _npcs[randomNPC].ThrowBall(instance.GetComponent<Rigidbody2D>());
 
     }
 
     private void CheckBallSpawnAvailability()
     {
-        float intervalToSpawn = Random.Range(_minSpawnInterval, _maxSpawnInterval);
-
-        if(Time.time <= lastSpawnTime + intervalToSpawn && currentConcurrentBalls < _maxConcurrentBalls)
+        if(Time.time > lastSpawnTime + intervalToSpawn /*&& currentConcurrentBalls < _maxConcurrentBalls*/)
         {
             GenerateRandomBall();
+            intervalToSpawn = Random.Range(_minSpawnInterval, _maxSpawnInterval);
         }
     }
 
-    public void RemoveCurrentBallFromController(Paper p)
+    public void RemoveCurrentBallFromController(Rigidbody2D rb)
     {
-        foreach(GameObject b in _balls)
+        foreach(Rigidbody2D b in _balls)
         {
-            if(b.GetComponent<BallController>()._ballPaper.paper_ID == p.paper_ID)
+            if(b == rb)
             {
-                //Check if the answer is correct or not
-                //--TO-DO--//
-
                 _balls.Remove(b);
-                GameObject.Destroy(b);
-                currentConcurrentBalls--;
+
+                /*if (_player.GetActiveBall() == b)
+                    _player.SetActiveBall(null);*/
+
+                GameObject.Destroy(b.gameObject);
             }
         }
     }
