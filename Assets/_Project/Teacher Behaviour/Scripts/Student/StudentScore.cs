@@ -41,7 +41,11 @@ public class StudentScore : MonoBehaviour
     {
         _grade += delta;
 
-        int pointsObtained = (int)(delta * 100 * _pointsMultiplier);
+        int pointsObtained = 0;
+        if(delta < 0)
+            pointsObtained = (int)(delta * 100);
+        else
+            pointsObtained = (int)(delta * 100 * _pointsMultiplier);
 
         _points += pointsObtained;
 
