@@ -12,16 +12,15 @@ public class TableBehaviour : MonoBehaviour
 
     #region VARIABLES
     [Header("UI ELEMENTS")]
-    [SerializeField] RectTransform table;
-    [SerializeField] RectTransform mask;
-    Vector3 initialPosition;
+    public Transform table;
+    public Transform mask;
+    public Vector3 initialPosition;
 
     [Header("ANIMATION")]
     [SerializeField] float movementY;
     [SerializeField] float animationSpeed;
-
-    [Header("BUTTONS")]
-    [SerializeField] GameObject openButton;
+    [SerializeField] Transform openTransform;
+    [SerializeField] Transform closeTransform;
 
     public int MaxListSize { get; } = 4;
 
@@ -111,9 +110,8 @@ public class TableBehaviour : MonoBehaviour
         {
             isOpened = true;
 
-            mask.DOMoveY(mask.transform.position.y + movementY, animationSpeed);
+            mask.DOMove(openTransform.position, animationSpeed);
 
-            openButton.SetActive(false);
         }
     }
     #endregion
@@ -125,10 +123,8 @@ public class TableBehaviour : MonoBehaviour
         {
             isOpened = false;
 
-            mask.DOMoveY(mask.transform.position.y - movementY, animationSpeed);
+            mask.DOMove(closeTransform.position, animationSpeed);
 
-            //Reactivamos el boton
-            openButton.SetActive(true);
         }
     }
     #endregion
@@ -217,6 +213,8 @@ public class TableBehaviour : MonoBehaviour
     {
         if (!paperOpened)
         {
+            OpenTable();
+
             paperOpened = true;
 
             currentPaper = toAnswerQueue[index];
@@ -242,7 +240,14 @@ public class TableBehaviour : MonoBehaviour
     }
     public void SelectAnswer(int index)
     {
-        SelectAnAnswer(index);        
+        //SELECCIONAMOS LA RESPUESTA
+        SelectAnAnswer(index);
+
+        //CONFIRMAMOS LA MESA
+        ConfirmAnswer();
+
+        //CERRAMOS LA MESA
+        CloseTable();
     }
 
     #region SELECT AN ANSWER
