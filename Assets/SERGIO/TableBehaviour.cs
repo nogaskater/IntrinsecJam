@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+using TMPro;
 
 
 public class TableBehaviour : MonoBehaviour
@@ -35,14 +36,21 @@ public class TableBehaviour : MonoBehaviour
     public int AnsweredQueueCount => answeredQueue.Count;
 
     [Header("PAPER ELEMENTS")]
-    [SerializeField] GameObject currentPaperToAnswer;    
-    [SerializeField] Text paperQuestion;
-    [SerializeField] Text paperAnswer;
-    [SerializeField] GameObject answer;
+    [SerializeField] GameObject currentPaperToAnswer;
+    public TextMeshProUGUI paperQuestion;
+    [SerializeField] Image questionImage;
     Paper currentPaper;
 
-    [Header("ANSWER IMAGES")]
-    [SerializeField] Sprite[] answerImages;
+    [Header("QUESTIONS")]
+    public TextMeshProUGUI[] questionTextExam = new TextMeshProUGUI[10];
+    public TextMeshProUGUI[] answerTextExam = new TextMeshProUGUI[10];
+
+    public String[] questions;
+    string[] finalExamQuestions = new String[10];
+
+
+    //[SerializeField] Sprite[] answerImages;
+    //[SerializeField] Sprite[] questionImages;
 
     ExamElement[] examQuestions = new ExamElement[10];
     ExamElement[] examAnswers = new ExamElement[10];
@@ -65,10 +73,7 @@ public class TableBehaviour : MonoBehaviour
 
         //Inicializamos las listas
         toAnswerQueue = new List<Paper>();
-        answeredQueue = new List<Paper>();
-
-        //Creamos el examen
-        CreateExam();
+        answeredQueue = new List<Paper>();        
 
         //Updateamos la UI
         UpdatePaperUI();
@@ -85,6 +90,9 @@ public class TableBehaviour : MonoBehaviour
         examAnswers[8] = ExamElement.EXAM_ELEMENT_9;
         examAnswers[9] = ExamElement.EXAM_ELEMENT_10;
 
+        //CREAMOS EL EXAMEN
+        CreateExam();
+
     }
     #endregion
 
@@ -99,7 +107,35 @@ public class TableBehaviour : MonoBehaviour
     #region CREATE EXAM
     void CreateExam()
     {
+        ShuffleArray(questions);
 
+        for (int i = 0; i < 10; i++)
+        {
+            finalExamQuestions[i] = questions[i];
+
+            //Partimos
+            string[] splitArray = finalExamQuestions[i].Split('?');
+
+            questionTextExam[i].text = splitArray[0] + "?";
+            answerTextExam[i].text = splitArray[0] + ".";
+
+
+            Debug.Log(finalExamQuestions[i]);
+        }        
+    }
+    #endregion
+
+    #region SHUFFLE ARRAY
+    void ShuffleArray(string[] texts)
+    {
+        // Knuth shuffle algorithm :: courtesy of Wikipedia :)
+        for (int t = 0; t < texts.Length; t++)
+        {
+            string tmp = texts[t];
+            int r = UnityEngine.Random.Range(t, texts.Length);
+            texts[t] = texts[r];
+            texts[r] = tmp;
+        }
     }
     #endregion
 
@@ -209,22 +245,42 @@ public class TableBehaviour : MonoBehaviour
     }
     #endregion
 
+    #region SELECT PAPER
     public void SelectPaper(int index)
     {
         if (!paperOpened)
         {
+            //Abrimos la mesa
             OpenTable();
-
             paperOpened = true;
 
+            //Asignamos el Paper
             currentPaper = toAnswerQueue[index];
+
+            currentPaper.question = ExamElement.EXAM_ELEMENT_4;
+
+            //Borramos el paper de la lista por contestar
             toAnswerQueue.Remove(toAnswerQueue[index]);
 
-            UpdatePaperUI();
 
+            UpdatePaperUI();
+            //Activamso el papelito en la mesa y la pregunta del papel
             currentPaperToAnswer.SetActive(true);
+
+            Debug.Log("QUE SPRITE HAY QUE PINTAR --> " + (int)currentPaper.question);
+
+            //PINTAMOS LA PREGUNTA
+            string[] splitArray = finalExamQuestions[(int)currentPaper.question - 1].Split('?');
+
+            paperQuestion.text = splitArray[0] + "?";
+
+            //if (currentPaper.question == ExamElement.NONE) questionImage.sprite = answerImages[(int)currentPaper.question - 1];
+
         }
     }
+    #endregion
+
+    #region LAUNCH PAPER
     public void LaunchPaper(int index)
     {
         print(answeredQueue[index]);
@@ -238,6 +294,9 @@ public class TableBehaviour : MonoBehaviour
 
         CloseTable();
     }
+    #endregion
+
+    #region SELECT ANSWER
     public void SelectAnswer(int index)
     {
         //SELECCIONAMOS LA RESPUESTA
@@ -249,6 +308,7 @@ public class TableBehaviour : MonoBehaviour
         //CERRAMOS LA MESA
         CloseTable();
     }
+    #endregion
 
     #region SELECT AN ANSWER
     void SelectAnAnswer(int _answer)
@@ -256,10 +316,10 @@ public class TableBehaviour : MonoBehaviour
         if (paperOpened)
         {
             //Activamos la imagen
-            answer.SetActive(true);
+            //answer.SetActive(true);
 
             //Le asignamos el Sprite
-            answer.GetComponent<Image>().sprite = answerImages[_answer];
+            //answer.GetComponent<Image>().sprite = answerImages[_answer];
             currentPaper.answer = examAnswers[_answer];
         }  
 
@@ -280,7 +340,7 @@ public class TableBehaviour : MonoBehaviour
 
             //Desactivamos la imagen
             currentPaperToAnswer.SetActive(false);
-            answer.SetActive(false);
+            //answer.SetActive(false);
         }
     }
     #endregion

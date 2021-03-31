@@ -10,7 +10,7 @@ public class CallTeacherDetection : MonoBehaviour
         if (_studentCallLogic == null)
             throw new ArgumentNullException("_studentCallLogic");
 
-        print("Initialized");
+        //print("Initialized");
     }
 
     private void OnMouseDown()
