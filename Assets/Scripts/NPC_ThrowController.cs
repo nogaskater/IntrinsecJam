@@ -1,9 +1,13 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class NPC_ThrowController : MonoBehaviour
 {
+    [Header("Dependencies")]
+    [SerializeField] private GeneralBallManager _generalBallManager;
+
     [Header("GameObject References")]
     //[SerializeField] private Rigidbody2D _npcBall;
     [SerializeField] private Transform _throwStartingPoint;
@@ -30,13 +34,15 @@ public class NPC_ThrowController : MonoBehaviour
         return _player;
     }
 
-    void Start()
+    private void Awake()
     {
-        
+        if (_generalBallManager == null)
+            throw new ArgumentNullException("_generalBallManager");
     }
-    void Update()
+
+    public void RemoveStudentFromThrowManager()
     {
-        
+        _generalBallManager.RemoveStudent(this);
     }
 
     public void ThrowBall(Rigidbody2D _npcBall)
@@ -56,6 +62,6 @@ public class NPC_ThrowController : MonoBehaviour
 
     private float ComputeRandomHeight()
     {
-        return Random.Range(_player.position.y + _minHeight, _player.position.y + _maxHeight);
+        return UnityEngine.Random.Range(_player.position.y + _minHeight, _player.position.y + _maxHeight);
     }
 }

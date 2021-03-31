@@ -1,11 +1,17 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class GeneralBallManager : MonoBehaviour
 {
+    [Header("Dependencies")]
+    [SerializeField] private ScoreManager _scoreManager;
+
+
     [Header("GameObject References")]
-    [SerializeField] private List<NPC_ThrowController> _npcs = new List<NPC_ThrowController>();
+    [SerializeField] private Transform _npcsParent;
+    private readonly List<NPC_ThrowController> _npcs = new List<NPC_ThrowController>();
     [SerializeField] private List<Rigidbody2D> _balls = new List<Rigidbody2D>();
     [SerializeField] private GameObject _ballPrefab;
     [SerializeField] private ThrowController _player;
@@ -25,9 +31,28 @@ public class GeneralBallManager : MonoBehaviour
     private float lastSpawnTime= 0.0f;
     private float intervalToSpawn;
 
+    private void Awake()
+    {
+        if (_scoreManager == null)
+            throw new ArgumentNullException("_scoreManager");
+
+        if (_npcsParent == null)
+            throw new ArgumentNullException("_npcsParent");
+
+        for (int i = 0; i < _npcsParent.childCount; i++)
+        {
+            _npcs.Add(_npcsParent.GetChild(i).GetComponent<NPC_ThrowController>());
+        }
+
+        foreach (var student in _npcs)
+        {
+            _scoreManager.AddNewStudentScore(student.GetComponent<StudentScore>());
+        }
+    }
+
     void Start()
     {
-        intervalToSpawn = Random.Range(_minFirstSpawnInterval, _maxFirstSpawnInterval);
+        intervalToSpawn = UnityEngine.Random.Range(_minFirstSpawnInterval, _maxFirstSpawnInterval);
     }
     void Update()
     {
@@ -36,7 +61,7 @@ public class GeneralBallManager : MonoBehaviour
 
     private void GenerateRandomBall()
     {
-        int randomNPC = Random.Range(0, _npcs.Count);
+        int randomNPC = UnityEngine.Random.Range(0, _npcs.Count);
 
         BallController instance = Instantiate(_ballPrefab, _npcs[randomNPC].GetThrowStartingPoint().position, Quaternion.identity).GetComponent<BallController>();    
         instance.Initialize(_npcs[randomNPC].GetComponent<Student>(), ExamElement.NONE);
@@ -49,10 +74,13 @@ public class GeneralBallManager : MonoBehaviour
 
     private void CheckBallSpawnAvailability()
     {
+        if (_npcs.Count == 0)
+            return;
+
         if(Time.time > lastSpawnTime + intervalToSpawn /*&& currentConcurrentBalls < _maxConcurrentBalls*/)
         {
             GenerateRandomBall();
-            intervalToSpawn = Random.Range(_minSpawnInterval, _maxSpawnInterval);
+            intervalToSpawn = UnityEngine.Random.Range(_minSpawnInterval, _maxSpawnInterval);
         }
     }
 
@@ -67,10 +95,38 @@ public class GeneralBallManager : MonoBehaviour
                 /*if (_player.GetActiveBall() == b)
                     _player.SetActiveBall(null);*/
 
-                GameObject.Destroy(b.gameObject);
+                Destroy(b.gameObject);
             }
         }
     }
 
+    public void RemoveStudent(NPC_ThrowController throwController)
+    {
+        _npcs.Remove(throwController);
+
+        if(_npcs.Count == 0)
+        {
+            _scoreManager.GameOver();
+        }
+    }
+
+    public StudentScore GetClosestStudent(Transform fromTeacher)
+    {
+        if (_npcs.Count == 0)
+            return null;
+
+        Transform closest = _npcs[0].transform;
+
+        foreach (var student in _npcs)
+        {
+            if(Vector2.Distance(student.transform.position, fromTeacher.position) < Vector2.Distance(closest.position, fromTeacher.position))
+            {
+                closest = student.transform;
+            }
+        }
+
+        return closest.GetComponent<StudentScore>();
+
+    }
 
 }

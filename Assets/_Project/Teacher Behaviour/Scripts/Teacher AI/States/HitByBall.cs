@@ -5,6 +5,7 @@ public class HitByBall : State
 {
     private Transform _ballTarget;
 
+
     public void Hit(Transform ballTarget)
     {
         if (_teacherAI.GetState() is HitByBall)

@@ -20,7 +20,7 @@ public class State : MonoBehaviour
 
     private bool _walkActionDone = false;
 
-    private void Awake()
+    protected virtual void Awake()
     {
         if (_teacherAI == null)
             throw new ArgumentNullException("_teacherAI");
