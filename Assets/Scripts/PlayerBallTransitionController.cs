@@ -31,5 +31,7 @@ public class PlayerBallTransitionController : MonoBehaviour
         _throwController.SetActiveBall(ball.GetComponent<Rigidbody2D>());       //Tener en cuenta que pasa si ya tienes una bola  en la mano!!!!
         _throwController.ResetBall();
 
+        ball.GetComponent<BallController>().Student.HolderActive(true);
+
     }
 }

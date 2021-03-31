@@ -53,6 +53,8 @@ public class ThrowController : MonoBehaviour
 
             _activeBall.gameObject.layer = LayerMask.NameToLayer("Ball");
 
+            _activeBall.GetComponent<BallController>().Student.HolderActive(false);
+
             _activeBall = null;
         }
     }
