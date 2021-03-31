@@ -8,8 +8,6 @@ using TMPro;
 
 public class MainMenu : MonoBehaviour
 {
-    public string sceneToOpen;
-
     //BUTTONS
     public List<Button> buttons;
     public List<TMP_Text> backText;
@@ -27,7 +25,7 @@ public class MainMenu : MonoBehaviour
         Application.Quit();
     }
 
-    void LoadNextScene()
+    public void LoadNextScene(string sceneToOpen)
     {
         SceneManager.LoadScene(sceneToOpen);
     }
