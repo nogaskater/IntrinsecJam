@@ -232,7 +232,7 @@ public class TableBehaviour : MonoBehaviour
         _playerBallTransitionController.PutBallInHand(answeredQueue[index].gameObject);
 
         //Eliminamos el paper de la lista
-        answeredQueue.Remove(answeredQueue[0]);
+        answeredQueue.Remove(answeredQueue[index]);
 
         UpdatePaperUI();
 
