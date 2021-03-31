@@ -16,7 +16,7 @@ public class StudentScore_UI : MonoBehaviour
         if (_studentScoreText == null)
             throw new ArgumentNullException("_studentScoreText");
 
-        ModifyScoreText(_studentScore.Score);
+        ModifyScoreText(_studentScore.Grade, 0);
     }
 
     private void OnEnable()
@@ -29,8 +29,8 @@ public class StudentScore_UI : MonoBehaviour
 
     }
 
-    private void ModifyScoreText(int score)
+    private void ModifyScoreText(int grade, int pointsObtained)
     {
-        _studentScoreText.text = score + "/10";
+        _studentScoreText.text = grade + "/10";
     }
 }

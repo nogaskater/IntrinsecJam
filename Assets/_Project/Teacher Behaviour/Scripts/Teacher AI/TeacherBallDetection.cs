@@ -18,7 +18,7 @@ public class TeacherBallDetection : MonoBehaviour
         {
             _hitByBall.Hit(collision.transform);
 
-            collision.gameObject.layer = LayerMask.NameToLayer("Ball2");
+            collision.gameObject.layer = LayerMask.NameToLayer("Ball3");
         }
     }
 }

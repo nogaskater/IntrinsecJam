@@ -1,14 +1,15 @@
 ﻿using System;
 using UnityEngine;
 using TMPro;
+using System.Collections.Generic;
 
 public class ScoreManager_UI : MonoBehaviour
 {
     [SerializeField] private ScoreManager _scoreManager;
 
-    [SerializeField] private GameObject _live1;
-    [SerializeField] private GameObject _live2;
-    [SerializeField] private GameObject _live3;
+    public List<GameObject> _lives;
+
+    [SerializeField] private TextMeshProUGUI _scoreText;
 
     private void Awake()
     {
@@ -18,47 +19,37 @@ public class ScoreManager_UI : MonoBehaviour
         _scoreManager.OnLiveUpdated += UpdateLives;
 
 
-        if (_live1 == null)
-            throw new ArgumentNullException("_live1");
-        if (_live2 == null)
-            throw new ArgumentNullException("_live2");
-        if (_live3 == null)
-            throw new ArgumentNullException("_live3");
+        if (_scoreText == null)
+            throw new ArgumentNullException("_scoreText");
+
+        _scoreManager.OnScoreUpdated += UpdateScore;
     }
 
     private void Start()
     {
-        _live1.SetActive(false);
-        _live2.SetActive(false);
-        _live3.SetActive(false);
+        UpdateLives(_scoreManager.CurrentLives);
+
+        UpdateScore(0);
     }
 
 
     private void UpdateLives(int lives)
     {
-        if(lives == 0)
+        if (_lives.Count < _scoreManager.MaxLives)
+            throw new InvalidOperationException("UI Lives is inferior to max lives. More UI elements should be generated.");
+
+        for (int i = 0; i < _scoreManager.MaxLives; i++)
         {
-            _live1.SetActive(false);
-            _live2.SetActive(false);
-            _live3.SetActive(false);
+            if (i + 1 <= _scoreManager.CurrentLives)
+                _lives[i].SetActive(true);
+            else
+                _lives[i].SetActive(false);
         }
-        else if(lives == 1)
-        {
-            _live1.SetActive(true);
-            _live2.SetActive(false);
-            _live3.SetActive(false);
-        }
-        else if(lives == 2)
-        {
-            _live1.SetActive(true);
-            _live2.SetActive(true);
-            _live3.SetActive(false);
-        }
-        else if(lives == 3)
-        {
-            _live1.SetActive(true);
-            _live2.SetActive(true);
-            _live3.SetActive(true);
-        }
+
+    }
+
+    private void UpdateScore(int score)
+    {
+        _scoreText.text = "Score: " + score;
     }
 }
