@@ -453,11 +453,11 @@ MonoBehaviour:
   _playerBallTransitionController: {fileID: 0}
   table: {fileID: 419288164829803724}
   mask: {fileID: 419288164556787204}
+  initialPosition: {x: 0, y: 0, z: 0}
   movementY: 475
   animationSpeed: 0.75
   openTransform: {fileID: 1259413791304364106}
   closeTransform: {fileID: 1787472278137751826}
-  openButton: {fileID: 419288163851712006}
   toAnswerQueue: []
   papersToAnswer:
   - {fileID: 419288165329051656}
