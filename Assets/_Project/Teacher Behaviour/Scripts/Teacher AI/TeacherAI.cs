@@ -5,6 +5,11 @@ using UnityEngine;
 public class TeacherAI : MonoBehaviour
 {
     [SerializeField] private State _startingState;
+    [SerializeField] private CharacterAnimation _teacherAnimation;
+    public Animator Animator => _teacherAnimation.Animator;
+    public CharacterAnimation TeacherAnimation => _teacherAnimation;
+
+
 
     public State CurrentState { get; private set; }
     public State GetState() => CurrentState;
@@ -18,6 +23,8 @@ public class TeacherAI : MonoBehaviour
     {
         if (_startingState == null)
             throw new ArgumentNullException("_startingState");
+        if (_teacherAnimation == null)
+            throw new ArgumentNullException("_teacherAnimation");
 
 
         if (_rightTrigger == null)

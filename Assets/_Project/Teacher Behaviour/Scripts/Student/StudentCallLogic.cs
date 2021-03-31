@@ -9,6 +9,7 @@ public class StudentCallLogic : MonoBehaviour
     [Header("Settings")]
     [SerializeField] private float _teacherCallCooldown = 30.0f;
 
+
     private bool _teacherCalled = false;
     public bool TeacherCalled => _teacherCalled;
 

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -6,10 +7,8 @@ using UnityEngine.EventSystems;
 public enum CurrentObject { NONE, PLAYER, BALL, NPC };
 public class InputController : MonoBehaviour
 {
-
     [Header("GameObject References")]
     [SerializeField] private ThrowController _throwController;
-    [SerializeField] private NPC_ThrowController _NPCThrowController1;      //Debug-Only
     [SerializeField] private GameObject _ballPrefab;      
 
     [Header("Input Settings")]
@@ -28,6 +27,7 @@ public class InputController : MonoBehaviour
     private CurrentObject currentObject;
     private CurrentObject lastClickedObj;
 
+
     void Start()
     {
         
@@ -36,7 +36,7 @@ public class InputController : MonoBehaviour
     {
         CheckLeftClick();
         CheckEscClick();
-        CheckResetBall();
+        //CheckResetBall();
 
         //CheckSpawnBallPlayer();
     }
@@ -45,18 +45,29 @@ public class InputController : MonoBehaviour
     {
         SetCurrentObject();
 
-        if(Input.GetButtonDown("Fire1"))
+
+        if (Input.GetButtonDown("Fire1"))
         {
             prevClickTime = Time.time;
             startClickPos = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
             lastClickedObj = currentObject;
 
-            //Debug.Log("Left Click - CLICKED");
+            // AEUGH
+            if (lastClickedObj != CurrentObject.PLAYER)
+                return;
+
+            if(_throwController.GetActiveBall() != null)
+                _throwController.TriggerChargeAnimation();
+
         }
         else if(Input.GetButton("Fire1"))
         {
-            
-            if(Time.time - prevClickTime >= _holdInterval && lastClickedObj==CurrentObject.PLAYER)
+
+            if (lastClickedObj != CurrentObject.PLAYER)
+                return;
+
+
+            if (Time.time - prevClickTime >= _holdInterval)
             {
                 //Debug.Log("Left Click - DRAGGING");
 
@@ -118,13 +129,13 @@ public class InputController : MonoBehaviour
         }
     }
 
-    public void CheckResetBall()
-    {
-        if(Input.GetButtonDown("Reset Ball"))
-        {
-            _throwController.ResetBall();
-        }
-    }
+    //public void CheckResetBall()
+    //{
+    //    if(Input.GetButtonDown("Reset Ball"))
+    //    {
+    //        _throwController.ResetBall();
+    //    }
+    //}
 
     //public void CheckSpawnBallPlayer()      //Debug-Only
     //{

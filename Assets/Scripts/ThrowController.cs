@@ -1,10 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class ThrowController : MonoBehaviour
 {
+    [SerializeField] private CharacterAnimation _characterAnimation;
+
     [Header("GameObject References")]
     [SerializeField] private Rigidbody2D _activeBall;
     [SerializeField] private Transform _throwStartingPoint;
@@ -32,15 +33,21 @@ public class ThrowController : MonoBehaviour
     {
         return _throwStartingPoint;
     }
-    
+
+    private void Awake()
+    {
+        if (_characterAnimation == null)
+            throw new ArgumentNullException("_characterAnimation");
+    }
 
     void Start()
     {
         DisableArrow();
     }
-    void Update()
+
+    public void TriggerChargeAnimation()
     {
-        
+        _characterAnimation.Animator.SetTrigger("Charge");
     }
 
     public void ThrowBall(Vector2 initialDirection, float initialMagnitude, float minRadPossible, float maxRadPossible)
@@ -56,7 +63,10 @@ public class ThrowController : MonoBehaviour
             _activeBall.GetComponent<BallController>().Student.HolderActive(false);
 
             _activeBall = null;
+
+            _characterAnimation.Animator.SetTrigger("Throw");
         }
+
     }
 
     private Vector2 ComputeInitialForce(Vector2 initialDirection, float initialMagnitude, float minRadPossible, float maxRadPossible)

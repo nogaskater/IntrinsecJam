@@ -6,6 +6,8 @@ public class FoundBall : State
     [SerializeField] private ScoreManager _scoreManager;
     [SerializeField] private GeneralBallManager _generalBallManager;
 
+    [SerializeField] private float _hideBallTime;
+
     protected override void Awake()
     {
         base.Awake();
@@ -47,6 +49,26 @@ public class FoundBall : State
         base.FinishAction();
     }
 
+    public override void EnterState()
+    {
+        base.EnterState();
+
+        if (_target == null)
+            return;
+
+        if (_target.position.x < transform.position.x)
+        {
+            _teacherAI.TeacherAnimation.SetSpriteDirection(Direction.LEFT);
+        }
+        else
+        {
+            _teacherAI.TeacherAnimation.SetSpriteDirection(Direction.RIGHT);
+        }
+
+
+        _teacherAI.Animator.SetTrigger("Walk");
+    }
+
     public override void UpdateState()
     {
         if (_target == null)
@@ -56,6 +78,18 @@ public class FoundBall : State
             return;
         }
 
-        base.UpdateState();
+        base.UpdateState(); 
+
+        if(_actionCounter > _hideBallTime && _target.gameObject.activeSelf)
+        {
+            _target.gameObject.SetActive(false);
+        }
+    }
+
+    public override void StartActionAnimation()
+    {
+        base.StartActionAnimation();
+
+        _teacherAI.Animator.SetTrigger("Crouch");
     }
 }
