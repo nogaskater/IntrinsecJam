@@ -7,9 +7,10 @@ public class Patrol : State
     [SerializeField] private Transform _parentTargets;
     private List<Transform> _targets = new List<Transform>();
 
-
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
+
         if (_parentTargets == null)
             throw new ArgumentNullException("_parentTargets");
 
@@ -33,11 +34,25 @@ public class Patrol : State
         if (_target.position.x < transform.position.x)
         {
             _teacherAI.LeftTriggerActive(true);
+
+            _teacherAI.TeacherAnimation.SetSpriteDirection(Direction.LEFT);
+
         }
         else
         {
             _teacherAI.RightTriggerActive(true);
+
+            _teacherAI.TeacherAnimation.SetSpriteDirection(Direction.RIGHT);
         }
+
+        _teacherAI.Animator.SetTrigger("Walk");
+    }
+
+    public override void StartActionAnimation()
+    {
+        base.StartActionAnimation();
+
+        _teacherAI.Animator.SetTrigger("Idle");
     }
 
 }

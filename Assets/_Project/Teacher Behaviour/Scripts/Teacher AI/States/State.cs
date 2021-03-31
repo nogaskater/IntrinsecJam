@@ -36,8 +36,8 @@ public class State : MonoBehaviour
 
         _teacherAI.RightTriggerActive(false);
         _teacherAI.LeftTriggerActive(false);
-
     }
+
     public virtual void ExitState()
     {
 
@@ -45,6 +45,9 @@ public class State : MonoBehaviour
     public virtual void UpdateState()
     {
         Vector2 direction = MyUtilities.DirectionVector(transform.position, _target.position);
+        if(this is CheckStudent)
+            direction = MyUtilities.DirectionVector(transform.position, (Vector2)_target.position + Vector2.right * 1.1f);
+        
 
         if (!_isNearTarget)
         {
@@ -59,6 +62,8 @@ public class State : MonoBehaviour
             if (direction.magnitude < _stopDistance)
             {
                 _isNearTarget = true;
+
+                StartActionAnimation();
             }
         }
         else
@@ -77,6 +82,11 @@ public class State : MonoBehaviour
         _teacherAI.ChangeState(_goToState);
     }
     public virtual void WalkAction()
+    {
+
+    }
+
+    public virtual void StartActionAnimation()
     {
 
     }

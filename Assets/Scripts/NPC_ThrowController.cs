@@ -7,6 +7,7 @@ public class NPC_ThrowController : MonoBehaviour
 {
     [Header("Dependencies")]
     [SerializeField] private GeneralBallManager _generalBallManager;
+    [SerializeField] private CharacterAnimation _characterAnimation;
 
     [Header("GameObject References")]
     //[SerializeField] private Rigidbody2D _npcBall;
@@ -25,6 +26,7 @@ public class NPC_ThrowController : MonoBehaviour
     private float vy;
     private float vx;
 
+
     public Transform GetThrowStartingPoint()
     {
         return _throwStartingPoint;
@@ -38,6 +40,8 @@ public class NPC_ThrowController : MonoBehaviour
     {
         if (_generalBallManager == null)
             throw new ArgumentNullException("_generalBallManager");
+        if (_characterAnimation == null)
+            throw new ArgumentNullException("_characterAnimation");
     }
 
     public void RemoveStudentFromThrowManager()
@@ -58,6 +62,8 @@ public class NPC_ThrowController : MonoBehaviour
 
         _npcBall.bodyType = RigidbodyType2D.Dynamic;
         _npcBall.velocity = new Vector2(vx, vy);
+
+        _characterAnimation.Animator.SetTrigger("Throw");
     }
 
     private float ComputeRandomHeight()

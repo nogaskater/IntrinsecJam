@@ -30,4 +30,11 @@ public class HitByBall : State
 
         print("Called");
     }
+
+    public override void StartActionAnimation()
+    {
+        base.StartActionAnimation();
+
+        _teacherAI.Animator.SetTrigger("Hit");
+    }
 }
