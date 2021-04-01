@@ -1485,6 +1485,121 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 20342232164344538, guid: 44b649327d636ca42ade9a8274b118a0,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 22.33
+      objectReference: {fileID: 0}
+    - target: {fileID: 20342232164344538, guid: 44b649327d636ca42ade9a8274b118a0,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 277.24493
+      objectReference: {fileID: 0}
+    - target: {fileID: 20342232164344538, guid: 44b649327d636ca42ade9a8274b118a0,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 29.44
+      objectReference: {fileID: 0}
+    - target: {fileID: 20342232164344538, guid: 44b649327d636ca42ade9a8274b118a0,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 1348.5792
+      objectReference: {fileID: 0}
+    - target: {fileID: 452060535622306151, guid: 44b649327d636ca42ade9a8274b118a0,
+        type: 3}
+      propertyPath: m_Color.a
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1068146465862520948, guid: 44b649327d636ca42ade9a8274b118a0,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1140837416825479508, guid: 44b649327d636ca42ade9a8274b118a0,
+        type: 3}
+      propertyPath: m_Color.a
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1352563628940969816, guid: 44b649327d636ca42ade9a8274b118a0,
+        type: 3}
+      propertyPath: m_fontStyle
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2537270124672428547, guid: 44b649327d636ca42ade9a8274b118a0,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -176
+      objectReference: {fileID: 0}
+    - target: {fileID: 2537270124672428547, guid: 44b649327d636ca42ade9a8274b118a0,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -52
+      objectReference: {fileID: 0}
+    - target: {fileID: 4275555234613036688, guid: 44b649327d636ca42ade9a8274b118a0,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 139.45807
+      objectReference: {fileID: 0}
+    - target: {fileID: 4275555234613036688, guid: 44b649327d636ca42ade9a8274b118a0,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 37.189
+      objectReference: {fileID: 0}
+    - target: {fileID: 4619428941776418371, guid: 44b649327d636ca42ade9a8274b118a0,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 64
+      objectReference: {fileID: 0}
+    - target: {fileID: 5083615506665645342, guid: 44b649327d636ca42ade9a8274b118a0,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -22
+      objectReference: {fileID: 0}
+    - target: {fileID: 5083615506665645342, guid: 44b649327d636ca42ade9a8274b118a0,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -26.999996
+      objectReference: {fileID: 0}
+    - target: {fileID: 5424513692312229960, guid: 44b649327d636ca42ade9a8274b118a0,
+        type: 3}
+      propertyPath: m_Color.a
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5434279171355735731, guid: 44b649327d636ca42ade9a8274b118a0,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 40.31
+      objectReference: {fileID: 0}
+    - target: {fileID: 5434279171355735731, guid: 44b649327d636ca42ade9a8274b118a0,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 331.65338
+      objectReference: {fileID: 0}
+    - target: {fileID: 5434279171355735731, guid: 44b649327d636ca42ade9a8274b118a0,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 45.52
+      objectReference: {fileID: 0}
+    - target: {fileID: 5434279171355735731, guid: 44b649327d636ca42ade9a8274b118a0,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 1471.7927
+      objectReference: {fileID: 0}
+    - target: {fileID: 6055307736336503024, guid: 44b649327d636ca42ade9a8274b118a0,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6225076616946460186, guid: 44b649327d636ca42ade9a8274b118a0,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6225076616946460199, guid: 44b649327d636ca42ade9a8274b118a0,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6225076617195378152, guid: 44b649327d636ca42ade9a8274b118a0,
         type: 3}
       propertyPath: m_Sprite
@@ -1509,12 +1624,138 @@ PrefabInstance:
     - target: {fileID: 6225076617687567772, guid: 44b649327d636ca42ade9a8274b118a0,
         type: 3}
       propertyPath: questions.Array.data[0]
-      value: 1. Who is Your aaadaddy? I am your Daddy
+      value: How many days do we have in a week?Seven
       objectReference: {fileID: 0}
     - target: {fileID: 6225076617687567772, guid: 44b649327d636ca42ade9a8274b118a0,
         type: 3}
       propertyPath: MaxListSize
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6225076617687567772, guid: 44b649327d636ca42ade9a8274b118a0,
+        type: 3}
+      propertyPath: questions.Array.data[1]
+      value: How many colors are in a rainbow?Seven
+      objectReference: {fileID: 0}
+    - target: {fileID: 6225076617687567772, guid: 44b649327d636ca42ade9a8274b118a0,
+        type: 3}
+      propertyPath: questions.Array.data[2]
+      value: How many letters are in the English alphabet?26
+      objectReference: {fileID: 0}
+    - target: {fileID: 6225076617687567772, guid: 44b649327d636ca42ade9a8274b118a0,
+        type: 3}
+      propertyPath: questions.Array.data[3]
+      value: How many sides are in a triangle?Three
+      objectReference: {fileID: 0}
+    - target: {fileID: 6225076617687567772, guid: 44b649327d636ca42ade9a8274b118a0,
+        type: 3}
+      propertyPath: questions.Array.data[4]
+      value: How do you call a type of shape that has five sides?Pentagon
+      objectReference: {fileID: 0}
+    - target: {fileID: 6225076617687567772, guid: 44b649327d636ca42ade9a8274b118a0,
+        type: 3}
+      propertyPath: questions.Array.data[5]
+      value: Which part of the body we use to smell?Nose
+      objectReference: {fileID: 0}
+    - target: {fileID: 6225076617687567772, guid: 44b649327d636ca42ade9a8274b118a0,
+        type: 3}
+      propertyPath: questions.Array.data[6]
+      value: Which is the largest mammal?Blue Whale
+      objectReference: {fileID: 0}
+    - target: {fileID: 6225076617687567772, guid: 44b649327d636ca42ade9a8274b118a0,
+        type: 3}
+      propertyPath: questions.Array.data[7]
+      value: Which month of the year has the least number of days?February
+      objectReference: {fileID: 0}
+    - target: {fileID: 6225076617687567772, guid: 44b649327d636ca42ade9a8274b118a0,
+        type: 3}
+      propertyPath: questions.Array.data[8]
+      value: How many seasons has the year got?Four
+      objectReference: {fileID: 0}
+    - target: {fileID: 6225076617687567772, guid: 44b649327d636ca42ade9a8274b118a0,
+        type: 3}
+      propertyPath: questions.Array.data[9]
+      value: How many legs has a dog?Four
+      objectReference: {fileID: 0}
+    - target: {fileID: 6225076617687567772, guid: 44b649327d636ca42ade9a8274b118a0,
+        type: 3}
+      propertyPath: questions.Array.data[10]
+      value: How many lives has a cat?Seven
+      objectReference: {fileID: 0}
+    - target: {fileID: 6225076617687567772, guid: 44b649327d636ca42ade9a8274b118a0,
+        type: 3}
+      propertyPath: questions.Array.data[11]
+      value: What is the largest river in the world?Amazonas
+      objectReference: {fileID: 0}
+    - target: {fileID: 6225076617687567772, guid: 44b649327d636ca42ade9a8274b118a0,
+        type: 3}
+      propertyPath: questions.Array.data[12]
+      value: How often do we have a leap year?Four
+      objectReference: {fileID: 0}
+    - target: {fileID: 6225076617687567772, guid: 44b649327d636ca42ade9a8274b118a0,
+        type: 3}
+      propertyPath: questions.Array.data[13]
+      value: How many months have 28 days?One
+      objectReference: {fileID: 0}
+    - target: {fileID: 6225076617687567772, guid: 44b649327d636ca42ade9a8274b118a0,
+        type: 3}
+      propertyPath: questions.Array.data[14]
+      value: What is a century?One hundred years
+      objectReference: {fileID: 0}
+    - target: {fileID: 6225076617687567772, guid: 44b649327d636ca42ade9a8274b118a0,
+        type: 3}
+      propertyPath: questions.Array.data[15]
+      value: What is the highest mountain in the world?Everest
+      objectReference: {fileID: 0}
+    - target: {fileID: 6225076617687567772, guid: 44b649327d636ca42ade9a8274b118a0,
+        type: 3}
+      propertyPath: questions.Array.data[16]
+      value: In which country is the Eiffel Tower located?Paris
+      objectReference: {fileID: 0}
+    - target: {fileID: 6225076617687567772, guid: 44b649327d636ca42ade9a8274b118a0,
+        type: 3}
+      propertyPath: questions.Array.data[17]
+      value: XIX / XI / MMXVIII, what date is it?19/11/2018
+      objectReference: {fileID: 0}
+    - target: {fileID: 6225076617687567772, guid: 44b649327d636ca42ade9a8274b118a0,
+        type: 3}
+      propertyPath: questions.Array.data[18]
+      value: How many continents are there in the world?Five
+      objectReference: {fileID: 0}
+    - target: {fileID: 6225076617687567772, guid: 44b649327d636ca42ade9a8274b118a0,
+        type: 3}
+      propertyPath: questions.Array.data[19]
+      value: What are the states of matter?Solid, liquid and gaseous
+      objectReference: {fileID: 0}
+    - target: {fileID: 6225076617687567772, guid: 44b649327d636ca42ade9a8274b118a0,
+        type: 3}
+      propertyPath: questions.Array.data[20]
+      value: "At what temperature does the water freeze? 0\xBAC"
+      objectReference: {fileID: 0}
+    - target: {fileID: 6225076617687567772, guid: 44b649327d636ca42ade9a8274b118a0,
+        type: 3}
+      propertyPath: questions.Array.data[21]
+      value: "At what temperature does water boil? 100\xBAC"
+      objectReference: {fileID: 0}
+    - target: {fileID: 6225076617687567772, guid: 44b649327d636ca42ade9a8274b118a0,
+        type: 3}
+      propertyPath: questions.Array.data[22]
+      value: Which is Miguel de Cervantes' best known character?Don Quixote of La
+        Mancha
+      objectReference: {fileID: 0}
+    - target: {fileID: 6225076617687567772, guid: 44b649327d636ca42ade9a8274b118a0,
+        type: 3}
+      propertyPath: questions.Array.data[23]
+      value: "What is the sum of the angles of a triangle?180\xBA"
+      objectReference: {fileID: 0}
+    - target: {fileID: 6225076617687567772, guid: 44b649327d636ca42ade9a8274b118a0,
+        type: 3}
+      propertyPath: questions.Array.data[24]
+      value: How many kilos are a ton?a thousand kilos
+      objectReference: {fileID: 0}
+    - target: {fileID: 6225076617687567772, guid: 44b649327d636ca42ade9a8274b118a0,
+        type: 3}
+      propertyPath: numQuestions
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 6225076617687567773, guid: 44b649327d636ca42ade9a8274b118a0,
         type: 3}
@@ -1579,6 +1820,11 @@ PrefabInstance:
     - target: {fileID: 6225076618838498513, guid: 44b649327d636ca42ade9a8274b118a0,
         type: 3}
       propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6874445518980240487, guid: 44b649327d636ca42ade9a8274b118a0,
+        type: 3}
+      propertyPath: m_Color.a
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -14346,7 +14592,7 @@ MonoBehaviour:
   _maxSpawnInterval: 8
   _minFirstSpawnInterval: 1
   _maxFirstSpawnInterval: 1
-  numQuestions: 6
+  numQuestions: 4
 --- !u!4 &1433948864874201153
 Transform:
   m_ObjectHideFlags: 0

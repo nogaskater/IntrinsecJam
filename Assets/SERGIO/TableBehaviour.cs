@@ -117,7 +117,7 @@ public class TableBehaviour : MonoBehaviour
     #region CREATE EXAM
     void CreateExam()
     {
-        ShuffleArray(questions);
+        //ShuffleArray(questions);
 
         for (int i = 0; i < numQuestions; i++)
         {
@@ -314,12 +314,10 @@ public class TableBehaviour : MonoBehaviour
     public void SelectAnswer(int index)
     {
         //SELECCIONAMOS LA RESPUESTA
-        SelectAnAnswer(index);
-
-
+        SelectAnAnswer(index);        
 
         //PINTAMOS LA RESPUESTA
-        string[] splitArray = finalExamQuestions[(int)currentPaper.question - 1].Split('?');
+        string[] splitArray = finalExamQuestions[index].Split('?');
 
         paperAnswer.text = splitArray[1];
 
