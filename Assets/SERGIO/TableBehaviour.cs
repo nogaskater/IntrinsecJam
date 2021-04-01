@@ -40,15 +40,17 @@ public class TableBehaviour : MonoBehaviour
     [Header("PAPER ELEMENTS")]
     [SerializeField] GameObject currentPaperToAnswer;
     public TextMeshProUGUI paperQuestion;
+    public TextMeshProUGUI paperAnswer;
     [SerializeField] Image questionImage;
     Paper currentPaper;
 
     [Header("QUESTIONS")]
-    public TextMeshProUGUI[] questionTextExam = new TextMeshProUGUI[10];
-    public TextMeshProUGUI[] answerTextExam = new TextMeshProUGUI[10];
+    [SerializeField] int numQuestions = 6;
+    public TextMeshProUGUI[] questionTextExam;
+    public TextMeshProUGUI[] answerTextExam;
 
     public String[] questions;
-    string[] finalExamQuestions = new String[10];
+    string[] finalExamQuestions;
 
 
     //[SerializeField] Sprite[] answerImages;
@@ -79,7 +81,7 @@ public class TableBehaviour : MonoBehaviour
 
         //Inicializamos las listas
         toAnswerQueue = new List<Paper>();
-        answeredQueue = new List<Paper>();        
+        answeredQueue = new List<Paper>();
 
         //Updateamos la UI
         UpdatePaperUI();
@@ -96,6 +98,8 @@ public class TableBehaviour : MonoBehaviour
         examAnswers[8] = ExamElement.EXAM_ELEMENT_9;
         examAnswers[9] = ExamElement.EXAM_ELEMENT_10;
 
+
+        finalExamQuestions = new string[numQuestions];
         //CREAMOS EL EXAMEN
         CreateExam();
 
@@ -115,7 +119,7 @@ public class TableBehaviour : MonoBehaviour
     {
         ShuffleArray(questions);
 
-        for (int i = 0; i < 10; i++)
+        for (int i = 0; i < numQuestions; i++)
         {
             finalExamQuestions[i] = questions[i];
 
@@ -123,11 +127,11 @@ public class TableBehaviour : MonoBehaviour
             string[] splitArray = finalExamQuestions[i].Split('?');
 
             questionTextExam[i].text = splitArray[0] + "?";
-            answerTextExam[i].text = splitArray[0] + ".";
+            answerTextExam[i].text = splitArray[1] + ".";
 
 
             //Debug.Log(finalExamQuestions[i]);
-        }        
+        }
     }
     #endregion
 
@@ -168,6 +172,7 @@ public class TableBehaviour : MonoBehaviour
             isOpened = false;
 
             mask.DOMove(closeTransform.position, animationSpeed);
+            paperAnswer.text = "";
 
         }
     }
@@ -188,8 +193,6 @@ public class TableBehaviour : MonoBehaviour
         }
     }
     #endregion
-
-
 
     #region OPEN PAPER
     public void OpenPaper()
@@ -258,7 +261,7 @@ public class TableBehaviour : MonoBehaviour
             //Asignamos el Paper
             currentPaper = toAnswerQueue[index];
 
-            currentPaper.question = ExamElement.EXAM_ELEMENT_4;
+            //currentPaper.question = ExamElement.EXAM_ELEMENT_4;
 
             //Borramos el paper de la lista por contestar
             toAnswerQueue.Remove(toAnswerQueue[index]);
@@ -268,7 +271,7 @@ public class TableBehaviour : MonoBehaviour
             //Activamso el papelito en la mesa y la pregunta del papel
             currentPaperToAnswer.SetActive(true);
 
-            Debug.Log("QUE SPRITE HAY QUE PINTAR --> " + (int)currentPaper.question);
+            //Debug.Log("QUE SPRITE HAY QUE PINTAR --> " + (int)currentPaper.question);
 
             //PINTAMOS LA PREGUNTA
             string[] splitArray = finalExamQuestions[(int)currentPaper.question - 1].Split('?');
@@ -295,7 +298,7 @@ public class TableBehaviour : MonoBehaviour
 
             UpdatePaperUI();
         }
-        
+
         _playerBallTransitionController.PutBallInHand(answeredQueue[index].gameObject);
 
         //Eliminamos el paper de la lista
@@ -313,11 +316,17 @@ public class TableBehaviour : MonoBehaviour
         //SELECCIONAMOS LA RESPUESTA
         SelectAnAnswer(index);
 
-        //CONFIRMAMOS LA MESA
-        ConfirmAnswer();
+
+
+        //PINTAMOS LA RESPUESTA
+        string[] splitArray = finalExamQuestions[(int)currentPaper.question - 1].Split('?');
+
+        paperAnswer.text = splitArray[1];
 
         //CERRAMOS LA MESA
-        CloseTable();
+        Invoke("CloseTable", 1f);
+        //CONFIRMAMOS LA MESA
+        Invoke("ConfirmAnswer", 1f);
 
         AudioManager.Instance.PlaySound("WritePaper");
     }
@@ -335,7 +344,7 @@ public class TableBehaviour : MonoBehaviour
             //Le asignamos el Sprite
             //answer.GetComponent<Image>().sprite = answerImages[_answer];
             currentPaper.answer = examAnswers[_answer];
-        }  
+        }
 
     }
     #endregion

@@ -23,6 +23,8 @@ public class GeneralBallManager : MonoBehaviour
     [SerializeField] private float _minFirstSpawnInterval = 2.0f;
     [SerializeField] private float _maxFirstSpawnInterval = 4.0f;
 
+    [SerializeField] private int numQuestions = 6;
+
     //--Controlling papersID's--//
     private int _currentBallID = 0;
 
@@ -65,7 +67,7 @@ public class GeneralBallManager : MonoBehaviour
         int randomNPC = UnityEngine.Random.Range(0, _npcs.Count);
 
         BallController instance = Instantiate(_ballPrefab, _npcs[randomNPC].GetThrowStartingPoint().position, Quaternion.identity).GetComponent<BallController>();    
-        instance.Initialize(_npcs[randomNPC].GetComponent<Student>(), ExamElement.NONE);
+        instance.Initialize(_npcs[randomNPC].GetComponent<Student>(), (ExamElement)UnityEngine.Random.Range(1, numQuestions));
 
         lastSpawnTime = Time.time;
 

@@ -1485,6 +1485,12 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6225076617195378152, guid: 44b649327d636ca42ade9a8274b118a0,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 29faf6978fe99654d86899c0a16df828,
+        type: 3}
     - target: {fileID: 6225076617687567771, guid: 44b649327d636ca42ade9a8274b118a0,
         type: 3}
       propertyPath: m_Name
@@ -1500,6 +1506,16 @@ PrefabInstance:
       propertyPath: _playerBallTransitionController
       value: 
       objectReference: {fileID: 688439041}
+    - target: {fileID: 6225076617687567772, guid: 44b649327d636ca42ade9a8274b118a0,
+        type: 3}
+      propertyPath: questions.Array.data[0]
+      value: 1. Who is Your aaadaddy? I am your Daddy
+      objectReference: {fileID: 0}
+    - target: {fileID: 6225076617687567772, guid: 44b649327d636ca42ade9a8274b118a0,
+        type: 3}
+      propertyPath: MaxListSize
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 6225076617687567773, guid: 44b649327d636ca42ade9a8274b118a0,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1560,6 +1576,11 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6225076618838498513, guid: 44b649327d636ca42ade9a8274b118a0,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 44b649327d636ca42ade9a8274b118a0, type: 3}
 --- !u!1001 &238907250
@@ -1579,6 +1600,11 @@ PrefabInstance:
       propertyPath: _characterAnimation
       value: 
       objectReference: {fileID: 2098902271}
+    - target: {fileID: 322988735572947647, guid: f604de094a275a945ac32eec80a86f01,
+        type: 3}
+      propertyPath: _table
+      value: 
+      objectReference: {fileID: 822463819}
     - target: {fileID: 408711408518606483, guid: f604de094a275a945ac32eec80a86f01,
         type: 3}
       propertyPath: m_LocalRotation.x
@@ -4965,6 +4991,16 @@ PrefabInstance:
       propertyPath: _scoreManager
       value: 
       objectReference: {fileID: 1859664424}
+    - target: {fileID: 467996765311922585, guid: 7ec21975f7535594dbe1a2bc16cf99a0,
+        type: 3}
+      propertyPath: _minStartScore
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 467996765311922585, guid: 7ec21975f7535594dbe1a2bc16cf99a0,
+        type: 3}
+      propertyPath: _maxStartScore
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 467996766332203789, guid: 7ec21975f7535594dbe1a2bc16cf99a0,
         type: 3}
       propertyPath: _sprites.Array.size
@@ -5569,6 +5605,16 @@ PrefabInstance:
         type: 3}
       propertyPath: _pointsMultiplier
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 467996765311922585, guid: 7ec21975f7535594dbe1a2bc16cf99a0,
+        type: 3}
+      propertyPath: _minStartScore
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 467996765311922585, guid: 7ec21975f7535594dbe1a2bc16cf99a0,
+        type: 3}
+      propertyPath: _maxStartScore
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 467996766332203789, guid: 7ec21975f7535594dbe1a2bc16cf99a0,
         type: 3}
@@ -9211,7 +9257,7 @@ PrefabInstance:
     - target: {fileID: 5088004195129275505, guid: aa387be3003d6b843bfa105760f99dfd,
         type: 3}
       propertyPath: _maxTime
-      value: 30
+      value: 90
       objectReference: {fileID: 0}
     - target: {fileID: 5088004195129275518, guid: aa387be3003d6b843bfa105760f99dfd,
         type: 3}
@@ -9432,6 +9478,16 @@ PrefabInstance:
         type: 3}
       propertyPath: _pointsMultiplier
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 467996765311922585, guid: 7ec21975f7535594dbe1a2bc16cf99a0,
+        type: 3}
+      propertyPath: _minStartScore
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 467996765311922585, guid: 7ec21975f7535594dbe1a2bc16cf99a0,
+        type: 3}
+      propertyPath: _maxStartScore
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 467996766332203789, guid: 7ec21975f7535594dbe1a2bc16cf99a0,
         type: 3}
@@ -10479,6 +10535,16 @@ PrefabInstance:
         type: 3}
       propertyPath: _pointsMultiplier
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 467996765311922585, guid: 7ec21975f7535594dbe1a2bc16cf99a0,
+        type: 3}
+      propertyPath: _minStartScore
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 467996765311922585, guid: 7ec21975f7535594dbe1a2bc16cf99a0,
+        type: 3}
+      propertyPath: _maxStartScore
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 467996766332203789, guid: 7ec21975f7535594dbe1a2bc16cf99a0,
         type: 3}
@@ -14280,6 +14346,7 @@ MonoBehaviour:
   _maxSpawnInterval: 8
   _minFirstSpawnInterval: 1
   _maxFirstSpawnInterval: 1
+  numQuestions: 6
 --- !u!4 &1433948864874201153
 Transform:
   m_ObjectHideFlags: 0
@@ -15251,6 +15318,16 @@ PrefabInstance:
       propertyPath: _scoreManager
       value: 
       objectReference: {fileID: 1859664424}
+    - target: {fileID: 467996765311922585, guid: 7ec21975f7535594dbe1a2bc16cf99a0,
+        type: 3}
+      propertyPath: _minStartScore
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 467996765311922585, guid: 7ec21975f7535594dbe1a2bc16cf99a0,
+        type: 3}
+      propertyPath: _maxStartScore
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 467996766332203789, guid: 7ec21975f7535594dbe1a2bc16cf99a0,
         type: 3}
       propertyPath: _sprites.Array.size

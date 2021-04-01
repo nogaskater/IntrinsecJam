@@ -7,18 +7,22 @@ public class PlayerBallTransitionController : MonoBehaviour
 {
     [Header("GameObject Referemces")]
     [SerializeField] private ThrowController _throwController;
-    [SerializeField] TableBehaviour table;
+    [SerializeField] private TableBehaviour _table;
     [SerializeField] private CharacterAnimation _characterAnimation;
 
     private void Awake()
     {
+        if (_throwController == null)
+            throw new ArgumentNullException("_throwController");
         if (_characterAnimation == null)
             throw new ArgumentNullException("_characterAnimation");
+        if (_table == null)
+            throw new ArgumentNullException("_table");
     }
 
     public void PutBallInBox(GameObject ball)
     {
-        if (table.ToAnserQueueCount >= table.MaxListSize)
+        if (_table.ToAnserQueueCount >= _table.MaxListSize)
             return;
 
         _characterAnimation.Animator.SetTrigger("Catch");
@@ -27,7 +31,7 @@ public class PlayerBallTransitionController : MonoBehaviour
 
         ball.SetActive(false);
 
-        table.AddNewPaper(ball.GetComponent<BallController>().BallPaper);
+        _table.AddNewPaper(ball.GetComponent<BallController>().BallPaper);
     }
 
     public void PutBallInHand(GameObject ball)
