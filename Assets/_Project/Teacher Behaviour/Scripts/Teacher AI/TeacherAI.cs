@@ -9,7 +9,7 @@ public class TeacherAI : MonoBehaviour
     public Animator Animator => _teacherAnimation.Animator;
     public CharacterAnimation TeacherAnimation => _teacherAnimation;
 
-
+    [SerializeField] private GameObject _exclamationUI;
 
     public State CurrentState { get; private set; }
     public State GetState() => CurrentState;
@@ -31,6 +31,12 @@ public class TeacherAI : MonoBehaviour
             throw new ArgumentNullException("_rightTrigger");
         if (_leftTrigger == null)
             throw new ArgumentNullException("_leftTrigger");
+
+        if (_exclamationUI == null)
+            throw new ArgumentNullException("_exclamationUI");
+
+
+        SetActiveExclamation(false);
     }
 
     private void Start()
@@ -44,9 +50,17 @@ public class TeacherAI : MonoBehaviour
 
     public void ChangeState(State toState)
     {
+        if(CurrentState != null)
+            CurrentState.ExitState();
+
         toState.EnterState();
 
         CurrentState = toState;
+    }
+
+    public void SetActiveExclamation(bool active)
+    {
+        _exclamationUI.SetActive(active);
     }
 
 

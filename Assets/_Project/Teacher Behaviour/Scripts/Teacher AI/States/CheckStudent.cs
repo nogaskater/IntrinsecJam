@@ -5,7 +5,7 @@ public class CheckStudent : State
 {
     public void CalledByStudent(Transform target)
     {
-        if (_teacherAI.GetState() is CheckStudent)
+        if (_teacherAI.GetState() is CheckStudent || _teacherAI.GetState() is FoundBall || _teacherAI.GetState() is HitByBall)
             return;
 
         _target = target;
@@ -28,6 +28,15 @@ public class CheckStudent : State
 
 
         _teacherAI.Animator.SetTrigger("Walk");
+
+        _teacherAI.SetActiveExclamation(true);
+    }
+
+    public override void ExitState()
+    {
+        base.ExitState();
+
+        _teacherAI.SetActiveExclamation(false);
     }
 
     public override void StartActionAnimation()

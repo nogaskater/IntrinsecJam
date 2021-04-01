@@ -14,13 +14,11 @@ public class CallTeacherDetection : MonoBehaviour
 
         if (_characterAnimation == null)
             throw new ArgumentNullException("_characterAnimation");
-
-        print("Initialized");
     }
 
     private void OnMouseDown()
     {
-        if (_studentCallLogic.TeacherCalled)
+        if (_studentCallLogic.TeacherCalled || _studentCallLogic.IsTableOpened)
             return;
 
         _characterAnimation.Animator.SetTrigger("Call");

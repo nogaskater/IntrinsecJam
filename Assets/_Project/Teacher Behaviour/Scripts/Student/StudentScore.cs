@@ -3,8 +3,12 @@ using UnityEngine;
 
 public class StudentScore : MonoBehaviour
 {
+    [SerializeField] private ScoreManager _scoreManager;
+
     [SerializeField] private NPCBallTransitionController _nPCBallTransitionController;
     [SerializeField] private NPC_ThrowController _npc_ThrowController;
+
+    [SerializeField] private StudentScoreFeedback _studentScoreFeedback;
 
     [Header("Settings")]
     [SerializeField] private int _minStartScore = 2;
@@ -14,6 +18,9 @@ public class StudentScore : MonoBehaviour
 
     private void Awake()
     {
+        if (_scoreManager == null)
+            throw new ArgumentNullException("_scoreManager");
+
         if (_nPCBallTransitionController == null)
             throw new ArgumentNullException("_nPCBallTransitionController");
 
@@ -23,9 +30,12 @@ public class StudentScore : MonoBehaviour
         if (_npc_ThrowController == null)
             throw new ArgumentNullException("_npc_ThrowController");
 
+        if (_studentScoreFeedback == null)
+            throw new ArgumentNullException("_studentScoreFeedback");
+
         _grade = UnityEngine.Random.Range(_minStartScore, _maxStartScore);
 
-        ModifyScore(0);
+        ModifyScore(0, false);
     }
 
     private int _grade;
@@ -37,34 +47,50 @@ public class StudentScore : MonoBehaviour
     
 
     public Action<int, int> OnScoreModified;
-    public void ModifyScore(int delta)
+    public void ModifyScore(int delta, bool popUp)
     {
         _grade += delta;
 
         int pointsObtained = 0;
-        if(delta < 0)
-            pointsObtained = (int)(delta * 100);
-        else
+        if(delta > 0)
             pointsObtained = (int)(delta * 100 * _pointsMultiplier);
 
-        _points += pointsObtained;
 
-        OnScoreModified?.Invoke(_grade, pointsObtained);
 
         if(_grade <= 0)
         {
-            // HANDLE HEALTH MODIFICATION
+            _scoreManager.ModifyLives(-1);
 
             OnStudentFinished?.Invoke(false);
 
-            _npc_ThrowController.RemoveStudentFromThrowManager();            
+            _npc_ThrowController.RemoveStudentFromThrowManager();
+
+            _grade = 0;
         }
         else if(_grade >= 10)
         {
+
+            pointsObtained += 1000;
+
             OnStudentFinished?.Invoke(true);
 
             _npc_ThrowController.RemoveStudentFromThrowManager();
 
+            _grade = 10;
+
         }
+
+        _points += pointsObtained;
+
+        if(popUp)
+        {
+            if (delta > 0)
+                _studentScoreFeedback.PopUpFeedback("+" + delta);
+            else
+                _studentScoreFeedback.PopUpNegativeFeedback(delta.ToString());
+
+        }
+
+        OnScoreModified?.Invoke(_grade, pointsObtained);
     }
 }

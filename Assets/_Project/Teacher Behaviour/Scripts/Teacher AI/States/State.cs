@@ -14,6 +14,8 @@ public class State : MonoBehaviour
     [SerializeField] protected State _goToState;
 
     protected Transform _target;
+    public Transform Target => _target;
+    public void RemoveTarget() => _target = null;
 
     protected bool _isNearTarget = false;
     protected float _actionCounter = 0;
@@ -44,9 +46,9 @@ public class State : MonoBehaviour
     }
     public virtual void UpdateState()
     {
-        Vector2 direction = MyUtilities.DirectionVector(transform.position, _target.position);
+        Vector2 direction = MyUtilities.DirectionVectorX(transform.position, _target.position);
         if(this is CheckStudent)
-            direction = MyUtilities.DirectionVector(transform.position, (Vector2)_target.position + Vector2.right * 1.1f);
+            direction = MyUtilities.DirectionVectorX(transform.position, (Vector2)_target.position + Vector2.right * 1.1f);
         
 
         if (!_isNearTarget)

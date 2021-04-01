@@ -29,6 +29,7 @@ public class BallController : MonoBehaviour
 
     public Student Student { get; private set; }
 
+    public bool ThrowByPlayer { get; set; }
 
     private void Awake()
     {
@@ -101,6 +102,8 @@ public class BallController : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         contCollisions++;
+
+        AudioManager.Instance.PlaySound("PaperHit");
     }
 
     private void OnCollisionStay2D(Collision2D collision)

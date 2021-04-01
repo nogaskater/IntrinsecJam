@@ -5,6 +5,7 @@ public class StudentCallLogic : MonoBehaviour
 {
     [Header("Dependencies")]
     [SerializeField] private CheckStudent _checkStudentState;
+    [SerializeField] private TableBehaviour _tableBehaviour;
 
     [Header("Settings")]
     [SerializeField] private float _teacherCallCooldown = 30.0f;
@@ -12,16 +13,17 @@ public class StudentCallLogic : MonoBehaviour
 
     private bool _teacherCalled = false;
     public bool TeacherCalled => _teacherCalled;
-
     private float _teacherCallCounter;
 
     public float TeacherCallCounter => _teacherCallCounter;
 
-
+    public bool IsTableOpened => _tableBehaviour.PaperOpened;
     private void Awake()
     {
         if (_checkStudentState == null)
             throw new ArgumentNullException("_teacherCallCooldown");
+        if (_tableBehaviour == null)
+            throw new ArgumentNullException("_tableBehaviour");
 
         _teacherCallCounter = _teacherCallCooldown;
     }

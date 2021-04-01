@@ -42,6 +42,7 @@ public class AudioManager : MonoBehaviour
         sound.Play();
     }
 
+
     public void StopSound(string name)
     {
         Sound sound = Sounds.Find(s => s.Name == name);
@@ -52,5 +53,16 @@ public class AudioManager : MonoBehaviour
 
         sound.Stop();
 
+    }
+
+    public void PlayRandomThrow()
+    {
+        int random = UnityEngine.Random.Range(0, 3);
+        if (random == 0)
+            Instance.PlaySound("Throw1");
+        else if(random == 1)
+            Instance.PlaySound("Throw2");
+        else if(random == 2)
+            Instance.PlaySound("Throw3");
     }
 }

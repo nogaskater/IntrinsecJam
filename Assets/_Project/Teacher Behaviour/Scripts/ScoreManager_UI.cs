@@ -11,6 +11,11 @@ public class ScoreManager_UI : MonoBehaviour
 
     [SerializeField] private TextMeshProUGUI _scoreText;
 
+    [SerializeField] private TextMeshProUGUI _timeText;
+
+    [SerializeField] private PlayerPopUp _playerPopUpPrefab;
+    [SerializeField] private Transform _playerPopUpTransform;
+
     private void Awake()
     {
         if (_scoreManager == null)
@@ -23,17 +28,32 @@ public class ScoreManager_UI : MonoBehaviour
             throw new ArgumentNullException("_scoreText");
 
         _scoreManager.OnScoreUpdated += UpdateScore;
+
+
+        if (_timeText == null)
+            throw new ArgumentNullException("_timeText");
+
+        if (_playerPopUpPrefab == null)
+            throw new ArgumentNullException("_playerPopUpPrefab");
+        if (_playerPopUpPrefab == null)
+            throw new ArgumentNullException("_playerPopUpPrefab");
+
     }
 
     private void Start()
     {
-        UpdateLives(_scoreManager.CurrentLives);
+        UpdateLives(false);
 
         UpdateScore(0);
     }
 
+    private void Update()
+    {
+        _timeText.text = ((int)_scoreManager.CurrentCounter).ToString(); // REPASAR FORMATO
+    }
 
-    private void UpdateLives(int lives)
+
+    private void UpdateLives(bool popUp)
     {
         if (_lives.Count < _scoreManager.MaxLives)
             throw new InvalidOperationException("UI Lives is inferior to max lives. More UI elements should be generated.");
@@ -46,6 +66,8 @@ public class ScoreManager_UI : MonoBehaviour
                 _lives[i].SetActive(false);
         }
 
+        if(popUp)
+            Instantiate(_playerPopUpPrefab, _playerPopUpTransform.position, Quaternion.identity);
     }
 
     private void UpdateScore(int score)

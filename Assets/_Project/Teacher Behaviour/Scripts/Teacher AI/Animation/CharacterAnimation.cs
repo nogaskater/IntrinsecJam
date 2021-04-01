@@ -15,20 +15,15 @@ public class CharacterAnimation : MonoBehaviour
             throw new ArgumentNullException("_animator");
     }
 
-
     public void SetSpriteDirection(Direction direction)
     {
         if (direction == Direction.LEFT)
         {
-            transform.localScale = new Vector2(-1, 1);
-
-            print("LEFT");
+            transform.localScale = new Vector2(Mathf.Abs(transform.localScale.x) * - 1, transform.localScale.y);
         }
         else if(direction == Direction.RIGHT)
         { 
-            transform.localScale = new Vector2(1, 1);
-
-            print("RIGHT");
+            transform.localScale = new Vector2(Mathf.Abs(transform.localScale.x), transform.localScale.y);
         }
     }
 }

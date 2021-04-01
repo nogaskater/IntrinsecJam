@@ -8,6 +8,7 @@ public class ScoreManager : MonoBehaviour
 
     [Header("Settings")]
     [SerializeField] private int _maxLives = 3;
+    [SerializeField] private float _maxTime = 60;
 
 
     public int MaxLives => _maxLives;
@@ -17,10 +18,15 @@ public class ScoreManager : MonoBehaviour
     private readonly List<StudentScore> _studentScore = new List<StudentScore>();
 
     public Action<int> OnScoreUpdated;
-    public Action<int> OnLiveUpdated;
-    public Action OnGameOver;
+    public Action<bool> OnLiveUpdated;
+    public Action<bool> OnGameOver;
+
+    public Action OnTimeOut;
 
     private bool _gameOver = false;
+
+    private float _counter;
+    public float CurrentCounter => _counter;
 
     public int TotalScore
     {
@@ -39,16 +45,37 @@ public class ScoreManager : MonoBehaviour
     private void Awake()
     {
         CurrentLives = _maxLives;
+
+        _counter = _maxTime;
     }
 
     private void Update()
     {
-        // Debug
-        if (Input.GetKeyDown(KeyCode.E))
-            ModifyLives(-1);
-        else if (Input.GetKeyDown(KeyCode.R))
-            ModifyLives(1);
+
+        if(_counter > 0)
+        {
+            _counter -= Time.deltaTime;
+        }
+        else
+        {
+            if(!_gameOver)
+            {
+                OnTimeOut?.Invoke();
+
+                GameOver(CurrentLives > 0);
+            }
+
+        }
     }
+
+    //private void Update()
+    //{
+    //    // Debug
+    //    if (Input.GetKeyDown(KeyCode.E))
+    //        ModifyLives(-1);
+    //    else if (Input.GetKeyDown(KeyCode.R))
+    //        ModifyLives(1);
+    //}
 
     public void ModifyLives(int delta)
     {
@@ -60,19 +87,18 @@ public class ScoreManager : MonoBehaviour
 
         CurrentLives += delta;
 
-        OnLiveUpdated?.Invoke(CurrentLives);
+        OnLiveUpdated?.Invoke(true);
 
         if(CurrentLives == 0)
         {
-            GameOver();
+            GameOver(false);
         }
     }
 
-    public void UpdateScore(int grage, int points)
+    public void UpdateScore(int grade, int points)
     {
         OnScoreUpdated?.Invoke(TotalScore);
     }
-
     public void AddNewStudentScore(StudentScore studentScore)
     {
         _studentScore.Add(studentScore);
@@ -80,17 +106,23 @@ public class ScoreManager : MonoBehaviour
         studentScore.OnScoreModified += UpdateScore;
     }
 
-    public void GameOver()
+    public void GameFinished()
     {
-        OnGameOver?.Invoke();
+        GameOver(CurrentLives > 0);
+    }
 
-        Time.timeScale = 0;
+    public void GameOver(bool win)
+    {
+        if (_gameOver)
+            return;
+
+        _gameOver = true;
+
+        OnGameOver?.Invoke(win);
     }
 
     public void RestartGame()
     {
-        Time.timeScale = 1;
-
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }

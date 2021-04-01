@@ -15,23 +15,21 @@ public class PlayerBallTransitionController : MonoBehaviour
 
         ball.SetActive(false);
 
-        Debug.Log("Ball to the box");
-
         table.AddNewPaper(ball.GetComponent<BallController>().BallPaper);
     }
 
     public void PutBallInHand(GameObject ball)
     {
-        //Sergio calienta que sales
-        //Remove selected paper from the box, passing its data to the ball(paper)
-        //--TO-DO--//
-        Debug.Log("Ball to the hand");
-
         ball.SetActive(true);
-        _throwController.SetActiveBall(ball.GetComponent<Rigidbody2D>());       //Tener en cuenta que pasa si ya tienes una bola  en la mano!!!!
+        _throwController.SetActiveBall(ball.GetComponent<Rigidbody2D>()); 
         _throwController.ResetBall();
 
         ball.GetComponent<BallController>().Student.HolderActive(true);
 
+    }
+
+    public Rigidbody2D GetCurrentBall()
+    {
+        return _throwController.GetActiveBall();
     }
 }

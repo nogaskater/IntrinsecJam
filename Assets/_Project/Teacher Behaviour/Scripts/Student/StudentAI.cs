@@ -11,6 +11,8 @@ public class StudentAI : MonoBehaviour
 
     [SerializeField] private CharacterAnimation _characterAnimation;
 
+    [SerializeField] private Transform _scoreUITransform;
+
 
     [Header("Start Moving Settings")]
     [SerializeField] private float _startMovingTime;
@@ -29,9 +31,13 @@ public class StudentAI : MonoBehaviour
         _studentScore.OnStudentFinished += StudentFinished;
 
         if (_exitRoomTarget == null)
-            throw new ArgumentNullException("_target");
+            throw new ArgumentNullException("_exitRoomTarget");
 
         _startMovingCounter = 0;
+
+
+        if (_scoreUITransform == null)
+            throw new ArgumentNullException("_scoreUITransform");
     }
 
     private void Update()
@@ -42,18 +48,29 @@ public class StudentAI : MonoBehaviour
             {
                 _startMovingCounter += Time.deltaTime;
 
+                Vector3 direction = MyUtilities.DirectionVectorZ(transform.position, _exitRoomTarget.position);
+
+                transform.Translate(direction * _movementSpeed * Time.deltaTime);
+
                 if (_startMovingCounter > _startMovingTime)
                 {
                     _hasStartedMoving = true;
+
+                    _characterAnimation.SetSpriteDirection(Direction.LEFT);
                 }
             }
             else
             {
-                Vector2 direction = MyUtilities.DirectionVector(transform.position, _exitRoomTarget.position).normalized;
+                Vector2 direction = MyUtilities.DirectionVectorX(transform.position, _exitRoomTarget.position).normalized;
 
                 transform.Translate(direction * _movementSpeed * Time.deltaTime);
             }
         }
+    }
+
+    public void FinishStudent()
+    {
+        StudentFinished(_studentScore.Grade > 5);
     }
 
     private void StudentFinished(bool passed)
@@ -62,11 +79,12 @@ public class StudentAI : MonoBehaviour
 
         if (passed)
         {
-            _movementSpeed *= 1.4f;
+            _movementSpeed *= 1.7f;
             _characterAnimation.Animator.SetTrigger("Passed");
         }
         else
             _characterAnimation.Animator.SetTrigger("Failed");
 
+        _scoreUITransform.SetParent(null);
     }
 }
