@@ -79,6 +79,8 @@ public class FoundBall : State
         _teacherAI.Animator.SetTrigger("Walk");
 
         _teacherAI.SetActiveExclamation(true);
+
+        AudioManager.Instance.PlaySound("Alert");
     }
 
     public override void ExitState()

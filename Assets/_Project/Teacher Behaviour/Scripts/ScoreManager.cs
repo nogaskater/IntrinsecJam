@@ -89,6 +89,8 @@ public class ScoreManager : MonoBehaviour
 
         OnLiveUpdated?.Invoke(true);
 
+        AudioManager.Instance.PlaySound("LoseLife");
+
         if(CurrentLives == 0)
         {
             GameOver(false);
@@ -115,6 +117,14 @@ public class ScoreManager : MonoBehaviour
     {
         if (_gameOver)
             return;
+
+        if (win)
+        {
+            AudioManager.Instance.PlaySound("Win");
+        }
+        else
+            AudioManager.Instance.PlaySound("Lose");
+
 
         _gameOver = true;
 

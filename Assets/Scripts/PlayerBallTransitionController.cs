@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,11 +8,22 @@ public class PlayerBallTransitionController : MonoBehaviour
     [Header("GameObject Referemces")]
     [SerializeField] private ThrowController _throwController;
     [SerializeField] TableBehaviour table;
+    [SerializeField] private CharacterAnimation _characterAnimation;
+
+    private void Awake()
+    {
+        if (_characterAnimation == null)
+            throw new ArgumentNullException("_characterAnimation");
+    }
 
     public void PutBallInBox(GameObject ball)
     {
         if (table.ToAnserQueueCount >= table.MaxListSize)
             return;
+
+        _characterAnimation.Animator.SetTrigger("Catch");
+
+        AudioManager.Instance.PlaySound("Catch");
 
         ball.SetActive(false);
 

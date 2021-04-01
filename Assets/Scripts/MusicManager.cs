@@ -10,12 +10,12 @@ public class MusicManager : MonoBehaviour
     {
         if (SelectedMusicType == MusicType.MENU)
         {
-            //AudioManager.Instance.PlaySound("Menu Music");
+            AudioManager.Instance.PlaySound("MainMenu");
             AudioManager.Instance.StopSound("Ambience");
         }
         else if (SelectedMusicType == MusicType.INGAME)
         {
-            //AudioManager.Instance.StopSound("Menu Music");
+            AudioManager.Instance.StopSound("MainMenu");
             AudioManager.Instance.PlaySound("Ambience");
         }
     }

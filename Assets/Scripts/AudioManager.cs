@@ -36,7 +36,7 @@ public class AudioManager : MonoBehaviour
         Sound sound = Sounds.Find(s => s.Name == name);
 
         if (sound == null)
-            throw new NullReferenceException("The sound you are tryong to play does not exist. (Incorrect name?)");
+            throw new NullReferenceException("The sound you are trying to play does not exist. (Incorrect name?)");
 
 
         sound.Play();
@@ -48,7 +48,7 @@ public class AudioManager : MonoBehaviour
         Sound sound = Sounds.Find(s => s.Name == name);
 
         if (sound == null)
-            throw new NullReferenceException("The sound you are tryong to play does not exist. (Incorrect name?)");
+            throw new NullReferenceException("The sound you are trying to play does not exist. (Incorrect name?)");
 
 
         sound.Stop();

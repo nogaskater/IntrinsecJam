@@ -6,9 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
-    guid: d1c3109bdb54ad54c8a2b2838528e640
+    path: Assets/Scenes/MainMenu.unity
+    guid: dca17010a17fc44489db2ce6d62c90d4
   - enabled: 1
-    path: Assets/Scenes/ParabolicThrowTest.unity
-    guid: 8f5a1a4e71037654d924b32a6ac9792a
+    path: Assets/Clase/Clase_2.unity
+    guid: ea267cf544e99a246a16ac838f7f64c8
   m_configObjects: {}

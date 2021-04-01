@@ -9,6 +9,8 @@ public class NPCBallTransitionController : MonoBehaviour
     [SerializeField] private GeneralBallManager _gBallManager;
     [SerializeField] private StudentScore _studentScore;
 
+    [SerializeField] private CharacterAnimation _characterAnimation;
+
 
     private void Awake()
     {
@@ -17,18 +19,30 @@ public class NPCBallTransitionController : MonoBehaviour
         if (_studentScore == null)
             throw new ArgumentNullException("_studentScore");
 
+        if (_characterAnimation == null)
+            throw new ArgumentNullException("_characterAnimation");
     }
 
     public Action<int, bool> OnBallReceived; 
     public void CheckBallAnswers(GameObject ball)
     {
-        if (_studentScore.Grade <= 0)
+        if (_studentScore.Grade <= 0 || _studentScore.Grade >= 10)
             return;
-        
-        OnBallReceived?.Invoke(2, true);
-        //Check if the answer is right or not
-        Debug.LogWarning("FALTA POR IMPLEMENTAR");
-        
+
+
+        print("CATCH");
+
+        Paper paper = ball.GetComponent<BallController>().GetComponent<Paper>();
+
+        if(paper.answer == paper.question)        
+            OnBallReceived?.Invoke(2, true);
+        else
+            OnBallReceived?.Invoke(-2, true);
+
+
+        if (_studentScore.Grade > 0 || _studentScore.Grade < 10)
+            AudioManager.Instance.PlaySound("Catch");
+
 
         _gBallManager.RemoveCurrentBallFromController(ball.GetComponent<Rigidbody2D>());
 

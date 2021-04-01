@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class StudentAI : MonoBehaviour
@@ -12,6 +13,8 @@ public class StudentAI : MonoBehaviour
     [SerializeField] private CharacterAnimation _characterAnimation;
 
     [SerializeField] private Transform _scoreUITransform;
+
+    [SerializeField] private List<SpriteRenderer> _sprites;
 
 
     [Header("Start Moving Settings")]
@@ -70,7 +73,7 @@ public class StudentAI : MonoBehaviour
 
     public void FinishStudent()
     {
-        StudentFinished(_studentScore.Grade > 5);
+        StudentFinished(_studentScore.Grade >= 5);
     }
 
     private void StudentFinished(bool passed)
@@ -80,10 +83,17 @@ public class StudentAI : MonoBehaviour
         if (passed)
         {
             _movementSpeed *= 1.7f;
+
+            print("PASSED");
             _characterAnimation.Animator.SetTrigger("Passed");
         }
         else
             _characterAnimation.Animator.SetTrigger("Failed");
+
+        foreach (var sprite in _sprites)
+        {
+            sprite.sortingOrder += 10;
+        }
 
         _scoreUITransform.SetParent(null);
     }

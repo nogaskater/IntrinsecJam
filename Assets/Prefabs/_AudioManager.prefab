@@ -45,14 +45,98 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Sounds:
   - Name: Button Hover
-    Clip: {fileID: 0}
-    Volume: 0
-    Pitch: 0
+    Clip: {fileID: 8300000, guid: f4924f7aa56524a46a18c2dfdac60773, type: 3}
+    Volume: 0.25
+    Pitch: 1
     SpatialBlend: 0
     Loop: 0
   - Name: Button Press
-    Clip: {fileID: 0}
-    Volume: 0
-    Pitch: 0
+    Clip: {fileID: 8300000, guid: 38e3bf2938ef63142889a7587198522d, type: 3}
+    Volume: 0.25
+    Pitch: 1
+    SpatialBlend: 0
+    Loop: 0
+  - Name: Ambience
+    Clip: {fileID: 8300000, guid: 5b49c39a48083524d9210e30e7da1ff0, type: 3}
+    Volume: 0.311
+    Pitch: 1
+    SpatialBlend: 0
+    Loop: 1
+  - Name: MainMenu
+    Clip: {fileID: 8300000, guid: a55bc9b0cec3ef341821c2457254afc5, type: 3}
+    Volume: 0.04
+    Pitch: 1
+    SpatialBlend: 0
+    Loop: 1
+  - Name: OpenPaper
+    Clip: {fileID: 8300000, guid: f191204c08c853c4ea67977d885eaa7b, type: 3}
+    Volume: 0.25
+    Pitch: 1
+    SpatialBlend: 0
+    Loop: 0
+  - Name: PaperHit
+    Clip: {fileID: 8300000, guid: 57fef3d2b3ecd8144be95997833a1ed0, type: 3}
+    Volume: 0.01
+    Pitch: 0.86
+    SpatialBlend: 0
+    Loop: 0
+  - Name: Throw1
+    Clip: {fileID: 8300000, guid: 3673ccc5271f43b4799441f6be06a7e8, type: 3}
+    Volume: 0.01
+    Pitch: 1
+    SpatialBlend: 0
+    Loop: 0
+  - Name: Throw2
+    Clip: {fileID: 8300000, guid: 19995025df7816a4291c6b60ce87b285, type: 3}
+    Volume: 0.01
+    Pitch: 1
+    SpatialBlend: 0
+    Loop: 0
+  - Name: Throw3
+    Clip: {fileID: 8300000, guid: c3b9df8462e121b4a871eb9565c8f7fa, type: 3}
+    Volume: 0.01
+    Pitch: 1
+    SpatialBlend: 0
+    Loop: 0
+  - Name: WritePaper
+    Clip: {fileID: 8300000, guid: c60563214abaf954fa8a94dbc1e94897, type: 3}
+    Volume: 0.4
+    Pitch: 1
+    SpatialBlend: 0
+    Loop: 0
+  - Name: Catch
+    Clip: {fileID: 8300000, guid: ea56ba452d0de78409caab007de763d3, type: 3}
+    Volume: 0.091
+    Pitch: 1
+    SpatialBlend: 0
+    Loop: 0
+  - Name: Lose
+    Clip: {fileID: 8300000, guid: f34b3af9fb74a9640862413ba0b6699f, type: 3}
+    Volume: 0.111
+    Pitch: 1
+    SpatialBlend: 0
+    Loop: 0
+  - Name: Win
+    Clip: {fileID: 8300000, guid: 97ded3bb381ac3a459a19a63009a458f, type: 3}
+    Volume: 0.4
+    Pitch: 1
+    SpatialBlend: 0
+    Loop: 0
+  - Name: LoseLife
+    Clip: {fileID: 8300000, guid: ef58be4769e0e67419daec7e8e828443, type: 3}
+    Volume: 0.4
+    Pitch: 1
+    SpatialBlend: 0
+    Loop: 0
+  - Name: Alert
+    Clip: {fileID: 8300000, guid: 9d7c5b96edb81af43b578903063ae4e0, type: 3}
+    Volume: 0.007
+    Pitch: 1
+    SpatialBlend: 0
+    Loop: 0
+  - Name: Oof
+    Clip: {fileID: 8300000, guid: 2fb9d37ddd9db3f4b8705d281aae1280, type: 3}
+    Volume: 0.303
+    Pitch: 1
     SpatialBlend: 0
     Loop: 0

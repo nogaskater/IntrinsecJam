@@ -47,5 +47,7 @@ public class HitByBall : State
         base.StartActionAnimation();
 
         _teacherAI.Animator.SetTrigger("Hit");
+
+        AudioManager.Instance.PlaySound("Oof");
     }
 }
