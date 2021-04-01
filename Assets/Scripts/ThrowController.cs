@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,6 +11,9 @@ public class ThrowController : MonoBehaviour
     [SerializeField] private Rigidbody2D _activeBall;
     [SerializeField] private Transform _throwStartingPoint;
 
+    [Header("Prefabs")]
+    [SerializeField] private GameObject _archPlaceHolder;
+
     [Header("UI References")]
     [SerializeField] private GameObject _arrow;
 
@@ -19,7 +23,12 @@ public class ThrowController : MonoBehaviour
     [SerializeField] private float _ballOffsetArrow;
 
     [Header("Throw Settings")]
-    [SerializeField] private float forceMultiplier;
+    [SerializeField] private float _forceMultiplier;
+    [SerializeField] private int _maxNumOfPlaceHolders;
+
+    //--Controlling arch placeholders--//
+    private List<GameObject> _archPlaceHolders = new List<GameObject>();
+
 
     public Rigidbody2D GetActiveBall()
     {
@@ -43,6 +52,7 @@ public class ThrowController : MonoBehaviour
     void Start()
     {
         DisableArrow();
+        InstantiateThrowArchPlaceHolder();
     }
 
     public void TriggerChargeAnimation()
@@ -69,6 +79,8 @@ public class ThrowController : MonoBehaviour
 
             AudioManager.Instance.PlayRandomThrow();
 
+            DisableThrowArch();
+
         }
 
     }
@@ -76,7 +88,7 @@ public class ThrowController : MonoBehaviour
     private Vector2 ComputeInitialForce(Vector2 initialDirection, float initialMagnitude, float minRadPossible, float maxRadPossible)
     {
         //Debug.Log("Magnitude raw: " + initialMagnitude + " //// Magnitude normalized: " + ReMap(initialMagnitude, 40.0f, 250.0f, 0.01f, 1.0f));
-        return (initialDirection.normalized * -1.0f) * ReMap(initialMagnitude, minRadPossible, maxRadPossible, 0.01f, 1.0f) * forceMultiplier;
+        return (initialDirection.normalized * -1.0f) * ReMap(initialMagnitude, minRadPossible, maxRadPossible, 0.01f, 1.0f) * _forceMultiplier;
     }
 
     public void ResetBall()        
@@ -109,7 +121,40 @@ public class ThrowController : MonoBehaviour
             }
 
             ChangeArrowColorGradient(colorValue);
+            EnableThrowArch(ComputeInitialForce(initialDirection, initialMagnitude, 40.0f, maxRadPossible), _archPlaceHolder);
         }
+    }
+
+    private void InstantiateThrowArchPlaceHolder()
+    {
+        for(int i = 0; i < _maxNumOfPlaceHolders; i++)
+        {
+            _archPlaceHolders.Add(GameObject.Instantiate(_archPlaceHolder, Vector3.zero, Quaternion.identity));
+            DisableThrowArch();
+        }
+    }
+
+    private void EnableThrowArch(Vector2 initialThrow, GameObject placeHolderArch)
+    {
+        for (int i = 0; i < _archPlaceHolders.Count; i++)
+        {
+            _archPlaceHolders[i].SetActive(true);
+            _archPlaceHolders[i].transform.position = ComputeArchPlaceHolderPos(i + 0.03f, initialThrow);
+        }
+
+    }
+
+    private void DisableThrowArch()
+    {
+        for (int i = 0; i < _archPlaceHolders.Count; i++)
+        {
+            _archPlaceHolders[i].SetActive(false);
+        }
+    }
+
+    private Vector2 ComputeArchPlaceHolderPos(float t, Vector2 forceDirection)
+    {
+        return (Vector2)_throwStartingPoint.position + (forceDirection * t) + 0.5f * Physics2D.gravity * Mathf.Pow(t, 2);
     }
 
     private void ChangeArrowColorGradient(float value)
