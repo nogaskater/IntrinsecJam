@@ -64,6 +64,8 @@ public class NPC_ThrowController : MonoBehaviour
         _npcBall.velocity = new Vector2(vx, vy);
 
         _characterAnimation.Animator.SetTrigger("Throw");
+
+        AudioManager.Instance.PlayRandomThrow();
     }
 
     private float ComputeRandomHeight()

@@ -21,14 +21,25 @@ public class HitByBall : State
         _teacherAI.ChangeState(this);
     }
 
+    public override void EnterState()
+    {
+        base.EnterState();
+
+        _teacherAI.SetActiveExclamation(true);
+    }
+
+    public override void ExitState()
+    {
+        base.ExitState();
+
+        _teacherAI.SetActiveExclamation(false);
+    }
 
     public override void FinishAction()
     {
         FoundBall foundBall = _goToState as FoundBall;
 
         foundBall.BallDetected(_ballTarget);
-
-        print("Called");
     }
 
     public override void StartActionAnimation()

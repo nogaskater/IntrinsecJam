@@ -27,6 +27,11 @@ public class InputController : MonoBehaviour
     private CurrentObject currentObject;
     private CurrentObject lastClickedObj;
 
+    private void Awake()
+    {
+        if (_throwController == null)
+            throw new ArgumentNullException("_throwController");
+    }
 
     void Start()
     {

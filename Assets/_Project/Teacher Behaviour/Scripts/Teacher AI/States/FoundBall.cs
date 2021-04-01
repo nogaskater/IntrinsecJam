@@ -8,6 +8,10 @@ public class FoundBall : State
 
     [SerializeField] private float _hideBallTime;
 
+    [Header("Settings")]
+    [SerializeField] private int _pointsLostUnanswered = -2;
+    [SerializeField] private int _pointsLostAnswered = -4;
+
     protected override void Awake()
     {
         base.Awake();
@@ -30,18 +34,24 @@ public class FoundBall : State
 
     public override void FinishAction()
     {
+        StudentScore studentScore = _target.GetComponent<BallController>().Student.GetComponent<StudentScore>();
+
         if (_target.gameObject.layer == LayerMask.NameToLayer("Ball2"))
         {
-            // SUBSTRACT POINTS FROM CLOSEST STUDENT
-
-            _generalBallManager.GetClosestStudent(transform)?.ModifyScore(-1);
+            if (_target.GetComponent<BallController>().ThrowByPlayer)
+                studentScore.ModifyScore(_pointsLostAnswered, true);
+            else
+                studentScore.ModifyScore(_pointsLostUnanswered, true);
 
         }
         else if(_target.gameObject.layer == LayerMask.NameToLayer("Ball3"))
         {
             // SUBSTRACT LIFE
 
-            _scoreManager.ModifyLives(-1);
+            if(_target.GetComponent<BallController>().ThrowByPlayer)
+                _scoreManager.ModifyLives(-1);
+            else
+                studentScore.ModifyScore(_pointsLostUnanswered, true);
         }
 
         Destroy(_target.gameObject);
@@ -67,6 +77,15 @@ public class FoundBall : State
 
 
         _teacherAI.Animator.SetTrigger("Walk");
+
+        _teacherAI.SetActiveExclamation(true);
+    }
+
+    public override void ExitState()
+    {
+        base.ExitState();
+        
+        _teacherAI.SetActiveExclamation(false);
     }
 
     public override void UpdateState()

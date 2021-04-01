@@ -16,7 +16,7 @@ public class MainMenu : MonoBehaviour
     {
         //HAY QUE AÑADIR LA ESCENA AL BUILDEAR
         Debug.Log("Empecemos");
-        //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
     public void ExitGame()
@@ -33,24 +33,24 @@ public class MainMenu : MonoBehaviour
     //HOVER BUTTON
     public void HoverButton(int numButton)
     {
-        LeanTween.scale(buttons[numButton].gameObject, new Vector3(1.2f, 1.2f, 1.2f), 0.2f).setEaseOutBack();
+        LeanTween.scale(buttons[numButton].gameObject, new Vector3(1.2f, 1.2f, 1.2f), 0.2f).setEaseOutBack().setIgnoreTimeScale(true);
     }
 
     //UNHOVER BUTTON
     public void UnHoverButton(int numButton)
     {
-        LeanTween.scale(buttons[numButton].gameObject, new Vector3(1f, 1f, 1f), 0.2f);
+        LeanTween.scale(buttons[numButton].gameObject, new Vector3(1f, 1f, 1f), 0.2f).setIgnoreTimeScale(true);
     }
 
     //TEXT BACK HOVER
     public void HoverText(int numText)
     {
-        LeanTween.scale(backText[numText].gameObject, new Vector3(1.2f, 1.2f, 1.2f), 0.2f).setEaseOutBack();
+        LeanTween.scale(backText[numText].gameObject, new Vector3(1.2f, 1.2f, 1.2f), 0.2f).setEaseOutBack().setIgnoreTimeScale(true);
     }
 
     //TEXT BACK UNHOVER
     public void UnhoverText(int numText)
     {
-        LeanTween.scale(backText[numText].gameObject, new Vector3(1f, 1f, 1f), 0.2f);
+        LeanTween.scale(backText[numText].gameObject, new Vector3(1f, 1f, 1f), 0.2f).setIgnoreTimeScale(true);
     }
 }

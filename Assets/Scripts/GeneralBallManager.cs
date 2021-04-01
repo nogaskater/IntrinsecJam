@@ -14,7 +14,6 @@ public class GeneralBallManager : MonoBehaviour
     private readonly List<NPC_ThrowController> _npcs = new List<NPC_ThrowController>();
     [SerializeField] private List<Rigidbody2D> _balls = new List<Rigidbody2D>();
     [SerializeField] private GameObject _ballPrefab;
-    [SerializeField] private ThrowController _player;
 
     [Header("Manager Settings")]
     //[SerializeField] private int _maxConcurrentBalls;
@@ -48,6 +47,8 @@ public class GeneralBallManager : MonoBehaviour
         {
             _scoreManager.AddNewStudentScore(student.GetComponent<StudentScore>());
         }
+
+        _scoreManager.OnTimeOut += CheckIfStudentHavePassed;
     }
 
     void Start()
@@ -69,7 +70,6 @@ public class GeneralBallManager : MonoBehaviour
         lastSpawnTime = Time.time;
 
         _npcs[randomNPC].ThrowBall(instance.GetComponent<Rigidbody2D>());
-
     }
 
     private void CheckBallSpawnAvailability()
@@ -92,8 +92,6 @@ public class GeneralBallManager : MonoBehaviour
             {
                 _balls.Remove(b);
 
-                /*if (_player.GetActiveBall() == b)
-                    _player.SetActiveBall(null);*/
 
                 Destroy(b.gameObject);
             }
@@ -106,7 +104,7 @@ public class GeneralBallManager : MonoBehaviour
 
         if(_npcs.Count == 0)
         {
-            _scoreManager.GameOver();
+            _scoreManager.GameFinished();
         }
     }
 
@@ -129,4 +127,16 @@ public class GeneralBallManager : MonoBehaviour
 
     }
 
+    public void CheckIfStudentHavePassed()
+    {
+        foreach (var student in _npcs)
+        {
+            if (student.GetComponent<StudentScore>().Grade < 5)
+                _scoreManager.ModifyLives(-1);
+
+            student.GetComponent<StudentAI>().FinishStudent();
+        }
+
+        _npcs.Clear();
+    }
 }

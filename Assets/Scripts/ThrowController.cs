@@ -61,10 +61,14 @@ public class ThrowController : MonoBehaviour
             _activeBall.gameObject.layer = LayerMask.NameToLayer("Ball");
 
             _activeBall.GetComponent<BallController>().Student.HolderActive(false);
+            _activeBall.GetComponent<BallController>().ThrowByPlayer = true;
 
             _activeBall = null;
 
             _characterAnimation.Animator.SetTrigger("Throw");
+
+            AudioManager.Instance.PlayRandomThrow();
+
         }
 
     }

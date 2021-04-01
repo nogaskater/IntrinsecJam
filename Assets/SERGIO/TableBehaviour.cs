@@ -11,6 +11,8 @@ public class TableBehaviour : MonoBehaviour
 {
     [SerializeField] private PlayerBallTransitionController _playerBallTransitionController;
 
+    [SerializeField] private TeacherAI _teacherAI;
+
     #region VARIABLES
     [Header("UI ELEMENTS")]
     public Transform table;
@@ -23,7 +25,7 @@ public class TableBehaviour : MonoBehaviour
     [SerializeField] Transform openTransform;
     [SerializeField] Transform closeTransform;
 
-    public int MaxListSize { get; } = 4;
+    public int MaxListSize = 4;
 
     [Header("TO ANSWER")]
     [SerializeField] List<Paper> toAnswerQueue;
@@ -57,6 +59,7 @@ public class TableBehaviour : MonoBehaviour
 
     bool isOpened = false;
     bool paperOpened = false;
+    public bool PaperOpened => paperOpened;
 
     #endregion
 
@@ -64,6 +67,9 @@ public class TableBehaviour : MonoBehaviour
     {
         if (_playerBallTransitionController == null)
             throw new ArgumentNullException("_playerBallTransitionController");
+
+        if (_teacherAI == null)
+            throw new ArgumentNullException("_teacherAI");
     }
 
     #region START
@@ -120,7 +126,7 @@ public class TableBehaviour : MonoBehaviour
             answerTextExam[i].text = splitArray[0] + ".";
 
 
-            Debug.Log(finalExamQuestions[i]);
+            //Debug.Log(finalExamQuestions[i]);
         }        
     }
     #endregion
@@ -148,6 +154,8 @@ public class TableBehaviour : MonoBehaviour
 
             mask.DOMove(openTransform.position, animationSpeed);
 
+            AudioManager.Instance.PlaySound("OpenPaper");
+
         }
     }
     #endregion
@@ -173,22 +181,15 @@ public class TableBehaviour : MonoBehaviour
 
         //Updateamos la UI
         UpdatePaperUI();
+
+        if (_newPaper.transform == _teacherAI.CurrentState.Target)
+        {
+            _teacherAI.CurrentState.RemoveTarget();
+        }
     }
     #endregion
 
-    #region ERASE PAPER
-    public void ErasePaper()
-    {
 
-    }
-    #endregion
-
-    #region GET ID FOR NEW PAPER
-    public int GetIdForNewPaper()
-    {
-        return toAnswerQueue.Count + 1;
-    }
-    #endregion
 
     #region OPEN PAPER
     public void OpenPaper()
@@ -283,7 +284,17 @@ public class TableBehaviour : MonoBehaviour
     #region LAUNCH PAPER
     public void LaunchPaper(int index)
     {
-        print(answeredQueue[index]);
+        Rigidbody2D currentBall = _playerBallTransitionController.GetCurrentBall();
+        if (currentBall != null)
+        {
+            currentBall.gameObject.SetActive(false);
+
+            answeredQueue.Add(currentBall.GetComponent<Paper>());
+
+            currentBall.GetComponent<BallController>().Student.HolderActive(false);
+
+            UpdatePaperUI();
+        }
         
         _playerBallTransitionController.PutBallInHand(answeredQueue[index].gameObject);
 
@@ -307,12 +318,15 @@ public class TableBehaviour : MonoBehaviour
 
         //CERRAMOS LA MESA
         CloseTable();
+
+        AudioManager.Instance.PlaySound("WritePaper");
     }
     #endregion
 
     #region SELECT AN ANSWER
     void SelectAnAnswer(int _answer)
     {
+        print(paperOpened);
         if (paperOpened)
         {
             //Activamos la imagen
@@ -334,7 +348,6 @@ public class TableBehaviour : MonoBehaviour
             paperOpened = false;
 
             answeredQueue.Add(currentPaper);
-
 
             UpdatePaperUI();
 
