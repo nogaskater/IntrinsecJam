@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -2085,6 +2085,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalRotation.w
       value: -0.50974
+      objectReference: {fileID: 0}
+    - target: {fileID: 6350003419330057032, guid: f604de094a275a945ac32eec80a86f01,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 8002490681435869065, guid: f604de094a275a945ac32eec80a86f01,
         type: 3}
@@ -5240,12 +5245,12 @@ PrefabInstance:
     - target: {fileID: 467996765311922585, guid: 7ec21975f7535594dbe1a2bc16cf99a0,
         type: 3}
       propertyPath: _minStartScore
-      value: 5
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 467996765311922585, guid: 7ec21975f7535594dbe1a2bc16cf99a0,
         type: 3}
       propertyPath: _maxStartScore
-      value: 6
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 467996766332203789, guid: 7ec21975f7535594dbe1a2bc16cf99a0,
         type: 3}
@@ -5855,12 +5860,12 @@ PrefabInstance:
     - target: {fileID: 467996765311922585, guid: 7ec21975f7535594dbe1a2bc16cf99a0,
         type: 3}
       propertyPath: _minStartScore
-      value: 5
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 467996765311922585, guid: 7ec21975f7535594dbe1a2bc16cf99a0,
         type: 3}
       propertyPath: _maxStartScore
-      value: 6
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 467996766332203789, guid: 7ec21975f7535594dbe1a2bc16cf99a0,
         type: 3}
@@ -9435,6 +9440,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1483597664515717103, guid: aa387be3003d6b843bfa105760f99dfd,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
+      value: MainMenu
+      objectReference: {fileID: 0}
     - target: {fileID: 5088004195074816455, guid: aa387be3003d6b843bfa105760f99dfd,
         type: 3}
       propertyPath: _table
@@ -9728,12 +9738,12 @@ PrefabInstance:
     - target: {fileID: 467996765311922585, guid: 7ec21975f7535594dbe1a2bc16cf99a0,
         type: 3}
       propertyPath: _minStartScore
-      value: 5
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 467996765311922585, guid: 7ec21975f7535594dbe1a2bc16cf99a0,
         type: 3}
       propertyPath: _maxStartScore
-      value: 6
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 467996766332203789, guid: 7ec21975f7535594dbe1a2bc16cf99a0,
         type: 3}
@@ -10785,12 +10795,12 @@ PrefabInstance:
     - target: {fileID: 467996765311922585, guid: 7ec21975f7535594dbe1a2bc16cf99a0,
         type: 3}
       propertyPath: _minStartScore
-      value: 5
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 467996765311922585, guid: 7ec21975f7535594dbe1a2bc16cf99a0,
         type: 3}
       propertyPath: _maxStartScore
-      value: 6
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 467996766332203789, guid: 7ec21975f7535594dbe1a2bc16cf99a0,
         type: 3}
@@ -14588,8 +14598,8 @@ MonoBehaviour:
   _balls: []
   _ballPrefab: {fileID: 5228412848913007655, guid: f4caf48df0e75c64980d657a1458d3ed,
     type: 3}
-  _minSpawnInterval: 4
-  _maxSpawnInterval: 8
+  _minSpawnInterval: 7
+  _maxSpawnInterval: 12
   _minFirstSpawnInterval: 1
   _maxFirstSpawnInterval: 1
   numQuestions: 4
@@ -15567,12 +15577,12 @@ PrefabInstance:
     - target: {fileID: 467996765311922585, guid: 7ec21975f7535594dbe1a2bc16cf99a0,
         type: 3}
       propertyPath: _minStartScore
-      value: 5
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 467996765311922585, guid: 7ec21975f7535594dbe1a2bc16cf99a0,
         type: 3}
       propertyPath: _maxStartScore
-      value: 6
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 467996766332203789, guid: 7ec21975f7535594dbe1a2bc16cf99a0,
         type: 3}

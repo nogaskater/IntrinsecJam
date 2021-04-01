@@ -248,6 +248,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20b1990c107eab24390b93fba8ec8062, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _characterAnimation: {fileID: 0}
   _activeBall: {fileID: 0}
   _throwStartingPoint: {fileID: 9149819133797789099}
   _arrow: {fileID: 7298402198344734491}
@@ -268,6 +269,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _throwController: {fileID: 6186718229199066176}
+  _table: {fileID: 0}
+  _characterAnimation: {fileID: 0}
 --- !u!1 &6884541283319635433
 GameObject:
   m_ObjectHideFlags: 0
@@ -472,7 +475,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 50
   m_TargetDisplay: 0
 --- !u!114 &6338442382441126756
 MonoBehaviour:
