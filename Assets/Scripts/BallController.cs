@@ -42,6 +42,7 @@ public class BallController : MonoBehaviour
         originalGScale = _rb.gravityScale;
         lastRollAsInterval = 0.0f;
     }
+
     void FixedUpdate()
     {
         CheckIsFalling();

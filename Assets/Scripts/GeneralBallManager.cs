@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class GeneralBallManager : MonoBehaviour
 {
+    public int numQuestions = 6;
     [Header("Dependencies")]
     [SerializeField] private ScoreManager _scoreManager;
 
@@ -65,7 +66,7 @@ public class GeneralBallManager : MonoBehaviour
         int randomNPC = UnityEngine.Random.Range(0, _npcs.Count);
 
         BallController instance = Instantiate(_ballPrefab, _npcs[randomNPC].GetThrowStartingPoint().position, Quaternion.identity).GetComponent<BallController>();    
-        instance.Initialize(_npcs[randomNPC].GetComponent<Student>(), ExamElement.NONE);
+        instance.Initialize(_npcs[randomNPC].GetComponent<Student>(), (ExamElement)UnityEngine.Random.Range(1,numQuestions) );
 
         lastSpawnTime = Time.time;
 
