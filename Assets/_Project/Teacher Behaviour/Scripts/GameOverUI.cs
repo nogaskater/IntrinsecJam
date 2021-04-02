@@ -4,9 +4,6 @@ using TMPro;
 
 public class GameOverUI : MonoBehaviour
 {
-    [Header("Dependencies")]
-    [SerializeField] private ScoreManager _scoreManager;
-
     [SerializeField] private GameObject _table;
     [SerializeField] private GameObject _gameOverCanvas;
 
@@ -14,8 +11,6 @@ public class GameOverUI : MonoBehaviour
 
     private void Awake()
     {
-        if (_scoreManager == null)
-            throw new ArgumentNullException("_scoreManager");
         if (_table == null)
             throw new ArgumentNullException("_table");
         if (_gameOverCanvas == null)
@@ -25,7 +20,7 @@ public class GameOverUI : MonoBehaviour
         if (_winLoseText == null)
             throw new ArgumentNullException("_winLoseText");
 
-        _scoreManager.OnGameOver += GameOver;
+        MatchManager.Instance.OnGameOver += GameOver;
 
         _gameOverCanvas.SetActive(false);
     }
@@ -44,7 +39,7 @@ public class GameOverUI : MonoBehaviour
 
     public void Button_RestartGame()
     {
-        _scoreManager.RestartGame();
+        MatchManager.Instance.RestartGame();
     }
 
 }

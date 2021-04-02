@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 4342345756490221785}
   - component: {fileID: 8852813287475301118}
   - component: {fileID: 6220872021950646895}
-  - component: {fileID: 510567148857050912}
   m_Layer: 14
   m_Name: Ball
   m_TagString: Ball
@@ -100,7 +99,6 @@ MonoBehaviour:
   _gravityFactor: 1
   _maxBounces: 3
   _rollCountAsBounceInterval: 0
-  _ballPaper: {fileID: 510567148857050912}
 --- !u!58 &8852813287475301118
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -138,20 +136,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &510567148857050912
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5228412848913007655}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 03f93b0f4be63d34f9a03c9f7eb811eb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  question: 0
-  answer: 0
 --- !u!1 &9175843811008112914
 GameObject:
   m_ObjectHideFlags: 0

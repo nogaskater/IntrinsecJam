@@ -3,20 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GeneralBallManager : MonoBehaviour
+public class StudentsManager : MonoBehaviour
 {
-    [Header("Dependencies")]
-    [SerializeField] private ScoreManager _scoreManager;
-
-
     [Header("GameObject References")]
     [SerializeField] private Transform _npcsParent;
-    [SerializeField] private List<NPC_ThrowController> _npcs = new List<NPC_ThrowController>();
-    [SerializeField] private List<Rigidbody2D> _balls = new List<Rigidbody2D>();
     [SerializeField] private GameObject _ballPrefab;
 
     [Header("Manager Settings")]
-    //[SerializeField] private int _maxConcurrentBalls;
     [SerializeField] private float _minSpawnInterval;
     [SerializeField] private float _maxSpawnInterval;
     [Header("First interval")]
@@ -24,6 +17,9 @@ public class GeneralBallManager : MonoBehaviour
     [SerializeField] private float _maxFirstSpawnInterval = 4.0f;
 
     [SerializeField] private int numQuestions = 6;
+
+    private List<NPC_ThrowController> _students = new List<NPC_ThrowController>();
+    private List<Rigidbody2D> _balls = new List<Rigidbody2D>();
 
     //--Controlling papersID's--//
     private int _currentBallID = 0;
@@ -34,26 +30,29 @@ public class GeneralBallManager : MonoBehaviour
 
     private void Awake()
     {
-        if (_scoreManager == null)
-            throw new ArgumentNullException("_scoreManager");
-
         if (_npcsParent == null)
             throw new ArgumentNullException("_npcsParent");
 
         for (int i = 0; i < _npcsParent.childCount; i++)
         {
-            Transform student = _npcsParent.GetChild(i);
+            NPC_ThrowController student = _npcsParent.GetChild(i).GetComponent<NPC_ThrowController>();
+
+            student.Initialize(this);
 
             if(student.gameObject.activeSelf)
-                _npcs.Add(student.GetComponent<NPC_ThrowController>());
+                _students.Add(student);
         }
 
-        foreach (var student in _npcs)
-        {
-            _scoreManager.AddNewStudentScore(student.GetComponent<StudentScore>());
-        }
 
-        _scoreManager.OnTimeOut += CheckIfStudentHavePassed;
+    }
+
+    private void OnEnable()
+    {
+        MatchManager.Instance.OnTimeOut += CheckIfStudentHavePassed;
+    }
+    private void OnDisable()
+    {
+        MatchManager.Instance.OnTimeOut -= CheckIfStudentHavePassed;
     }
 
     void Start()
@@ -67,19 +66,19 @@ public class GeneralBallManager : MonoBehaviour
 
     private void GenerateRandomBall()
     {
-        int randomNPC = UnityEngine.Random.Range(0, _npcs.Count);
+        int randomNPC = UnityEngine.Random.Range(0, _students.Count);
 
-        BallController instance = Instantiate(_ballPrefab, _npcs[randomNPC].GetThrowStartingPoint().position, Quaternion.identity).GetComponent<BallController>();    
-        instance.Initialize(_npcs[randomNPC].GetComponent<Student>(), (ExamElement)UnityEngine.Random.Range(1, numQuestions));
+        BallController instance = Instantiate(_ballPrefab, _students[randomNPC].GetThrowStartingPoint().position, Quaternion.identity).GetComponent<BallController>();    
+        instance.Initialize(_students[randomNPC].GetComponent<Student>(), (ExamElement)UnityEngine.Random.Range(1, numQuestions));
 
         lastSpawnTime = Time.time;
 
-        _npcs[randomNPC].ThrowBall(instance.GetComponent<Rigidbody2D>());
+        _students[randomNPC].ThrowBall(instance.GetComponent<Rigidbody2D>());
     }
 
     private void CheckBallSpawnAvailability()
     {
-        if (_npcs.Count == 0)
+        if (_students.Count == 0)
             return;
 
         if(Time.time > lastSpawnTime + intervalToSpawn /*&& currentConcurrentBalls < _maxConcurrentBalls*/)
@@ -105,22 +104,22 @@ public class GeneralBallManager : MonoBehaviour
 
     public void RemoveStudent(NPC_ThrowController throwController)
     {
-        _npcs.Remove(throwController);
+        _students.Remove(throwController);
 
-        if(_npcs.Count == 0)
+        if(_students.Count == 0)
         {
-            _scoreManager.GameFinished();
+            MatchManager.Instance.GameFinished();
         }
     }
 
-    public StudentScore GetClosestStudent(Transform fromTeacher)
+    public StudentGrade GetClosestStudent(Transform fromTeacher)
     {
-        if (_npcs.Count == 0)
+        if (_students.Count == 0)
             return null;
 
-        Transform closest = _npcs[0].transform;
+        Transform closest = _students[0].transform;
 
-        foreach (var student in _npcs)
+        foreach (var student in _students)
         {
             if(Vector2.Distance(student.transform.position, fromTeacher.position) < Vector2.Distance(closest.position, fromTeacher.position))
             {
@@ -128,20 +127,20 @@ public class GeneralBallManager : MonoBehaviour
             }
         }
 
-        return closest.GetComponent<StudentScore>();
+        return closest.GetComponent<StudentGrade>();
 
     }
 
     public void CheckIfStudentHavePassed()
     {
-        foreach (var student in _npcs)
+        foreach (var student in _students)
         {
-            if (student.GetComponent<StudentScore>().Grade < 5)
-                _scoreManager.ModifyLives(-1);
+            if (student.GetComponent<StudentGrade>().Grade < 5)
+                MatchManager.Instance.ModifyLives(-1);
 
             student.GetComponent<StudentAI>().FinishStudent();
         }
 
-        _npcs.Clear();
+        _students.Clear();
     }
 }

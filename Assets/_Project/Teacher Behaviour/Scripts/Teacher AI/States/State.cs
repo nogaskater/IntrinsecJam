@@ -89,11 +89,4 @@ public class State : MonoBehaviour
     {
         _teacherAI.ChangeState(_goToState);
     }
-
-    public void RemoveTarget()
-    {
-        _target.GetComponent<BallController>().OnEnteredSafeState -= RemoveTarget;
-
-        _target = null;
-    }
 }

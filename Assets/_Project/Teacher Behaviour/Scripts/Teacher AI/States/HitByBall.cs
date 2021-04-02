@@ -3,24 +3,12 @@ using UnityEngine;
 
 public class HitByBall : State
 {
-    [SerializeField] private Patrol _patrolState;
-
-    protected override void Awake()
-    {
-        base.Awake();
-
-        if (_patrolState == null)
-            throw new ArgumentNullException("_patrolState");
-    }
-
     public void Hit(BallController ballController)
     {
         if (_teacherAI.GetState() is HitByBall || _teacherAI.GetState() is FoundBall)
             return;
 
         _target = ballController.transform;
-
-        ballController.OnEnteredSafeState += RemoveTarget;
 
         _teacherAI.ChangeState(this);
     }
@@ -60,13 +48,10 @@ public class HitByBall : State
 
     public override void FinishAction()
     {
-        if (_target != null)
-            _teacherAI.ChangeState(_goToState);
-        else
-            _teacherAI.ChangeState(_patrolState);
+        FoundBall foundBallState = _goToState as FoundBall;
+
+        foundBallState.BallDetected(_target.GetComponent<BallController>());
     }
-
-
 
     public override void StartActionAnimation()
     {

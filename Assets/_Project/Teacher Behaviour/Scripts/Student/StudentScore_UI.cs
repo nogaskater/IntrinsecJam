@@ -4,7 +4,7 @@ using TMPro;
 public class StudentScore_UI : MonoBehaviour
 {
     [Header("Dependencies")]
-    [SerializeField] private StudentScore _studentScore;
+    [SerializeField] private StudentGrade _studentScore;
 
     [SerializeField] private TextMeshProUGUI _studentScoreText;
 

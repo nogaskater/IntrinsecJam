@@ -6,8 +6,8 @@ using UnityEngine;
 public class NPCBallTransitionController : MonoBehaviour
 {
     [Header("GameObject References")]
-    [SerializeField] private GeneralBallManager _gBallManager;
-    [SerializeField] private StudentScore _studentScore;
+    [SerializeField] private StudentsManager _gBallManager;
+    [SerializeField] private StudentGrade _studentScore;
 
     [SerializeField] private CharacterAnimation _characterAnimation;
 

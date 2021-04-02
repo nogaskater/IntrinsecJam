@@ -7,8 +7,8 @@ public class PlayerBallTransitionController : MonoBehaviour
 {
     [Header("GameObject Referemces")]
     [SerializeField] private ThrowController _throwController;
-    [SerializeField] private TableBehaviour _table;
     [SerializeField] private CharacterAnimation _characterAnimation;
+    [SerializeField] private TableBehaviour _table;
 
     private void Awake()
     {

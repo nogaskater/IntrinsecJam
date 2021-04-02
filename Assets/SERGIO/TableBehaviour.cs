@@ -182,7 +182,7 @@ public class TableBehaviour : MonoBehaviour
         //Updateamos la UI
         UpdatePaperUI();
 
-        _newPaper.OnEnteredSafeState?.Invoke();
+        _newPaper.IsSafe = true;
     }
     #endregion
 

@@ -33,8 +33,8 @@ public class BallController : MonoBehaviour
 
     public bool ThrownByPlayer { get; set; }
 
-    public Action OnEnteredSafeState; 
-    
+    public bool IsSafe { get; set; }
+
     void Start()
     {
         originalGScale = _rb.gravityScale;

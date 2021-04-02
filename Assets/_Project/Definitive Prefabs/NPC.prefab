@@ -2450,7 +2450,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebe244d2bc15df04fb836ccd47272abe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _generalBallManager: {fileID: 0}
   _characterAnimation: {fileID: 467996765591209950}
   _throwStartingPoint: {fileID: 8273400322517205466}
   _player: {fileID: 0}
@@ -2493,15 +2492,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 7245248948133330414}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5a53642febab7c4fa1340ebd0a8ae38, type: 3}
+  m_Script: {fileID: 11500000, guid: 360bc1e31496c1f45ab9c95847c3405d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _scoreManager: {fileID: 0}
   _nPCBallTransitionController: {fileID: 4462628780300801964}
   _npc_ThrowController: {fileID: 6241569097724754994}
   _studentScoreFeedback: {fileID: 2041418376}
-  _minStartScore: 9
-  _maxStartScore: 10
+  _minStartGrade: 2
+  _maxStateGrade: 7
   _pointsMultiplier: 1
 --- !u!114 &467996766332203789
 MonoBehaviour:
@@ -2520,6 +2518,17 @@ MonoBehaviour:
   _movementSpeed: 1.2
   _characterAnimation: {fileID: 467996765591209950}
   _scoreUITransform: {fileID: 467996766220575924}
+  _sprites:
+  - {fileID: 7199091355581493289}
+  - {fileID: 3892176596447443004}
+  - {fileID: 4947647897441054421}
+  - {fileID: 3985420533106390293}
+  - {fileID: 3714584927663203940}
+  - {fileID: 1038534616333010168}
+  - {fileID: 2162573855954938125}
+  - {fileID: 2419431264065563672}
+  - {fileID: 628502479475655181}
+  - {fileID: 9117024424579933297}
   _startMovingTime: 1.2
 --- !u!1 &7278316829868727378
 GameObject:
@@ -2924,7 +2933,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 9
+  m_SortingOrder: 11
   m_Sprite: {fileID: -4958865809216138019, guid: 932374f1952a24045b834e939a18e578,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

@@ -3,31 +3,16 @@ using UnityEngine;
 
 public class FoundBall : State
 {
-    [SerializeField] private ScoreManager _scoreManager;
-    [SerializeField] private GeneralBallManager _generalBallManager;
-
     [SerializeField] private float _hideBallTime;
 
     [Header("Settings")]
     [SerializeField] private int _pointsLostUnanswered = -2;
     [SerializeField] private int _pointsLostAnswered = -4;
 
-    protected override void Awake()
-    {
-        base.Awake();
-
-        if (_scoreManager == null)
-            throw new ArgumentNullException("_scoreManager");
-        if (_generalBallManager == null)
-            throw new ArgumentNullException("_generalBallManager");
-    }
-
     public void BallDetected(BallController ballController)
     {
         if (_teacherAI.GetState() is FoundBall)
             return;
-
-        ballController.OnEnteredSafeState += RemoveTarget;
 
         _target = ballController.transform;        
 
@@ -36,7 +21,7 @@ public class FoundBall : State
 
     public override void FinishAction()
     {
-        StudentScore studentScore = _target.GetComponent<BallController>().Student.GetComponent<StudentScore>();
+        StudentGrade studentScore = _target.GetComponent<BallController>().Student.GetComponent<StudentGrade>();
 
         if (_target.gameObject.layer == LayerMask.NameToLayer("Ball2"))
         {
@@ -51,7 +36,7 @@ public class FoundBall : State
             // SUBSTRACT LIFE
 
             if(_target.GetComponent<BallController>().ThrownByPlayer)
-                _scoreManager.ModifyLives(-1);
+                MatchManager.Instance.ModifyLives(-1);
             else
                 studentScore.ModifyScore(_pointsLostUnanswered, true);
         }
@@ -85,12 +70,6 @@ public class FoundBall : State
         AudioManager.Instance.PlaySound("Alert");
     }
 
-    public override void ExitState()
-    {
-        base.ExitState();
-        
-        _teacherAI.SetActiveExclamation(false);
-    }
 
     public override void UpdateState()
     {
@@ -103,10 +82,18 @@ public class FoundBall : State
 
         base.UpdateState(); 
 
+        // This is to hide the ball mid character animation
         if(_actionCounter > _hideBallTime && _target.gameObject.activeSelf)
         {
             _target.gameObject.SetActive(false);
         }
+    }
+
+    public override void ExitState()
+    {
+        base.ExitState();
+        
+        _teacherAI.SetActiveExclamation(false);
     }
 
     public override void StartActionAnimation()

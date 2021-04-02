@@ -2,10 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
-public class GameManager : MonoBehaviour
+public class MatchManager : MonoBehaviour
 {
-    public static GameManager Instance;
+    public static MatchManager Instance;
 
     [Header("Settings")]
     [SerializeField] private int _maxLives = 3;
@@ -15,9 +14,9 @@ public class GameManager : MonoBehaviour
     public int CurrentLives { get; private set; }
     public float MatchCounter { get; private set; }
 
-    private readonly List<StudentScore> _studentScores = new List<StudentScore>();
-
     private bool _gameOver = false;
+
+    private int _score = 0;
 
 
     // EVENTS
@@ -27,19 +26,6 @@ public class GameManager : MonoBehaviour
 
     public Action OnTimeOut;
     
-    public int TotalScore
-    {
-        get
-        {
-            int sum = 0;
-            foreach (var studentScore in _studentScores)
-            {
-                sum += studentScore.Points;
-            }
-
-            return sum;
-        }
-    }
 
 
     private void Awake()
@@ -57,8 +43,23 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
 
         #endregion
+    }
 
-        StartMatch();
+    private void Update()
+    {
+        if(MatchCounter > 0)
+        {
+            MatchCounter -= Time.deltaTime;
+        }
+        else
+        {
+            if(!_gameOver)
+            {
+                OnTimeOut?.Invoke();
+
+                GameOver(CurrentLives > 0);
+            }
+        }
     }
 
     public void StartMatch()
@@ -66,6 +67,8 @@ public class GameManager : MonoBehaviour
         CurrentLives = _maxLives;
 
         MatchCounter = _matchTime;
+
+        _score = 0;
     }
 
     public void ModifyLives(int delta)
@@ -94,15 +97,11 @@ public class GameManager : MonoBehaviour
 
     }
 
-    public void UpdateScore(int grade, int points)
+    public void AddScore(int delta)
     {
-        OnScoreUpdated?.Invoke(TotalScore);
-    }
-    public void AddNewStudentScore(StudentScore studentScore)
-    {
-        _studentScores.Add(studentScore);
+        _score += delta;
 
-        studentScore.OnScoreModified += UpdateScore;
+        OnScoreUpdated?.Invoke(_score);
     }
 
     public void GameFinished()
@@ -131,5 +130,7 @@ public class GameManager : MonoBehaviour
     public void RestartGame()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+
+        StartMatch();
     }
 }

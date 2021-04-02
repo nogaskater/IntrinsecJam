@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class StudentAI : MonoBehaviour
 {
-    [SerializeField] private StudentScore _studentScore;
+    [SerializeField] private StudentGrade _studentScore;
 
     [SerializeField] private Transform _exitRoomTarget;
 
