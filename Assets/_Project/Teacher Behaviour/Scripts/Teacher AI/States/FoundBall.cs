@@ -22,12 +22,14 @@ public class FoundBall : State
             throw new ArgumentNullException("_generalBallManager");
     }
 
-    public void BallDetected(Transform ballTarget)
+    public void BallDetected(BallController ballController)
     {
         if (_teacherAI.GetState() is FoundBall)
             return;
 
-        _target = ballTarget;
+        ballController.OnEnteredSafeState += RemoveTarget;
+
+        _target = ballController.transform;        
 
         _teacherAI.ChangeState(this);
     }
@@ -38,7 +40,7 @@ public class FoundBall : State
 
         if (_target.gameObject.layer == LayerMask.NameToLayer("Ball2"))
         {
-            if (_target.GetComponent<BallController>().ThrowByPlayer)
+            if (_target.GetComponent<BallController>().ThrownByPlayer)
                 studentScore.ModifyScore(_pointsLostAnswered, true);
             else
                 studentScore.ModifyScore(_pointsLostUnanswered, true);
@@ -48,7 +50,7 @@ public class FoundBall : State
         {
             // SUBSTRACT LIFE
 
-            if(_target.GetComponent<BallController>().ThrowByPlayer)
+            if(_target.GetComponent<BallController>().ThrownByPlayer)
                 _scoreManager.ModifyLives(-1);
             else
                 studentScore.ModifyScore(_pointsLostUnanswered, true);

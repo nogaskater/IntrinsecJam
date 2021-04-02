@@ -16,7 +16,7 @@ public class NPCBallTrigger : MonoBehaviour
         {
             BallController ballController = collision.gameObject.GetComponent<BallController>();
 
-            if (ballController.Student == _student && ballController.BallPaper.answer != ExamElement.NONE)
+            if (ballController.Student == _student && ballController.Answer != ExamElement.NONE)
             {
                 _ballTransitionController.CheckBallAnswers(collision.gameObject);
             }

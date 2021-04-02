@@ -11,7 +11,7 @@ public class GeneralBallManager : MonoBehaviour
 
     [Header("GameObject References")]
     [SerializeField] private Transform _npcsParent;
-    private readonly List<NPC_ThrowController> _npcs = new List<NPC_ThrowController>();
+    [SerializeField] private List<NPC_ThrowController> _npcs = new List<NPC_ThrowController>();
     [SerializeField] private List<Rigidbody2D> _balls = new List<Rigidbody2D>();
     [SerializeField] private GameObject _ballPrefab;
 
@@ -42,7 +42,10 @@ public class GeneralBallManager : MonoBehaviour
 
         for (int i = 0; i < _npcsParent.childCount; i++)
         {
-            _npcs.Add(_npcsParent.GetChild(i).GetComponent<NPC_ThrowController>());
+            Transform student = _npcsParent.GetChild(i);
+
+            if(student.gameObject.activeSelf)
+                _npcs.Add(student.GetComponent<NPC_ThrowController>());
         }
 
         foreach (var student in _npcs)

@@ -10,7 +10,7 @@ public class PlayerBallTrigger : MonoBehaviour
     {
         if(collision.gameObject.tag == "Ball")
         {
-            if(collision.gameObject.GetComponent<BallController>().BallPaper.answer == ExamElement.NONE)
+            if(collision.gameObject.GetComponent<BallController>().Answer == ExamElement.NONE)
             {
                 _ballTransitionController.PutBallInBox(collision.gameObject);
             }

@@ -31,7 +31,7 @@ public class PlayerBallTransitionController : MonoBehaviour
 
         ball.SetActive(false);
 
-        _table.AddNewPaper(ball.GetComponent<BallController>().BallPaper);
+        _table.AddNewPaper(ball.GetComponent<BallController>());
     }
 
     public void PutBallInHand(GameObject ball)

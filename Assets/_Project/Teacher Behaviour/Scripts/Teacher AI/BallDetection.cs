@@ -14,7 +14,12 @@ public class BallDetection : MonoBehaviour
     {
         if(collision.gameObject.tag == "Ball")
         {
-            _foundBallState.BallDetected(collision.transform);
+            BallController ballController = collision.GetComponent<BallController>();
+
+            if (ballController == null)
+                throw new InvalidOperationException("No BallController script is attached to a gameobject that has a Ball tag.");
+
+            _foundBallState.BallDetected(ballController);
 
             collision.gameObject.layer = LayerMask.NameToLayer("Ball2");
         }

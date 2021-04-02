@@ -11,8 +11,6 @@ public class TableBehaviour : MonoBehaviour
 {
     [SerializeField] private PlayerBallTransitionController _playerBallTransitionController;
 
-    [SerializeField] private TeacherAI _teacherAI;
-
     #region VARIABLES
     [Header("UI ELEMENTS")]
     public Transform table;
@@ -28,12 +26,12 @@ public class TableBehaviour : MonoBehaviour
     public int MaxListSize = 4;
 
     [Header("TO ANSWER")]
-    [SerializeField] List<Paper> toAnswerQueue;
+    [SerializeField] List<BallController> toAnswerQueue;
     [SerializeField] List<GameObject> papersToAnswer;
     public int ToAnserQueueCount => toAnswerQueue.Count;
 
     [Header("ANSWERED")]
-    [SerializeField] List<Paper> answeredQueue;
+    [SerializeField] List<BallController> answeredQueue;
     [SerializeField] List<GameObject> papersDone;
     public int AnsweredQueueCount => answeredQueue.Count;
 
@@ -42,7 +40,7 @@ public class TableBehaviour : MonoBehaviour
     public TextMeshProUGUI paperQuestion;
     public TextMeshProUGUI paperAnswer;
     [SerializeField] Image questionImage;
-    Paper currentPaper;
+    BallController currentPaper;
 
     [Header("QUESTIONS")]
     [SerializeField] int numQuestions = 6;
@@ -69,9 +67,6 @@ public class TableBehaviour : MonoBehaviour
     {
         if (_playerBallTransitionController == null)
             throw new ArgumentNullException("_playerBallTransitionController");
-
-        if (_teacherAI == null)
-            throw new ArgumentNullException("_teacherAI");
     }
 
     #region START
@@ -80,8 +75,8 @@ public class TableBehaviour : MonoBehaviour
         initialPosition = table.position;
 
         //Inicializamos las listas
-        toAnswerQueue = new List<Paper>();
-        answeredQueue = new List<Paper>();
+        toAnswerQueue = new List<BallController>();
+        answeredQueue = new List<BallController>();
 
         //Updateamos la UI
         UpdatePaperUI();
@@ -179,7 +174,7 @@ public class TableBehaviour : MonoBehaviour
     #endregion
 
     #region ADD NEW PAPER
-    public void AddNewPaper(Paper _newPaper)
+    public void AddNewPaper(BallController _newPaper)
     {
         //Añadimos el papel
         toAnswerQueue.Add(_newPaper);
@@ -187,10 +182,7 @@ public class TableBehaviour : MonoBehaviour
         //Updateamos la UI
         UpdatePaperUI();
 
-        if (_newPaper.transform == _teacherAI.CurrentState.Target)
-        {
-            _teacherAI.CurrentState.RemoveTarget();
-        }
+        _newPaper.OnEnteredSafeState?.Invoke();
     }
     #endregion
 
@@ -274,7 +266,7 @@ public class TableBehaviour : MonoBehaviour
             //Debug.Log("QUE SPRITE HAY QUE PINTAR --> " + (int)currentPaper.question);
 
             //PINTAMOS LA PREGUNTA
-            string[] splitArray = finalExamQuestions[(int)currentPaper.question - 1].Split('?');
+            string[] splitArray = finalExamQuestions[(int)currentPaper.Question - 1].Split('?');
 
             paperQuestion.text = splitArray[0] + "?";
 
@@ -292,7 +284,7 @@ public class TableBehaviour : MonoBehaviour
         {
             currentBall.gameObject.SetActive(false);
 
-            answeredQueue.Add(currentBall.GetComponent<Paper>());
+            answeredQueue.Add(currentBall.GetComponent<BallController>());
 
             currentBall.GetComponent<BallController>().Student.HolderActive(false);
 
@@ -333,7 +325,6 @@ public class TableBehaviour : MonoBehaviour
     #region SELECT AN ANSWER
     void SelectAnAnswer(int _answer)
     {
-        print(paperOpened);
         if (paperOpened)
         {
             //Activamos la imagen
@@ -341,7 +332,7 @@ public class TableBehaviour : MonoBehaviour
 
             //Le asignamos el Sprite
             //answer.GetComponent<Image>().sprite = answerImages[_answer];
-            currentPaper.answer = examAnswers[_answer];
+            currentPaper.Answer = examAnswers[_answer];
         }
 
     }
@@ -350,7 +341,7 @@ public class TableBehaviour : MonoBehaviour
     #region CONFIRM ANSWER
     public void ConfirmAnswer()
     {
-        if (paperOpened && currentPaper.answer != ExamElement.NONE)
+        if (paperOpened && currentPaper.Answer != ExamElement.NONE)
         {
             paperOpened = false;
 

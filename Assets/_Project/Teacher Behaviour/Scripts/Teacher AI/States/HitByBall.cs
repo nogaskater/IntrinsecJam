@@ -3,20 +3,24 @@ using UnityEngine;
 
 public class HitByBall : State
 {
-    private Transform _ballTarget;
+    [SerializeField] private Patrol _patrolState;
 
-
-    public void Hit(Transform ballTarget)
+    protected override void Awake()
     {
-        if (_teacherAI.GetState() is HitByBall)
+        base.Awake();
+
+        if (_patrolState == null)
+            throw new ArgumentNullException("_patrolState");
+    }
+
+    public void Hit(BallController ballController)
+    {
+        if (_teacherAI.GetState() is HitByBall || _teacherAI.GetState() is FoundBall)
             return;
 
-        if (_teacherAI.GetState() is FoundBall)
-            return;
+        _target = ballController.transform;
 
-        _ballTarget = ballTarget;
-
-        _target = transform;
+        ballController.OnEnteredSafeState += RemoveTarget;
 
         _teacherAI.ChangeState(this);
     }
@@ -28,6 +32,25 @@ public class HitByBall : State
         _teacherAI.SetActiveExclamation(true);
     }
 
+    public override void UpdateState()
+    {
+        if (!_isNearTarget)
+        {
+            _isNearTarget = true;
+
+            StartActionAnimation();
+        }
+        else
+        {
+            _actionCounter += Time.deltaTime;
+
+            if (_actionCounter > _actionTime)
+            {
+                FinishAction();
+            }
+        }
+    }
+
     public override void ExitState()
     {
         base.ExitState();
@@ -37,10 +60,13 @@ public class HitByBall : State
 
     public override void FinishAction()
     {
-        FoundBall foundBall = _goToState as FoundBall;
-
-        foundBall.BallDetected(_ballTarget);
+        if (_target != null)
+            _teacherAI.ChangeState(_goToState);
+        else
+            _teacherAI.ChangeState(_patrolState);
     }
+
+
 
     public override void StartActionAnimation()
     {

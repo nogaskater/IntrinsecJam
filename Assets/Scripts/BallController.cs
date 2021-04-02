@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -24,19 +25,16 @@ public class BallController : MonoBehaviour
     private bool isfalling;
     private int contFalling = 0;
 
-    [SerializeField] private Paper _ballPaper;
-    public Paper BallPaper => _ballPaper;
+    // PAPER INFO
+    public ExamElement Question { get; set; }
+    public ExamElement Answer { get; set; }
 
     public Student Student { get; private set; }
 
-    public bool ThrowByPlayer { get; set; }
+    public bool ThrownByPlayer { get; set; }
 
-    private void Awake()
-    {
-        if (_ballPaper == null)
-            throw new System.ArgumentNullException("BallPaper");
-    }
-
+    public Action OnEnteredSafeState; 
+    
     void Start()
     {
         originalGScale = _rb.gravityScale;
@@ -51,7 +49,7 @@ public class BallController : MonoBehaviour
     public void Initialize(Student student, ExamElement element)
     {
         Student = student;
-        _ballPaper.question = element;
+        Question = element;
     }
 
     private void CheckIsFalling()

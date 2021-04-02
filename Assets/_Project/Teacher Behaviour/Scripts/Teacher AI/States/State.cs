@@ -8,14 +8,13 @@ public class State : MonoBehaviour
     [Header("Settings")]
     [SerializeField] private float _movementSpeed = 2;
     [SerializeField] private float _stopDistance = 0.1f;
-    [SerializeField] private float _actionTime = 3.0f;
+    [SerializeField] protected float _actionTime = 3.0f;
 
     [Header("Go To State")]
     [SerializeField] protected State _goToState;
 
     protected Transform _target;
     public Transform Target => _target;
-    public void RemoveTarget() => _target = null;
 
     protected bool _isNearTarget = false;
     protected float _actionCounter = 0;
@@ -38,11 +37,6 @@ public class State : MonoBehaviour
 
         _teacherAI.RightTriggerActive(false);
         _teacherAI.LeftTriggerActive(false);
-    }
-
-    public virtual void ExitState()
-    {
-
     }
     public virtual void UpdateState()
     {
@@ -78,19 +72,28 @@ public class State : MonoBehaviour
             }
         }
     }
-
-    public virtual void FinishAction()
+    public virtual void ExitState()
     {
-        _teacherAI.ChangeState(_goToState);
+
     }
+
     public virtual void WalkAction()
     {
 
     }
-
     public virtual void StartActionAnimation()
     {
 
     }
+    public virtual void FinishAction()
+    {
+        _teacherAI.ChangeState(_goToState);
+    }
 
+    public void RemoveTarget()
+    {
+        _target.GetComponent<BallController>().OnEnteredSafeState -= RemoveTarget;
+
+        _target = null;
+    }
 }

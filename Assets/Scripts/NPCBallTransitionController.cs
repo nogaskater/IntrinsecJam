@@ -30,11 +30,9 @@ public class NPCBallTransitionController : MonoBehaviour
             return;
 
 
-        print("CATCH");
+        BallController paper = ball.GetComponent<BallController>();
 
-        Paper paper = ball.GetComponent<BallController>().GetComponent<Paper>();
-
-        if(paper.answer == paper.question)        
+        if(paper.Answer == paper.Question)        
             OnBallReceived?.Invoke(2, true);
         else
             OnBallReceived?.Invoke(-2, true);

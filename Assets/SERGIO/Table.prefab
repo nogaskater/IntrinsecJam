@@ -318,7 +318,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2020304656062282951
 RectTransform:
   m_ObjectHideFlags: 0
@@ -836,7 +836,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 1
+  m_fontStyle: 3
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 256
   m_textAlignment: 65535
@@ -1309,7 +1309,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 2.0000181, y: 100.000015}
+  m_AnchoredPosition: {x: 2.0000181, y: 64}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &4419667067356209237
@@ -1347,7 +1347,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -34.999996, y: -52.4}
+  m_AnchoredPosition: {x: -52, y: -176}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &4833051280368010677
@@ -1385,8 +1385,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 30.99, y: 21.601}
-  m_SizeDelta: {x: 1304.9491, y: 227.82478}
+  m_AnchoredPosition: {x: 29.44, y: 22.33}
+  m_SizeDelta: {x: 1348.5792, y: 277.24493}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &9222273564085100294
 CanvasRenderer:
@@ -1514,7 +1514,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -26.999996, y: 48.000015}
+  m_AnchoredPosition: {x: -26.999996, y: -22}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &4888298260800211337
@@ -1552,8 +1552,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 32.81, y: 50.47}
-  m_SizeDelta: {x: 1358.635, y: 260.18555}
+  m_AnchoredPosition: {x: 45.52, y: 40.31}
+  m_SizeDelta: {x: 1471.7927, y: 331.65338}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1814569295022526165
 CanvasRenderer:
@@ -2245,8 +2245,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 6.07, y: 40.247}
-  m_SizeDelta: {x: 663.56055, y: 127.9892}
+  m_AnchoredPosition: {x: 6.07, y: 37.189}
+  m_SizeDelta: {x: 663.56055, y: 139.45807}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8006725235944602112
 CanvasRenderer:
@@ -2488,7 +2488,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &5350247653668438764
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3135,7 +3135,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 078d7d8aa10701242aaee82a41bcc991, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 29faf6978fe99654d86899c0a16df828, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -4028,7 +4028,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerBallTransitionController: {fileID: 0}
-  _teacherAI: {fileID: 0}
   table: {fileID: 6225076618838498512}
   mask: {fileID: 6225076616946460184}
   initialPosition: {x: 0, y: 0, z: 0}
@@ -4036,7 +4035,7 @@ MonoBehaviour:
   animationSpeed: 0.75
   openTransform: {fileID: 4812131683000997974}
   closeTransform: {fileID: 5439247737482879246}
-  MaxListSize: 4
+  MaxListSize: 5
   toAnswerQueue: []
   papersToAnswer:
   - {fileID: 6225076618322724884}
@@ -4055,7 +4054,7 @@ MonoBehaviour:
   paperQuestion: {fileID: 1352563628940969816}
   paperAnswer: {fileID: 6031013068793519619}
   questionImage: {fileID: 0}
-  numQuestions: 6
+  numQuestions: 4
   questionTextExam:
   - {fileID: 3217997299964814031}
   - {fileID: 489646500691473373}
@@ -4079,31 +4078,31 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   questions:
-  - 1. Who is Your daddy? I am your Daddy
-  - 2. Who is Your daddy? I am your Daddy
-  - 3. Who is Your daddy? I am your Daddy
-  - 4. Who is Your daddy? I am your Daddy
-  - 5. Who is Your daddy? I am your Daddy
-  - 6. Who is Your daddy? I am your Daddy
-  - 7. Who is Your daddy? I am your Daddy
-  - 8. Who is Your daddy? I am your Daddy
-  - 9. Who is Your daddy? I am your Daddy
-  - 10. Who is Your daddy? I am your Daddy
-  - 11. Who is Your daddy? I am your Daddy
-  - 12. Who is Your daddy? I am your Daddy
-  - 13. Who is Your daddy? I am your Daddy
-  - 14. Who is Your daddy? I am your Daddy
-  - 15. Who is Your daddy? I am your Daddy
-  - 16. Who is Your daddy? I am your Daddy
-  - 17. Who is Your daddy? I am your Daddy
-  - 18. Who is Your daddy? I am your Daddy
-  - 19. Who is Your daddy? I am your Daddy
-  - 20. Who is Your daddy? I am your Daddy
-  - 21. Who is Your daddy? I am your Daddy
-  - 22. Who is Your daddy? I am your Daddy
-  - 23. Who is Your daddy? I am your Daddy
-  - 24. Who is Your daddy? I am your Daddy
-  - 25. Who is Your daddy? I am your Daddy
+  - How many days do we have in a week?Seven
+  - How many colors are in a rainbow?Seven
+  - How many letters are in the English alphabet?26
+  - How many sides are in a triangle?Three
+  - How do you call a type of shape that has five sides?Pentagon
+  - Which part of the body we use to smell?Nose
+  - Which is the largest mammal?Blue Whale
+  - Which month of the year has the least number of days?February
+  - How many seasons has the year got?Four
+  - How many legs has a dog?Four
+  - How many lives has a cat?Seven
+  - What is the largest river in the world?Amazonas
+  - How often do we have a leap year?Four
+  - How many months have 28 days?One
+  - What is a century?One hundred years
+  - What is the highest mountain in the world?Everest
+  - In which country is the Eiffel Tower located?Paris
+  - XIX / XI / MMXVIII, what date is it?19/11/2018
+  - How many continents are there in the world?Five
+  - What are the states of matter?Solid, liquid and gaseous
+  - "At what temperature does the water freeze? 0\xBAC"
+  - "At what temperature does water boil? 100\xBAC"
+  - Which is Miguel de Cervantes' best known character?Don Quixote of La Mancha
+  - "What is the sum of the angles of a triangle?180\xBA"
+  - How many kilos are a ton?a thousand kilos
 --- !u!1 &6225076617760941564
 GameObject:
   m_ObjectHideFlags: 0
@@ -5079,7 +5078,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6225076618838498527}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 

@@ -3,37 +3,36 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class ScoreManager : MonoBehaviour
+public class GameManager : MonoBehaviour
 {
+    public static GameManager Instance;
 
     [Header("Settings")]
     [SerializeField] private int _maxLives = 3;
-    [SerializeField] private float _maxTime = 60;
-
+    [SerializeField] private float _matchTime = 60;
 
     public int MaxLives => _maxLives;
-
     public int CurrentLives { get; private set; }
+    public float MatchCounter { get; private set; }
 
-    private readonly List<StudentScore> _studentScore = new List<StudentScore>();
-
-    public Action<int> OnScoreUpdated;
-    public Action<bool> OnLiveUpdated;
-    public Action<bool> OnGameOver;
-
-    public Action OnTimeOut;
+    private readonly List<StudentScore> _studentScores = new List<StudentScore>();
 
     private bool _gameOver = false;
 
-    private float _counter;
-    public float CurrentCounter => _counter;
 
+    // EVENTS
+    public Action<bool> OnLiveUpdated; // popupFeedback
+    public Action<int> OnScoreUpdated; // score
+    public Action<bool> OnGameOver; // win
+
+    public Action OnTimeOut;
+    
     public int TotalScore
     {
         get
         {
             int sum = 0;
-            foreach (var studentScore in _studentScore)
+            foreach (var studentScore in _studentScores)
             {
                 sum += studentScore.Points;
             }
@@ -42,30 +41,31 @@ public class ScoreManager : MonoBehaviour
         }
     }
 
+
     private void Awake()
+    {
+        #region Singletone
+        if (Instance != null)
+        {
+            Destroy(gameObject);
+
+            return;
+        }
+
+        Instance = this;
+
+        DontDestroyOnLoad(gameObject);
+
+        #endregion
+
+        StartMatch();
+    }
+
+    public void StartMatch()
     {
         CurrentLives = _maxLives;
 
-        _counter = _maxTime;
-    }
-
-    private void Update()
-    {
-
-        if(_counter > 0)
-        {
-            _counter -= Time.deltaTime;
-        }
-        else
-        {
-            if(!_gameOver)
-            {
-                OnTimeOut?.Invoke();
-
-                GameOver(CurrentLives > 0);
-            }
-
-        }
+        MatchCounter = _matchTime;
     }
 
     public void ModifyLives(int delta)
@@ -78,6 +78,11 @@ public class ScoreManager : MonoBehaviour
 
         CurrentLives += delta;
 
+        if (CurrentLives <= 0)
+            CurrentLives = 0;
+        else if (CurrentLives >= _maxLives)
+            CurrentLives = _maxLives;
+
         OnLiveUpdated?.Invoke(true);
 
         AudioManager.Instance.PlaySound("LoseLife");
@@ -86,6 +91,7 @@ public class ScoreManager : MonoBehaviour
         {
             GameOver(false);
         }
+
     }
 
     public void UpdateScore(int grade, int points)
@@ -94,7 +100,7 @@ public class ScoreManager : MonoBehaviour
     }
     public void AddNewStudentScore(StudentScore studentScore)
     {
-        _studentScore.Add(studentScore);
+        _studentScores.Add(studentScore);
 
         studentScore.OnScoreModified += UpdateScore;
     }
