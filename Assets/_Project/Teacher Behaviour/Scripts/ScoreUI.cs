@@ -16,13 +16,11 @@ public class ScoreUI : MonoBehaviour
 
     private void Awake()
     {
-        MatchManager.Instance.OnLiveUpdated += UpdateLives;
 
 
         if (_scoreText == null)
             throw new ArgumentNullException("_scoreText");
 
-        MatchManager.Instance.OnScoreUpdated += UpdateScore;
 
 
         if (_timeText == null)
@@ -35,6 +33,18 @@ public class ScoreUI : MonoBehaviour
 
     }
 
+    private void OnEnable()
+    {
+        MatchManager.Instance.OnLiveUpdated += UpdateLives;
+        MatchManager.Instance.OnScoreUpdated += UpdateScore;
+    }
+
+    private void OnDisable()
+    {
+        MatchManager.Instance.OnLiveUpdated -= UpdateLives;
+        MatchManager.Instance.OnScoreUpdated -= UpdateScore;
+    }
+
     private void Start()
     {
         UpdateLives(false);
@@ -44,7 +54,7 @@ public class ScoreUI : MonoBehaviour
 
     private void Update()
     {
-        _timeText.text = ((int)MatchManager.Instance.MatchCounter).ToString(); // REPASAR FORMATO
+        _timeText.text = ((int)(MatchManager.Instance.MatchCounter + 1)).ToString(); // REPASAR FORMATO
     }
 
 

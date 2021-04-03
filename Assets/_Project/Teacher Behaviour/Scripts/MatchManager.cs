@@ -26,8 +26,8 @@ public class MatchManager : MonoBehaviour
     public Action<bool> OnGameOver; // win
 
     public Action OnTimeOut;
-    
 
+    private bool _matchStarted;
 
     private void Awake()
     {
@@ -48,6 +48,9 @@ public class MatchManager : MonoBehaviour
 
     private void Update()
     {
+        if (!_matchStarted)
+            return;
+
         if(MatchCounter > 0)
         {
             MatchCounter -= Time.deltaTime;
@@ -70,7 +73,18 @@ public class MatchManager : MonoBehaviour
         MatchCounter = _matchTime;
 
         _score = 0;
+
+        _matchStarted = true;
+
+        _gameOver = false;
     }
+
+    public void FinishMatch()
+    {
+        _matchStarted = false;
+    }
+
+
 
     public void ModifyLives(int delta)
     {

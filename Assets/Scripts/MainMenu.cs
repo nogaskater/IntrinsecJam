@@ -15,7 +15,6 @@ public class MainMenu : MonoBehaviour
     public void PlayGame()
     {
         //HAY QUE AÑADIR LA ESCENA AL BUILDEAR
-        Debug.Log("Empecemos");
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 

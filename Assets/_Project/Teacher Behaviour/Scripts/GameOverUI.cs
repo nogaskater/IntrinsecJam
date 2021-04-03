@@ -1,6 +1,7 @@
 ﻿using System;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class GameOverUI : MonoBehaviour
 {
@@ -20,9 +21,17 @@ public class GameOverUI : MonoBehaviour
         if (_winLoseText == null)
             throw new ArgumentNullException("_winLoseText");
 
-        MatchManager.Instance.OnGameOver += GameOver;
 
         _gameOverCanvas.SetActive(false);
+    }
+
+    private void OnEnable()
+    {
+        MatchManager.Instance.OnGameOver += GameOver;
+    }
+    private void OnDisable()
+    {
+        MatchManager.Instance.OnGameOver -= GameOver;
     }
 
     private void GameOver(bool win)
@@ -40,6 +49,13 @@ public class GameOverUI : MonoBehaviour
     public void Button_RestartGame()
     {
         MatchManager.Instance.RestartGame();
+    }
+
+    public void Button_BackToMainMenu()
+    {
+        SceneManager.LoadScene("MainMenu");
+
+        MatchManager.Instance.FinishMatch();
     }
 
 }

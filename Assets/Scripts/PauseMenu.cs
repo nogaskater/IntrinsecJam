@@ -32,6 +32,8 @@ public class PauseMenu : MonoBehaviour
         Time.timeScale = 1f;
 
         SceneManager.LoadScene(MainMenu);
+
+        MatchManager.Instance.FinishMatch();
     }
 
     public void QuitGame()

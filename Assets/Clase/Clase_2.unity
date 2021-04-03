@@ -12562,7 +12562,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c763e4c2a39e1174188dc8a082d57aa4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _matchTime: 60
+  _matchTime: 2
 --- !u!4 &1779428497
 Transform:
   m_ObjectHideFlags: 0
@@ -14436,9 +14436,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2152397639436449990}
-        m_MethodName: LoadNextScene
-        m_Mode: 5
+      - m_Target: {fileID: 5088004196179240288}
+        m_MethodName: Button_BackToMainMenu
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -14844,7 +14844,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 10
   m_TargetDisplay: 0
 --- !u!114 &3011124539078617794
 MonoBehaviour:
