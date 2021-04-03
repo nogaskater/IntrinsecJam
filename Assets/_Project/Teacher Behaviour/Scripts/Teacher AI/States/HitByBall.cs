@@ -50,7 +50,10 @@ public class HitByBall : State
     {
         FoundBall foundBallState = _goToState as FoundBall;
 
-        foundBallState.BallDetected(_target.GetComponent<BallController>());
+        if (_target != null)
+            foundBallState.BallDetected(_target.GetComponent<BallController>());
+        else
+            _teacherAI.ChangeState(_goToState);
     }
 
     public override void StartActionAnimation()

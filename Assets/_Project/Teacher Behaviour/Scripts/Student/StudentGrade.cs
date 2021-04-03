@@ -3,9 +3,7 @@ using UnityEngine;
 
 public class StudentGrade : MonoBehaviour
 {
-    [SerializeField] private NPCBallTransitionController _nPCBallTransitionController;
-    [SerializeField] private NPC_ThrowController _npc_ThrowController;
-
+    [SerializeField] private Student _student;
     [SerializeField] private StudentScoreFeedback _studentScoreFeedback;
 
     [Header("Settings")]
@@ -16,16 +14,12 @@ public class StudentGrade : MonoBehaviour
     public Action<bool> OnStudentFinished;
     public int Grade { get; private set; }
 
+    public Action<int, int> OnScoreModified;
+
     private void Awake()
     {
-        if (_nPCBallTransitionController == null)
-            throw new ArgumentNullException("_nPCBallTransitionController");
-
-        _nPCBallTransitionController.OnBallReceived += ModifyScore;
-
-
-        if (_npc_ThrowController == null)
-            throw new ArgumentNullException("_npc_ThrowController");
+        if (_student == null)
+            throw new ArgumentNullException("_student");
 
         if (_studentScoreFeedback == null)
             throw new ArgumentNullException("_studentScoreFeedback");
@@ -35,7 +29,22 @@ public class StudentGrade : MonoBehaviour
         ModifyScore(0, false);
     }    
 
-    public Action<int, int> OnScoreModified;
+    public void CheckBallAnswers(BallController ballController)
+    {
+        if (Grade <= 0 || Grade >= 10)
+            return;
+
+        if (ballController.Answer == ballController.Answer)
+            ModifyScore(2, true);
+        else
+            ModifyScore(-2, true);
+
+        if (Grade > 0 || Grade < 10)
+            AudioManager.Instance.PlaySound("Catch");
+
+        Destroy(ballController.gameObject);
+    }
+
     public void ModifyScore(int delta, bool popUp)
     {
         Grade += delta;
@@ -52,7 +61,7 @@ public class StudentGrade : MonoBehaviour
 
             OnStudentFinished?.Invoke(false);
 
-            _npc_ThrowController.RemoveStudentFromThrowManager();
+            _student.RemoveStudentFromManager();
 
             Grade = 0;
         }
@@ -63,7 +72,7 @@ public class StudentGrade : MonoBehaviour
 
             OnStudentFinished?.Invoke(true);
 
-            _npc_ThrowController.RemoveStudentFromThrowManager();
+            _student.RemoveStudentFromManager();
 
             Grade = 10;
 

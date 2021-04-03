@@ -4,13 +4,14 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 public class MatchManager : MonoBehaviour
 {
+    private const int MAX_LIVES = 3;
+
     public static MatchManager Instance;
 
     [Header("Settings")]
-    [SerializeField] private int _maxLives = 3;
     [SerializeField] private float _matchTime = 60;
 
-    public int MaxLives => _maxLives;
+    public int MaxLives => MAX_LIVES;
     public int CurrentLives { get; private set; }
     public float MatchCounter { get; private set; }
 
@@ -64,7 +65,7 @@ public class MatchManager : MonoBehaviour
 
     public void StartMatch()
     {
-        CurrentLives = _maxLives;
+        CurrentLives = MAX_LIVES;
 
         MatchCounter = _matchTime;
 
@@ -73,7 +74,7 @@ public class MatchManager : MonoBehaviour
 
     public void ModifyLives(int delta)
     {
-        if (delta > 0 && CurrentLives == _maxLives)
+        if (delta > 0 && CurrentLives == MAX_LIVES)
             return;
 
         if (delta < 0 && CurrentLives == 0)
@@ -83,8 +84,8 @@ public class MatchManager : MonoBehaviour
 
         if (CurrentLives <= 0)
             CurrentLives = 0;
-        else if (CurrentLives >= _maxLives)
-            CurrentLives = _maxLives;
+        else if (CurrentLives >= MAX_LIVES)
+            CurrentLives = MAX_LIVES;
 
         OnLiveUpdated?.Invoke(true);
 

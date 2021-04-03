@@ -6,8 +6,10 @@ using UnityEngine;
 public class StudentsManager : MonoBehaviour
 {
     [Header("GameObject References")]
+    [SerializeField] private StudentCallLogic _studentCallLogic;
     [SerializeField] private Transform _npcsParent;
-    [SerializeField] private GameObject _ballPrefab;
+    [SerializeField] private Transform _player;
+    [SerializeField] private Transform _exitRoomTransform;
 
     [Header("Manager Settings")]
     [SerializeField] private float _minSpawnInterval;
@@ -18,26 +20,29 @@ public class StudentsManager : MonoBehaviour
 
     [SerializeField] private int numQuestions = 6;
 
-    private List<NPC_ThrowController> _students = new List<NPC_ThrowController>();
-    private List<Rigidbody2D> _balls = new List<Rigidbody2D>();
+    private List<Student> _students = new List<Student>();
 
-    //--Controlling papersID's--//
-    private int _currentBallID = 0;
 
     //--Controlling spawn times--//
-    private float lastSpawnTime= 0.0f;
-    private float intervalToSpawn;
+    private float _lastSpawnTime= 0.0f;
+    private float _intervalToSpawn;
 
     private void Awake()
     {
+        if (_studentCallLogic == null)
+            throw new ArgumentNullException("_studentCallLogic");
         if (_npcsParent == null)
             throw new ArgumentNullException("_npcsParent");
+        if (_player == null)
+            throw new ArgumentNullException("_player");
+        if (_exitRoomTransform == null)
+            throw new ArgumentNullException("_exitRoomTransform");
 
         for (int i = 0; i < _npcsParent.childCount; i++)
         {
-            NPC_ThrowController student = _npcsParent.GetChild(i).GetComponent<NPC_ThrowController>();
+            Student student = _npcsParent.GetChild(i).GetComponent<Student>();
 
-            student.Initialize(this);
+            student.Initialize(this, _studentCallLogic, _player, _exitRoomTransform);
 
             if(student.gameObject.activeSelf)
                 _students.Add(student);
@@ -55,9 +60,13 @@ public class StudentsManager : MonoBehaviour
         MatchManager.Instance.OnTimeOut -= CheckIfStudentHavePassed;
     }
 
-    void Start()
+
+    private void Start()
     {
-        intervalToSpawn = UnityEngine.Random.Range(_minFirstSpawnInterval, _maxFirstSpawnInterval);
+        _intervalToSpawn = UnityEngine.Random.Range(_minFirstSpawnInterval, _maxFirstSpawnInterval);
+
+        _lastSpawnTime = Time.time;
+
     }
     void Update()
     {
@@ -68,12 +77,9 @@ public class StudentsManager : MonoBehaviour
     {
         int randomNPC = UnityEngine.Random.Range(0, _students.Count);
 
-        BallController instance = Instantiate(_ballPrefab, _students[randomNPC].GetThrowStartingPoint().position, Quaternion.identity).GetComponent<BallController>();    
-        instance.Initialize(_students[randomNPC].GetComponent<Student>(), (ExamElement)UnityEngine.Random.Range(1, numQuestions));
+        _students[randomNPC].GenerateBall(numQuestions);
 
-        lastSpawnTime = Time.time;
-
-        _students[randomNPC].ThrowBall(instance.GetComponent<Rigidbody2D>());
+        _lastSpawnTime = Time.time;
     }
 
     private void CheckBallSpawnAvailability()
@@ -81,28 +87,15 @@ public class StudentsManager : MonoBehaviour
         if (_students.Count == 0)
             return;
 
-        if(Time.time > lastSpawnTime + intervalToSpawn /*&& currentConcurrentBalls < _maxConcurrentBalls*/)
+        if(Time.time > _lastSpawnTime + _intervalToSpawn /*&& currentConcurrentBalls < _maxConcurrentBalls*/)
         {
             GenerateRandomBall();
-            intervalToSpawn = UnityEngine.Random.Range(_minSpawnInterval, _maxSpawnInterval);
+            _intervalToSpawn = UnityEngine.Random.Range(_minSpawnInterval, _maxSpawnInterval);
         }
     }
 
-    public void RemoveCurrentBallFromController(Rigidbody2D rb)
-    {
-        foreach(Rigidbody2D b in _balls)
-        {
-            if(b == rb)
-            {
-                _balls.Remove(b);
 
-
-                Destroy(b.gameObject);
-            }
-        }
-    }
-
-    public void RemoveStudent(NPC_ThrowController throwController)
+    public void RemoveStudent(Student throwController)
     {
         _students.Remove(throwController);
 

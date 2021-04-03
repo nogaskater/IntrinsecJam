@@ -3,17 +3,20 @@ using UnityEngine;
 
 public class CallTeacherDetection : MonoBehaviour
 {
-    [SerializeField] private StudentCallLogic _studentCallLogic;
+    [SerializeField] private Student _student;
 
-    [SerializeField] private CharacterAnimation _characterAnimation;
+    private StudentCallLogic _studentCallLogic;
+
+
+    public void Initialize(StudentCallLogic studentCallLogic)
+    {
+        _studentCallLogic = studentCallLogic;
+    }
 
     private void Awake()
     {
-        if (_studentCallLogic == null)
-            throw new ArgumentNullException("_studentCallLogic");
-
-        if (_characterAnimation == null)
-            throw new ArgumentNullException("_characterAnimation");
+        if (_student == null)
+            throw new ArgumentNullException("_student");
     }
 
     private void OnMouseDown()
@@ -21,7 +24,10 @@ public class CallTeacherDetection : MonoBehaviour
         if (_studentCallLogic.TeacherCalled || _studentCallLogic.IsTableOpened)
             return;
 
-        _characterAnimation.Animator.SetTrigger("Call");
+        if (_student.HasFinished)
+            return;
+
+        _student.Animator.SetTrigger("Call");
 
         _studentCallLogic.CallTeacher(transform);
     }

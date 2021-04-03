@@ -14,12 +14,9 @@ public class State : MonoBehaviour
     [SerializeField] protected State _goToState;
 
     protected Transform _target;
-    public Transform Target => _target;
 
     protected bool _isNearTarget = false;
     protected float _actionCounter = 0;
-
-    private bool _walkActionDone = false;
 
     protected virtual void Awake()
     {
@@ -33,7 +30,6 @@ public class State : MonoBehaviour
     {
         _isNearTarget = false;
         _actionCounter = 0;
-        _walkActionDone = false;
 
         _teacherAI.RightTriggerActive(false);
         _teacherAI.LeftTriggerActive(false);
@@ -47,12 +43,6 @@ public class State : MonoBehaviour
 
         if (!_isNearTarget)
         {
-            if(!_walkActionDone)
-            {
-                WalkAction();
-                _walkActionDone = true;
-            }
-
             transform.Translate(direction.normalized * _movementSpeed * Time.deltaTime);
 
             if (direction.magnitude < _stopDistance)
@@ -77,10 +67,6 @@ public class State : MonoBehaviour
 
     }
 
-    public virtual void WalkAction()
-    {
-
-    }
     public virtual void StartActionAnimation()
     {
 

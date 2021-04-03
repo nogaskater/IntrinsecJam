@@ -5,16 +5,13 @@ using UnityEngine;
 public class StudentAI : MonoBehaviour
 {
     [SerializeField] private StudentGrade _studentScore;
-
-    [SerializeField] private Transform _exitRoomTarget;
-
     [SerializeField] private float _movementSpeed = 3;
-
     [SerializeField] private CharacterAnimation _characterAnimation;
-
     [SerializeField] private Transform _scoreUITransform;
-
     [SerializeField] private List<SpriteRenderer> _sprites;
+
+
+    private Transform _exitRoomTarget;
 
 
     [Header("Start Moving Settings")]
@@ -23,7 +20,14 @@ public class StudentAI : MonoBehaviour
     private float _startMovingCounter = 0;
     private bool _hasStartedMoving = false;
 
-    private bool _hasFinished = false;
+    public bool HasFinished { get; private set; }
+
+
+    public void Initialize(Transform exitTransform)
+    {
+        _exitRoomTarget = exitTransform;
+    }
+
     private void Awake()
     {
         if (_studentScore == null)
@@ -32,9 +36,6 @@ public class StudentAI : MonoBehaviour
             throw new ArgumentNullException("_characterAnimation");
 
         _studentScore.OnStudentFinished += StudentFinished;
-
-        if (_exitRoomTarget == null)
-            throw new ArgumentNullException("_exitRoomTarget");
 
         _startMovingCounter = 0;
 
@@ -45,7 +46,7 @@ public class StudentAI : MonoBehaviour
 
     private void Update()
     {
-        if(_hasFinished)
+        if(HasFinished)
         {
             if (!_hasStartedMoving)
             {
@@ -78,13 +79,12 @@ public class StudentAI : MonoBehaviour
 
     private void StudentFinished(bool passed)
     {
-        _hasFinished = true;
+        HasFinished = true;
 
         if (passed)
         {
             _movementSpeed *= 1.7f;
 
-            print("PASSED");
             _characterAnimation.Animator.SetTrigger("Passed");
         }
         else

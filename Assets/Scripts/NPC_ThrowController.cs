@@ -8,14 +8,9 @@ public class NPC_ThrowController : MonoBehaviour
     [Header("GameObject References")]
     [SerializeField] private CharacterAnimation _characterAnimation;
     [SerializeField] private Transform _throwStartingPoint;
-    [SerializeField] private Transform _player;
-
     [Header("Throw Settings")]
     [SerializeField] private float _minHeight;
     [SerializeField] private float _maxHeight;
-
-
-    private StudentsManager _studentManager;
 
     //--Controlling the assisted throw--//
     private float height;
@@ -26,13 +21,15 @@ public class NPC_ThrowController : MonoBehaviour
     private float vx;
 
 
-    public Transform GetThrowStartingPoint()
+    public Transform GetThrowStartingPoint => _throwStartingPoint;
+
+
+    private Transform _player;
+
+
+    public void Initialize(Transform player)
     {
-        return _throwStartingPoint;
-    }
-    public Transform GetPlayer()
-    {
-        return _player;
+        _player = player;
     }
 
     private void Awake()
@@ -41,18 +38,6 @@ public class NPC_ThrowController : MonoBehaviour
             throw new ArgumentNullException("_characterAnimation");
         if (_throwStartingPoint == null)
             throw new ArgumentNullException("_throwStartingPoint");
-        if (_player == null)
-            throw new ArgumentNullException("_player");
-    }
-
-    public void Initialize(StudentsManager studentManager)
-    {
-        _studentManager = studentManager;
-    }
-
-    public void RemoveStudentFromThrowManager()
-    {
-        _studentManager.RemoveStudent(this);
     }
 
     public void ThrowBall(Rigidbody2D _npcBall)

@@ -5,9 +5,8 @@ using UnityEngine;
 
 public class NPCBallTrigger : MonoBehaviour
 {
-    [SerializeField] private NPCBallTransitionController _ballTransitionController;
     [SerializeField] private Student _student;
-
+    [SerializeField] private StudentGrade _studentGrade;
 
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -18,7 +17,7 @@ public class NPCBallTrigger : MonoBehaviour
 
             if (ballController.Student == _student && ballController.Answer != ExamElement.NONE)
             {
-                _ballTransitionController.CheckBallAnswers(collision.gameObject);
+                _studentGrade.CheckBallAnswers(ballController);
             }
         }
     }

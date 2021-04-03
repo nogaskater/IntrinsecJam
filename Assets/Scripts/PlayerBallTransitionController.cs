@@ -48,4 +48,14 @@ public class PlayerBallTransitionController : MonoBehaviour
     {
         return _throwController.GetActiveBall();
     }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Ball")
+        {
+            if (collision.gameObject.GetComponent<BallController>().Answer == ExamElement.NONE)
+            {
+                PutBallInBox(collision.gameObject);
+            }
+        }
+    }
 }
