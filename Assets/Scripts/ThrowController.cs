@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,6 +9,7 @@ public class ThrowController : MonoBehaviour
 
     [Header("GameObject References")]
     [SerializeField] private Transform _throwStartingPoint;
+    [SerializeField] private LineRenderer _tracerLine;
 
     [Header("UI References")]
     [SerializeField] private GameObject _arrow;
@@ -19,6 +21,8 @@ public class ThrowController : MonoBehaviour
 
     [Header("Throw Settings")]
     [SerializeField] private float forceMultiplier;
+    [SerializeField] private float _timeBetweenTraces;
+
 
 
     private Rigidbody2D _activeBall;
@@ -60,6 +64,9 @@ public class ThrowController : MonoBehaviour
             _activeBall.bodyType = RigidbodyType2D.Dynamic;
             _activeBall.AddForce(ballForce, ForceMode2D.Impulse);
 
+            //Debug.Log("Initial Force: " + ballForce);
+            //Debug.Log("Initial Velocity: " + CalculateIntialVelocity(ballForce, _activeBall.mass));
+
             _activeBall.gameObject.layer = LayerMask.NameToLayer("Ball");
 
             BallController ballController = _activeBall.GetComponent<BallController>();
@@ -97,6 +104,8 @@ public class ThrowController : MonoBehaviour
         float newScale = 0.0f;
         float colorValue = 0.0f;
 
+        float dragMag = 0.0f;
+
         if (_activeBall!=null)
         {
             _arrow.SetActive(true);
@@ -105,29 +114,79 @@ public class ThrowController : MonoBehaviour
 
             colorValue = ReMap(initialMagnitude, 0.0f, maxRadPossible, 0.0f, 1.0f);
 
+            dragMag = maxRadPossible;
+
             if (inMaxRadius)
             {
                 newScale = ReMap(initialMagnitude, 0.0f, maxRadPossible, _minXScaleArrow, _maxXScaleArrow);
                 _arrow.transform.localScale = new Vector3(newScale, _arrow.transform.localScale.y, _arrow.transform.localScale.z);
 
                 colorValue = ReMap(newScale, _minXScaleArrow, _maxXScaleArrow, 0.0f, 1.0f);
+
+                dragMag = initialMagnitude;
             }
 
+            DrawTrace(CalculateIntialVelocity(ComputeInitialForce(initialDirection * -1.0f, dragMag, 40.0f, 250.0f), _activeBall.mass));
+            //Debug.Log("Force computed: " + ComputeInitialForce(initialDirection * -1.0f, dragMag, 40.0f, 250.0f));
             ChangeArrowColorGradient(colorValue);
         }
     }
 
     private void ChangeArrowColorGradient(float value)
     {
-        //Debug.Log(value);
+        Color c;
 
-        Color c = new Color(value, 1.0f - value, 0.0f);
+        if(value <= 0.5f)
+        {
+            c = new Color(value * 2.0f, 1.0f, 0.0f);
+        }
+        else
+        {
+            c = new Color(1.0f , 1.0f - (value / 2.0f), 0.0f);
+        }
+
         _arrow.transform.GetChild(0).GetComponent<Image>().color = c;
+        _tracerLine.material.color = c;
     }
 
     public void DisableArrow()
     {
         _arrow.SetActive(false);
+        DisableTrace();
+    }
+
+    private void DrawTrace(Vector2 v0)
+    {
+        GetComponent<LineRenderer>().enabled = true;
+
+        for (int i = 0; i <_tracerLine.positionCount; i++)
+        {
+            _tracerLine.SetPosition(i, (Vector3) CalculatePosInTime(v0, i * _timeBetweenTraces));
+        }
+    }
+
+    private void DisableTrace()
+    {
+
+        GetComponent<LineRenderer>().enabled = false;
+
+    }
+
+    private Vector2 CalculateIntialVelocity(Vector2 force, float mass)
+    {
+        return (force / mass) * 1.0f/*Time.fixedDeltaTime*/;
+    }
+
+    private Vector3 CalculatePosInTime(Vector2 v0, float t)
+    {
+        Vector3 result = _throwStartingPoint.position;
+
+        result.x = result.x + v0.x * t;
+        result.y = (-0.5f * Mathf.Abs(Physics2D.gravity.y * _activeBall.gravityScale) * (t * t)) + (v0.y * t) + result.y;
+
+        //Debug.Log("Time: " + t + " /// Position: " + result);
+
+        return result;
     }
 
     private float ReMap(float s, float a1, float a2, float b1, float b2)
