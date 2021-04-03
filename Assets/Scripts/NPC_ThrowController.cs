@@ -5,15 +5,9 @@ using UnityEngine;
 
 public class NPC_ThrowController : MonoBehaviour
 {
-    [Header("Dependencies")]
-    [SerializeField] private GeneralBallManager _generalBallManager;
-    [SerializeField] private CharacterAnimation _characterAnimation;
-
     [Header("GameObject References")]
-    //[SerializeField] private Rigidbody2D _npcBall;
+    [SerializeField] private CharacterAnimation _characterAnimation;
     [SerializeField] private Transform _throwStartingPoint;
-    [SerializeField] private Transform _player;
-
     [Header("Throw Settings")]
     [SerializeField] private float _minHeight;
     [SerializeField] private float _maxHeight;
@@ -27,26 +21,23 @@ public class NPC_ThrowController : MonoBehaviour
     private float vx;
 
 
-    public Transform GetThrowStartingPoint()
+    public Transform GetThrowStartingPoint => _throwStartingPoint;
+
+
+    private Transform _player;
+
+
+    public void Initialize(Transform player)
     {
-        return _throwStartingPoint;
-    }
-    public Transform GetPlayer()
-    {
-        return _player;
+        _player = player;
     }
 
     private void Awake()
     {
-        if (_generalBallManager == null)
-            throw new ArgumentNullException("_generalBallManager");
         if (_characterAnimation == null)
             throw new ArgumentNullException("_characterAnimation");
-    }
-
-    public void RemoveStudentFromThrowManager()
-    {
-        _generalBallManager.RemoveStudent(this);
+        if (_throwStartingPoint == null)
+            throw new ArgumentNullException("_throwStartingPoint");
     }
 
     public void ThrowBall(Rigidbody2D _npcBall)

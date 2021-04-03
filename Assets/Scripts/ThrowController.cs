@@ -7,7 +7,6 @@ public class ThrowController : MonoBehaviour
     [SerializeField] private CharacterAnimation _characterAnimation;
 
     [Header("GameObject References")]
-    [SerializeField] private Rigidbody2D _activeBall;
     [SerializeField] private Transform _throwStartingPoint;
 
     [Header("UI References")]
@@ -20,6 +19,9 @@ public class ThrowController : MonoBehaviour
 
     [Header("Throw Settings")]
     [SerializeField] private float forceMultiplier;
+
+
+    private Rigidbody2D _activeBall;
 
     public Rigidbody2D GetActiveBall()
     {
@@ -60,8 +62,11 @@ public class ThrowController : MonoBehaviour
 
             _activeBall.gameObject.layer = LayerMask.NameToLayer("Ball");
 
-            _activeBall.GetComponent<BallController>().Student.HolderActive(false);
-            _activeBall.GetComponent<BallController>().ThrowByPlayer = true;
+            BallController ballController = _activeBall.GetComponent<BallController>();
+
+            ballController.Student.HolderActive(false);
+            ballController.ThrownByPlayer = true;
+            ballController.IsSafe = false;
 
             _activeBall = null;
 

@@ -29,7 +29,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 22389736097756637}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2041418376
 MonoBehaviour:
@@ -138,7 +138,7 @@ Transform:
   m_Children:
   - {fileID: 2939923517940506496}
   m_Father: {fileID: 22389736097756637}
-  m_RootOrder: 5
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &467996765591209950
 MonoBehaviour:
@@ -459,11 +459,11 @@ Transform:
   m_GameObject: {fileID: 467996766733496515}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.07, y: 2.73, z: 0}
-  m_LocalScale: {x: 0.49886867, y: 0.49886867, z: 0.49886867}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 5936709879102621194}
   m_Father: {fileID: 22389736097756637}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &467996766733496542
 MeshFilter:
@@ -503,7 +503,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 22389736097756637}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!70 &7039240581427843941
 CapsuleCollider2D:
@@ -533,8 +533,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1dbe22ae661479d4ebc396729eace1eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _ballTransitionController: {fileID: 4462628780300801964}
   _student: {fileID: 3836090337427862643}
+  _studentGrade: {fileID: 467996765311922585}
 --- !u!1 &915832919259166234
 GameObject:
   m_ObjectHideFlags: 0
@@ -856,58 +856,11 @@ Transform:
   m_GameObject: {fileID: 1160092903619271804}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.61515003, y: 0.1536268, z: 0}
-  m_LocalScale: {x: 0.64279, y: 0.64279, z: 0.64279}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 22389736097756637}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1165142438568549570
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1165142438568549571}
-  - component: {fileID: 1165142438568549572}
-  m_Layer: 0
-  m_Name: Call Teacher Detection
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1165142438568549571
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1165142438568549570}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.6439354, y: 1.6439354, z: 1.6439354}
-  m_Children: []
-  m_Father: {fileID: 22389736097756637}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!70 &1165142438568549572
-CapsuleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1165142438568549570}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.43812948}
-  m_Size: {x: 0.5, y: 1.21179}
-  m_Direction: 0
 --- !u!1 &1791159475656622869
 GameObject:
   m_ObjectHideFlags: 0
@@ -1338,9 +1291,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4045526239275387507}
-  m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
+  m_LocalRotation: {x: -0, y: -0, z: -0.7071068, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.3088795, y: 0.26247066, z: 0.26247066}
+  m_LocalScale: {x: 0.1540903, y: 0.1309384, z: 0.1309384}
   m_Children: []
   m_Father: {fileID: 467996766733496512}
   m_RootOrder: 0
@@ -1440,7 +1393,7 @@ GameObject:
   - component: {fileID: 4792458448626022487}
   - component: {fileID: 4792458448626022486}
   m_Layer: 0
-  m_Name: Capsule
+  m_Name: Call Teacher Detection
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1458,7 +1411,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 22389736097756637}
-  m_RootOrder: 6
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &4792458448626022485
 MeshFilter:
@@ -1533,8 +1486,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 543b5852bbc2f734189bc52d79dc53b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _studentCallLogic: {fileID: 0}
-  _characterAnimation: {fileID: 467996765591209950}
+  _student: {fileID: 3836090337427862643}
 --- !u!1 &5179096907060015610
 GameObject:
   m_ObjectHideFlags: 0
@@ -2388,10 +2340,9 @@ GameObject:
   m_Component:
   - component: {fileID: 22389736097756637}
   - component: {fileID: 6005989093487472401}
-  - component: {fileID: 6241569097724754994}
   - component: {fileID: 3836090337427862643}
-  - component: {fileID: 4462628780300801964}
   - component: {fileID: 467996765311922585}
+  - component: {fileID: 6241569097724754994}
   - component: {fileID: 467996766332203789}
   m_Layer: 11
   m_Name: NPC
@@ -2411,13 +2362,12 @@ Transform:
   m_LocalPosition: {x: -6.702, y: 1.26, z: -2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1165142438568549571}
   - {fileID: 8808634384924585754}
+  - {fileID: 4792458448626022473}
   - {fileID: 467996766220575924}
+  - {fileID: 467996765591209945}
   - {fileID: 8273400322517205466}
   - {fileID: 467996766733496512}
-  - {fileID: 467996765591209945}
-  - {fileID: 4792458448626022473}
   - {fileID: 2041418375}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -2438,24 +2388,6 @@ CapsuleCollider2D:
   m_Offset: {x: -0.013595343, y: 0.6647899}
   m_Size: {x: 0.73465586, y: 1.9878821}
   m_Direction: 0
---- !u!114 &6241569097724754994
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7245248948133330414}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ebe244d2bc15df04fb836ccd47272abe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _generalBallManager: {fileID: 0}
-  _characterAnimation: {fileID: 467996765591209950}
-  _throwStartingPoint: {fileID: 8273400322517205466}
-  _player: {fileID: 0}
-  _minHeight: 3.5
-  _maxHeight: 4
 --- !u!114 &3836090337427862643
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2468,22 +2400,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e75b8d0fa0b9a7947b87338b4f443869, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _targetHolder: {fileID: 467996766733496515}
---- !u!114 &4462628780300801964
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7245248948133330414}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7dc0b21edd3b2424585be4d9b53987ca, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _gBallManager: {fileID: 0}
-  _studentScore: {fileID: 467996765311922585}
   _characterAnimation: {fileID: 467996765591209950}
+  _targetHolder: {fileID: 467996766733496515}
+  _ballPrefab: {fileID: 5228412848913007655, guid: f4caf48df0e75c64980d657a1458d3ed,
+    type: 3}
+  _npcThrowController: {fileID: 6241569097724754994}
+  _callTeacherDetection: {fileID: 4792458448626022486}
+  _studentAI: {fileID: 467996766332203789}
 --- !u!114 &467996765311922585
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2493,16 +2416,30 @@ MonoBehaviour:
   m_GameObject: {fileID: 7245248948133330414}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5a53642febab7c4fa1340ebd0a8ae38, type: 3}
+  m_Script: {fileID: 11500000, guid: 360bc1e31496c1f45ab9c95847c3405d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _scoreManager: {fileID: 0}
-  _nPCBallTransitionController: {fileID: 4462628780300801964}
-  _npc_ThrowController: {fileID: 6241569097724754994}
+  _student: {fileID: 3836090337427862643}
   _studentScoreFeedback: {fileID: 2041418376}
-  _minStartScore: 9
-  _maxStartScore: 10
+  _minStartGrade: 2
+  _maxStateGrade: 7
   _pointsMultiplier: 1
+--- !u!114 &6241569097724754994
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7245248948133330414}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebe244d2bc15df04fb836ccd47272abe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _characterAnimation: {fileID: 467996765591209950}
+  _throwStartingPoint: {fileID: 8273400322517205466}
+  _minHeight: 3.5
+  _maxHeight: 4
 --- !u!114 &467996766332203789
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2516,10 +2453,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _studentScore: {fileID: 467996765311922585}
-  _exitRoomTarget: {fileID: 0}
   _movementSpeed: 1.2
   _characterAnimation: {fileID: 467996765591209950}
   _scoreUITransform: {fileID: 467996766220575924}
+  _sprites:
+  - {fileID: 7199091355581493289}
+  - {fileID: 3892176596447443004}
+  - {fileID: 4947647897441054421}
+  - {fileID: 3985420533106390293}
+  - {fileID: 3714584927663203940}
+  - {fileID: 1038534616333010168}
+  - {fileID: 2162573855954938125}
+  - {fileID: 2419431264065563672}
+  - {fileID: 628502479475655181}
+  - {fileID: 9117024424579933297}
   _startMovingTime: 1.2
 --- !u!1 &7278316829868727378
 GameObject:
@@ -2924,7 +2871,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 9
+  m_SortingOrder: 11
   m_Sprite: {fileID: -4958865809216138019, guid: 932374f1952a24045b834e939a18e578,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

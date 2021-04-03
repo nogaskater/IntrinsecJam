@@ -7,8 +7,8 @@ public class PlayerBallTransitionController : MonoBehaviour
 {
     [Header("GameObject Referemces")]
     [SerializeField] private ThrowController _throwController;
-    [SerializeField] private TableBehaviour _table;
     [SerializeField] private CharacterAnimation _characterAnimation;
+    [SerializeField] private TableBehaviour _table;
 
     private void Awake()
     {
@@ -31,7 +31,7 @@ public class PlayerBallTransitionController : MonoBehaviour
 
         ball.SetActive(false);
 
-        _table.AddNewPaper(ball.GetComponent<BallController>().BallPaper);
+        _table.AddNewPaper(ball.GetComponent<BallController>());
     }
 
     public void PutBallInHand(GameObject ball)
@@ -47,5 +47,15 @@ public class PlayerBallTransitionController : MonoBehaviour
     public Rigidbody2D GetCurrentBall()
     {
         return _throwController.GetActiveBall();
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Ball")
+        {
+            if (collision.gameObject.GetComponent<BallController>().Answer == ExamElement.NONE)
+            {
+                PutBallInBox(collision.gameObject);
+            }
+        }
     }
 }

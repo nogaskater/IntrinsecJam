@@ -1,9 +1,10 @@
 ﻿using System;
 using UnityEngine;
 
+
 public class StudentCallLogic : MonoBehaviour
 {
-    [Header("Dependencies")]
+    [Header("References")]
     [SerializeField] private CheckStudent _checkStudentState;
     [SerializeField] private TableBehaviour _tableBehaviour;
 

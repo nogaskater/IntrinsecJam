@@ -4,19 +4,25 @@ using UnityEngine;
 
 public class Patrol : State
 {
-    [SerializeField] private Transform _parentTargets;
+    [SerializeField] private Transform _waypointParent;
     private List<Transform> _targets = new List<Transform>();
 
     protected override void Awake()
     {
         base.Awake();
 
-        if (_parentTargets == null)
+        if (_waypointParent == null)
             throw new ArgumentNullException("_parentTargets");
 
-        for (int i = 0; i < _parentTargets.childCount; i++)
+        if (_waypointParent.childCount == 0)
+            throw new InvalidOperationException("There are no waypoints set as child of the waypoint parent.");
+
+        for (int i = 0; i < _waypointParent.childCount; i++)
         {
-            _targets.Add(_parentTargets.GetChild(i));
+            Transform waypoint = _waypointParent.GetChild(i);
+
+            if(waypoint.gameObject.activeSelf)
+                _targets.Add(waypoint);
         }
     }
 
@@ -25,11 +31,19 @@ public class Patrol : State
         base.EnterState();
 
         List<Transform> targets = new List<Transform>(_targets);
-        targets.Remove(_target);
 
-        int random = UnityEngine.Random.Range(0, targets.Count);
+        if(targets.Count == 1)
+        {
+            _target = targets[0];
+        }
+        else
+        {
+            targets.Remove(_target);
 
-        _target = targets[random];
+            int random = UnityEngine.Random.Range(0, targets.Count);
+
+            _target = targets[random];
+        }
 
         if (_target.position.x < transform.position.x)
         {

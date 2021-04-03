@@ -8,19 +8,15 @@ public class State : MonoBehaviour
     [Header("Settings")]
     [SerializeField] private float _movementSpeed = 2;
     [SerializeField] private float _stopDistance = 0.1f;
-    [SerializeField] private float _actionTime = 3.0f;
+    [SerializeField] protected float _actionTime = 3.0f;
 
     [Header("Go To State")]
     [SerializeField] protected State _goToState;
 
     protected Transform _target;
-    public Transform Target => _target;
-    public void RemoveTarget() => _target = null;
 
     protected bool _isNearTarget = false;
     protected float _actionCounter = 0;
-
-    private bool _walkActionDone = false;
 
     protected virtual void Awake()
     {
@@ -34,15 +30,9 @@ public class State : MonoBehaviour
     {
         _isNearTarget = false;
         _actionCounter = 0;
-        _walkActionDone = false;
 
         _teacherAI.RightTriggerActive(false);
         _teacherAI.LeftTriggerActive(false);
-    }
-
-    public virtual void ExitState()
-    {
-
     }
     public virtual void UpdateState()
     {
@@ -53,12 +43,6 @@ public class State : MonoBehaviour
 
         if (!_isNearTarget)
         {
-            if(!_walkActionDone)
-            {
-                WalkAction();
-                _walkActionDone = true;
-            }
-
             transform.Translate(direction.normalized * _movementSpeed * Time.deltaTime);
 
             if (direction.magnitude < _stopDistance)
@@ -78,12 +62,7 @@ public class State : MonoBehaviour
             }
         }
     }
-
-    public virtual void FinishAction()
-    {
-        _teacherAI.ChangeState(_goToState);
-    }
-    public virtual void WalkAction()
+    public virtual void ExitState()
     {
 
     }
@@ -92,5 +71,8 @@ public class State : MonoBehaviour
     {
 
     }
-
+    public virtual void FinishAction()
+    {
+        _teacherAI.ChangeState(_goToState);
+    }
 }

@@ -9,60 +9,33 @@ public class PauseMenu : MonoBehaviour
     // Start is called before the first frame update
 
     //VARIABLEs
-    public static bool GameIsPaused = false;
     public GameObject pauseMenuUI;
     public List<TMP_Text> backText;
 
     public string MainMenu = "MainMenu";
 
-    void Start()
-    {
-        
-    }
+    private bool _paused;
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            if (GameIsPaused)
-            {
-                Resume();
-            }
-            else
-            {
-                Pause();
-            }
-        }
-    }
 
-    public void Resume()
-    {
-        pauseMenuUI.SetActive(false);
-        Time.timeScale = 1f;
-        GameIsPaused = false;
-        //AudioListener.volume = 1.0f;
-    }
 
     public void Pause()
     {
-        pauseMenuUI.SetActive(true);
-        Time.timeScale = 0f;
-        GameIsPaused = true;
-        //AudioListener.volume = 0.2f;
+        _paused = !_paused;
+
+        pauseMenuUI.SetActive(_paused);
+
+        Time.timeScale = _paused ? 0 : 1;
     }
 
     public void LoadMenu()
     {
         Time.timeScale = 1f;
-        //Debug.Log("Loading Menu...");
+
         SceneManager.LoadScene(MainMenu);
-        //AudioListener.volume = 1.0f;
     }
 
     public void QuitGame()
     {
-        //Debug.Log("QUIT GAME PAUSE MENU");
         Application.Quit();
     }
 

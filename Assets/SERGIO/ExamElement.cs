@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-
-public enum ExamElement
+﻿public enum ExamElement
 {
     NONE = 0,
     EXAM_ELEMENT_1 = 1,
@@ -14,9 +12,3 @@ public enum ExamElement
     EXAM_ELEMENT_9 = 9,
     EXAM_ELEMENT_10 = 10
 };
-
-public class Paper : MonoBehaviour
-{
-    public ExamElement question;
-    public ExamElement answer;
-}
