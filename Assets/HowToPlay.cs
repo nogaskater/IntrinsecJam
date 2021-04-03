@@ -13,12 +13,23 @@ public class HowToPlay : MonoBehaviour
 
     int currentTutorial = 0;
 
+    [Header("Arrows")]
+    [SerializeField] private GameObject _leftArrow;
+    [SerializeField] private GameObject _rightArrow;
 
+    private void Start()
+    {
+        CloseHowToPlay();
+    }
 
     public void OpenHowToPlay()
     {
         howToPlay.SetActive(true);
         mainMenu.SetActive(false);
+
+        currentTutorial = 0;
+
+        ShowTutorial(currentTutorial);
     }
 
     public void CloseHowToPlay()
@@ -29,37 +40,32 @@ public class HowToPlay : MonoBehaviour
 
     public void MoveTutorialRight()
     {
-
         currentTutorial++;
-        if (currentTutorial >= 4)
-        {
-            currentTutorial = 0;
-        }
-
-        for (int i = 0; i < 4; i++)
-        {
-            if (i == currentTutorial)
-            {
-                Tutorials[i].SetActive(true);
-            }
-            else
-            {
-                Tutorials[i].SetActive(false);
-            }
-        }
+        ShowTutorial(currentTutorial);
     }
-
     public void MoveTutorialLeft()
     {
         currentTutorial--;
-        if (currentTutorial < 0 )
+        ShowTutorial(currentTutorial);
+    }
+
+    private void ShowTutorial(int id)
+    {
+        _leftArrow.SetActive(true);
+        _rightArrow.SetActive(true);
+
+        if (currentTutorial == 0)
         {
-            currentTutorial = 3;
+            _leftArrow.SetActive(false);
+        }
+        else if (currentTutorial == Tutorials.Length - 1)
+        {
+            _rightArrow.SetActive(false);
         }
 
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < Tutorials.Length; i++)
         {
-            if (i == currentTutorial)
+            if (i == id)
             {
                 Tutorials[i].SetActive(true);
             }
