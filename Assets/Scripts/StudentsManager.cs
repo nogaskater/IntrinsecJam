@@ -18,8 +18,6 @@ public class StudentsManager : MonoBehaviour
     [SerializeField] private float _minFirstSpawnInterval = 2.0f;
     [SerializeField] private float _maxFirstSpawnInterval = 4.0f;
 
-    [SerializeField] private int numQuestions = 6;
-
     private List<Student> _students = new List<Student>();
 
 
@@ -77,7 +75,7 @@ public class StudentsManager : MonoBehaviour
     {
         int randomNPC = UnityEngine.Random.Range(0, _students.Count);
 
-        _students[randomNPC].GenerateBall(numQuestions);
+        _students[randomNPC].GenerateBall();
 
         _lastSpawnTime = Time.time;
     }

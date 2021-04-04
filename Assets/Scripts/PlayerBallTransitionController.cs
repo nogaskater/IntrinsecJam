@@ -10,6 +10,11 @@ public class PlayerBallTransitionController : MonoBehaviour
     [SerializeField] private CharacterAnimation _characterAnimation;
     [SerializeField] private TableBehaviour _table;
 
+    [SerializeField] private GameObject _throwAvailableFeedback;
+    private void HideFeeback()
+    {
+        _throwAvailableFeedback.SetActive(false);
+    }
     private void Awake()
     {
         if (_throwController == null)
@@ -18,12 +23,22 @@ public class PlayerBallTransitionController : MonoBehaviour
             throw new ArgumentNullException("_characterAnimation");
         if (_table == null)
             throw new ArgumentNullException("_table");
+
+        if (_throwAvailableFeedback == null)
+            throw new ArgumentNullException("_throwAvailableFeedback");
+        _throwAvailableFeedback.SetActive(false);
+    }
+    private void OnEnable()
+    {
+        _throwController.OnBallThrow += HideFeeback;
+    }
+    private void OnDisable()
+    {
+        _throwController.OnBallThrow -= HideFeeback;
     }
 
     public void PutBallInBox(GameObject ball)
     {
-        if (_table.ToAnserQueueCount >= _table.MaxListSize)
-            return;
 
         _characterAnimation.Animator.SetTrigger("Catch");
 
@@ -31,18 +46,27 @@ public class PlayerBallTransitionController : MonoBehaviour
 
         ball.SetActive(false);
 
-        _table.AddNewPaper(ball.GetComponent<BallController>());
+        _table.AddUnansweredPaper(ball.GetComponent<BallController>());
     }
 
-    public void PutBallInHand(GameObject ball)
+    public void PutBallInHand(BallController ball)
     {
-        ball.SetActive(true);
+        ball.gameObject.SetActive(true);
         _throwController.SetActiveBall(ball.GetComponent<Rigidbody2D>()); 
         _throwController.ResetBall();
 
-        ball.GetComponent<BallController>().Student.HolderActive(true);
+        ball.Student.HolderActive(true);
+
+        _throwAvailableFeedback.SetActive(true);
 
     }
+    public void RemoveBallFromHand(BallController ball)
+    {
+        _throwController.RemoveActiveBall();
+        ball.gameObject.SetActive(false);
+        ball.Student.HolderActive(false);
+    }
+
 
     public Rigidbody2D GetCurrentBall()
     {
@@ -50,6 +74,9 @@ public class PlayerBallTransitionController : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (!_table.IsThereRoomForMoreNewPapers())
+            return;
+
         if (collision.gameObject.tag == "Ball")
         {
             if (collision.gameObject.GetComponent<BallController>().Answer == ExamElement.NONE)
