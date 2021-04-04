@@ -10,6 +10,11 @@ public class PlayerBallTransitionController : MonoBehaviour
     [SerializeField] private CharacterAnimation _characterAnimation;
     [SerializeField] private TableBehaviour _table;
 
+    [SerializeField] private GameObject _throwAvailableFeedback;
+    private void HideFeeback()
+    {
+        _throwAvailableFeedback.SetActive(false);
+    }
     private void Awake()
     {
         if (_throwController == null)
@@ -18,6 +23,18 @@ public class PlayerBallTransitionController : MonoBehaviour
             throw new ArgumentNullException("_characterAnimation");
         if (_table == null)
             throw new ArgumentNullException("_table");
+
+        if (_throwAvailableFeedback == null)
+            throw new ArgumentNullException("_throwAvailableFeedback");
+        _throwAvailableFeedback.SetActive(false);
+    }
+    private void OnEnable()
+    {
+        _throwController.OnBallThrow += HideFeeback;
+    }
+    private void OnDisable()
+    {
+        _throwController.OnBallThrow -= HideFeeback;
     }
 
     public void PutBallInBox(GameObject ball)
@@ -40,12 +57,16 @@ public class PlayerBallTransitionController : MonoBehaviour
 
         ball.Student.HolderActive(true);
 
+        _throwAvailableFeedback.SetActive(true);
+
     }
     public void RemoveBallFromHand(BallController ball)
     {
+        _throwController.RemoveActiveBall();
         ball.gameObject.SetActive(false);
         ball.Student.HolderActive(false);
     }
+
 
     public Rigidbody2D GetCurrentBall()
     {

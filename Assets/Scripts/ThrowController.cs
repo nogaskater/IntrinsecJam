@@ -26,9 +26,14 @@ public class ThrowController : MonoBehaviour
 
     public Action OnBallThrow;
 
+
     public Rigidbody2D GetActiveBall()
     {
         return _activeBall;
+    }
+    public void RemoveActiveBall()
+    {
+        _activeBall = null;
     }
     public void SetActiveBall(Rigidbody2D rb)
     {
