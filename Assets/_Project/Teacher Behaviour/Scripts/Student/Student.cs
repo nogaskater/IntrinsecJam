@@ -53,10 +53,10 @@ public class Student : MonoBehaviour
         _targetHolder.SetActive(false);
     }
 
-    public void GenerateBall(int numQuestions)
+    public void GenerateBall()
     {
         BallController instance = Instantiate(_ballPrefab, NPC_ThrowController.GetThrowStartingPoint.position, Quaternion.identity).GetComponent<BallController>();
-        instance.Initialize(this, (ExamElement)UnityEngine.Random.Range(1, numQuestions));
+        instance.Initialize(this, (ExamElement)UnityEngine.Random.Range(1, 5));
 
         NPC_ThrowController.ThrowBall(instance.GetComponent<Rigidbody2D>());
     }

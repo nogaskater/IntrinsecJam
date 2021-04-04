@@ -22,8 +22,6 @@ public class PlayerBallTransitionController : MonoBehaviour
 
     public void PutBallInBox(GameObject ball)
     {
-        if (_table.ToAnserQueueCount + (_table.CurrentPaper == null? 0 : 1) >= _table.MaxListSize)
-            return;
 
         _characterAnimation.Animator.SetTrigger("Catch");
 
@@ -31,17 +29,22 @@ public class PlayerBallTransitionController : MonoBehaviour
 
         ball.SetActive(false);
 
-        _table.AddNewPaper(ball.GetComponent<BallController>());
+        _table.AddUnansweredPaper(ball.GetComponent<BallController>());
     }
 
-    public void PutBallInHand(GameObject ball)
+    public void PutBallInHand(BallController ball)
     {
-        ball.SetActive(true);
+        ball.gameObject.SetActive(true);
         _throwController.SetActiveBall(ball.GetComponent<Rigidbody2D>()); 
         _throwController.ResetBall();
 
-        ball.GetComponent<BallController>().Student.HolderActive(true);
+        ball.Student.HolderActive(true);
 
+    }
+    public void RemoveBallFromHand(BallController ball)
+    {
+        ball.gameObject.SetActive(false);
+        ball.Student.HolderActive(false);
     }
 
     public Rigidbody2D GetCurrentBall()
@@ -50,6 +53,9 @@ public class PlayerBallTransitionController : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (!_table.IsThereRoomForMoreNewPapers())
+            return;
+
         if (collision.gameObject.tag == "Ball")
         {
             if (collision.gameObject.GetComponent<BallController>().Answer == ExamElement.NONE)

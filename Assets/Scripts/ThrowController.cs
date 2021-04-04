@@ -23,6 +23,9 @@ public class ThrowController : MonoBehaviour
 
     private Rigidbody2D _activeBall;
 
+
+    public Action OnBallThrow;
+
     public Rigidbody2D GetActiveBall()
     {
         return _activeBall;
@@ -74,8 +77,8 @@ public class ThrowController : MonoBehaviour
 
             AudioManager.Instance.PlayRandomThrow();
 
+            OnBallThrow?.Invoke();
         }
-
     }
 
     private Vector2 ComputeInitialForce(Vector2 initialDirection, float initialMagnitude, float minRadPossible, float maxRadPossible)

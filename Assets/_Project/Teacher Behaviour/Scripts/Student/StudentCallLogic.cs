@@ -20,7 +20,7 @@ public class StudentCallLogic : MonoBehaviour
 
     public float TeacherCallCounter => _teacherCallCounter;
 
-    public BallController CurrentPaper => _tableBehaviour.CurrentPaper;
+    public PaperUI CurrentPaper => _tableBehaviour.CurrentPaperUIAtTable;
     private void Awake()
     {
         if (_checkStudentState == null)

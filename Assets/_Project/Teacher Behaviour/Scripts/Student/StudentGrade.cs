@@ -34,7 +34,7 @@ public class StudentGrade : MonoBehaviour
         if (Grade <= 0 || Grade >= 10)
             return;
 
-        if (ballController.Answer == ballController.Answer)
+        if (ballController.Question == ballController.Answer)
             ModifyScore(2, true);
         else
             ModifyScore(-2, true);

@@ -69,7 +69,7 @@ MonoBehaviour:
     SpatialBlend: 0
     Loop: 1
   - Name: OpenPaper
-    Clip: {fileID: 8300000, guid: f191204c08c853c4ea67977d885eaa7b, type: 3}
+    Clip: {fileID: 8300000, guid: 8d7e252091804d342bee4f80c207dbaf, type: 3}
     Volume: 0.25
     Pitch: 1
     SpatialBlend: 0
@@ -82,19 +82,19 @@ MonoBehaviour:
     Loop: 0
   - Name: Throw1
     Clip: {fileID: 8300000, guid: 3673ccc5271f43b4799441f6be06a7e8, type: 3}
-    Volume: 0.01
+    Volume: 0.05
     Pitch: 1
     SpatialBlend: 0
     Loop: 0
   - Name: Throw2
     Clip: {fileID: 8300000, guid: 19995025df7816a4291c6b60ce87b285, type: 3}
-    Volume: 0.01
+    Volume: 0.05
     Pitch: 1
     SpatialBlend: 0
     Loop: 0
   - Name: Throw3
     Clip: {fileID: 8300000, guid: c3b9df8462e121b4a871eb9565c8f7fa, type: 3}
-    Volume: 0.01
+    Volume: 0.05
     Pitch: 1
     SpatialBlend: 0
     Loop: 0

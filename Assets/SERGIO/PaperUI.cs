@@ -5,6 +5,8 @@ public class PaperUI : MonoBehaviour
 {
     [SerializeField] private GameObject _selector;
 
+    public BallController StoredPaper { get; set; }
+
     private void Awake()
     {
         if (_selector == null)

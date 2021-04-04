@@ -1,261 +1,333 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using DG.Tweening;
 using TMPro;
+using System.Collections;
 
 public class TableBehaviour : MonoBehaviour
 {
     private const int numQuestions = 4;
 
-
     [SerializeField] private PlayerBallTransitionController _playerBallTransitionController;
+    [SerializeField] private ThrowController _throwController;
 
-    #region VARIABLES
     [Header("UI ELEMENTS")]
     public RectTransform mask;
 
     [Header("ANIMATION")]
-    [SerializeField] float movementY;
     [SerializeField] float animationSpeed;
     [SerializeField] RectTransform openTransform;
     [SerializeField] RectTransform closeTransform;
 
-    public int MaxListSize = 4;
+    public int MaxListSize = 5;
 
-    [Header("TO ANSWER")]
-    [SerializeField] List<BallController> toAnswerQueue;
-    [SerializeField] List<GameObject> papersToAnswer;
-    public int ToAnserQueueCount => toAnswerQueue.Count;
+    [SerializeField] private List<Question> _questionsAndAnswers;
+    private Dictionary<ExamElement, Question> _finalQuestions = new Dictionary<ExamElement, Question>();
 
-    [Header("ANSWERED")]
-    [SerializeField] List<BallController> answeredQueue;
-    [SerializeField] List<GameObject> papersDone;
-    public int AnsweredQueueCount => answeredQueue.Count;
+    [SerializeField] private List<PaperUI> _preAnswerListUI;
+    public PaperUI CurrentPaperUIAtTable { get; set; }
+
+
+    [SerializeField] private List<PaperUI> _postAnswerListUI;
+    public PaperUI CurrentPaperUIInHand { get; set; }
+
 
     [Header("PAPER ELEMENTS")]
-    [SerializeField] GameObject currentPaperToAnswer;
     public TextMeshProUGUI paperQuestion;
     public TextMeshProUGUI paperAnswer;
-    [SerializeField] Image questionImage;
-    public BallController CurrentPaper { get; set; }
 
     [Header("QUESTIONS")]
     public TextMeshProUGUI[] questionTextExam;
     public TextMeshProUGUI[] answerTextExam;
 
-    public String[] questions;
+    private bool _isWritingAnswer = false;
 
-    private List<string> finalQuestions = new List<string>();
-
-    private bool _writingAnswer = false;
-
-    ExamElement[] examQuestions = new ExamElement[10];
-    ExamElement[] examAnswers = new ExamElement[10];
-
-    #endregion
 
     private void Awake()
     {
         if (_playerBallTransitionController == null)
             throw new ArgumentNullException("_playerBallTransitionController");
+        if (_throwController == null)
+            throw new ArgumentNullException("_throwController");
+    }
+    private void OnEnable()
+    {
+        _throwController.OnBallThrow += RemovePaperInHand;
+    }
+    private void OnDisable()
+    {
+        _throwController.OnBallThrow -= RemovePaperInHand;        
     }
 
     void Start()
     {
-
-        //Inicializamos las listas
-        toAnswerQueue = new List<BallController>();
-        answeredQueue = new List<BallController>();
-
-        //Updateamos la UI
-        UpdatePaperUI();
-
-        //PROVISIONAL
-        examAnswers[0] = ExamElement.EXAM_ELEMENT_1;
-        examAnswers[1] = ExamElement.EXAM_ELEMENT_2;
-        examAnswers[2] = ExamElement.EXAM_ELEMENT_3;
-        examAnswers[3] = ExamElement.EXAM_ELEMENT_4;
-        examAnswers[4] = ExamElement.EXAM_ELEMENT_5;
-        examAnswers[5] = ExamElement.EXAM_ELEMENT_6;
-        examAnswers[6] = ExamElement.EXAM_ELEMENT_7;
-        examAnswers[7] = ExamElement.EXAM_ELEMENT_8;
-        examAnswers[8] = ExamElement.EXAM_ELEMENT_9;
-        examAnswers[9] = ExamElement.EXAM_ELEMENT_10;
-
-
-        //CREAMOS EL EXAMEN
         CreateExam();
+
+        InitializePaperUI();
 
         mask.sizeDelta = new Vector2(mask.sizeDelta.x, closeTransform.anchoredPosition.y);
     }
 
-
-    void CreateExam()
+    private void InitializePaperUI()
     {
-        List<string> copiedQuestions = new List<string>(questions);
+        foreach (var paperUI in _preAnswerListUI)
+        {
+            paperUI.gameObject.SetActive(false);
+        }
+
+        foreach (var paperUI in _postAnswerListUI)
+        {
+            paperUI.gameObject.SetActive(false);
+        }
+    }
+
+    private void CreateExam()
+    {
+        List<Question> copiedQuestions = new List<Question>(_questionsAndAnswers);
 
         for (int i = 0; i < numQuestions; i++)
         {
             int randomID = UnityEngine.Random.Range(0, copiedQuestions.Count);
 
-            finalQuestions.Add(copiedQuestions[randomID]);
+            _finalQuestions.Add((ExamElement)(i+1), copiedQuestions[randomID]);
 
             copiedQuestions.RemoveAt(randomID);
-
         }
 
-        for (int i = 0; i < finalQuestions.Count; i++)
+        int counter = 0;
+        foreach (var question in _finalQuestions)
         {
-            string[] splitArray = finalQuestions[i].Split('?');
+            questionTextExam[counter].text = question.Value.GetQuestion;
+            answerTextExam[counter].text = question.Value.GetAnswer;
 
-            questionTextExam[i].text = splitArray[0] + "?";
-            answerTextExam[i].text = splitArray[1] + ".";
+            counter++;
         }
     }
-    public void AddNewPaper(BallController _newPaper)
-    {
-        toAnswerQueue.Add(_newPaper);
 
-        UpdatePaperUI();
+    private PaperUI AddPaper(BallController _ballcontroller, List<PaperUI> paperUIList)
+    {
+        foreach (var paperUI in paperUIList)
+        {
+            if (paperUI.StoredPaper == null)
+            {
+                paperUI.StoredPaper = _ballcontroller;
+
+                paperUI.gameObject.SetActive(true);
+
+                return paperUI;
+            }
+        }
+
+        return null;
+    }
+    private void RemovePaper(PaperUI paperUI)
+    {
+        paperUI.StoredPaper = null;
+
+        paperUI.SelectorActive(false);
+
+        paperUI.gameObject.SetActive(false);
+    }
+
+    public void AddUnansweredPaper(BallController _newPaper)
+    {
+        AddPaper(_newPaper, _preAnswerListUI);
 
         _newPaper.IsSafe = true;
     }
-    public void SelectPaper(int index)
+    private PaperUI AddAnsweredPaper(BallController _answeredPaper)
     {
-        if (CurrentPaper == null)
-        {
-            mask.DOSizeDelta(new Vector2(mask.sizeDelta.x, openTransform.anchoredPosition.y), animationSpeed);
-
-            CurrentPaper = toAnswerQueue[index];
-
-            paperQuestion.text = questionTextExam[index].text;
-
-            currentPaperToAnswer.SetActive(true);
-
-            UpdatePaperUI();
-
-            AudioManager.Instance.PlaySound("OpenPaper");
-        }
+        return AddPaper(_answeredPaper, _postAnswerListUI);
     }
-    public void SelectAnswer(int index)
+
+    private void RemovePaperAtTable()
     {
-        CurrentPaper.Answer = examAnswers[index];
+        RemovePaper(CurrentPaperUIAtTable);
 
-        //PINTAMOS LA RESPUESTA
-        string[] splitArray = finalQuestions[index].Split('?');
+        CurrentPaperUIAtTable = null;
+    }
+    private void RemovePaperInHand()
+    {
+        RemovePaper(CurrentPaperUIInHand);
 
-        paperAnswer.text = splitArray[1];
+        CurrentPaperUIInHand = null;
+    }
 
-        Invoke("ConfirmAnswer", 1f);
-        _writingAnswer = true;
+    private void SelectPaper(PaperUI paperUI)
+    {
+        if (!IsThereRoomToAnswerMorePapers() || _isWritingAnswer)
+            return;
+
+        AudioManager.Instance.PlaySound("OpenPaper");
+
+        if (CurrentPaperUIAtTable == null)
+        {
+            CurrentPaperUIAtTable = paperUI;
+
+            //print(CurrentPaper.Question);
+
+            paperUI.SelectorActive(true);
+
+            SetOpenedPaper(CurrentPaperUIAtTable.StoredPaper);
+
+            OpenTable();
+
+            return;
+        }
+
+        if(CurrentPaperUIAtTable == paperUI)
+        {
+            CurrentPaperUIAtTable = null;
+
+            paperUI.SelectorActive(false);
+
+            CloseTable();
+
+            return;
+        }
+
+        CurrentPaperUIAtTable.SelectorActive(false);
+
+        CurrentPaperUIAtTable = paperUI;
+
+        CurrentPaperUIAtTable.SelectorActive(true);
+
+        SetOpenedPaper(CurrentPaperUIAtTable.StoredPaper);
+    }
+
+    private void SelectAnswer(int examElement)
+    {
+        if (_isWritingAnswer)
+            return;
+
+        CurrentPaperUIAtTable.StoredPaper.Answer = (ExamElement)examElement;
+
+        paperAnswer.text = _finalQuestions[CurrentPaperUIAtTable.StoredPaper.Answer].GetAnswer;
+
+        _isWritingAnswer = true;
+
+        StartCoroutine(ConfirmAnswer(1));
+
 
         AudioManager.Instance.PlaySound("WritePaper");
     }
-    public void ConfirmAnswer()
+    private IEnumerator ConfirmAnswer(float time)
     {
-        answeredQueue.Add(CurrentPaper);
-        toAnswerQueue.Remove(CurrentPaper);
+        yield return new WaitForSeconds(time);
 
-        currentPaperToAnswer.SetActive(false);
+        PaperUI answeredPaper = AddAnsweredPaper(CurrentPaperUIAtTable.StoredPaper);
 
-        CurrentPaper = null;
+        RemovePaperAtTable();
+
+        AutoLaunchPaper(answeredPaper);
 
         CloseTable();
 
-        _writingAnswer = false;
+        AudioManager.Instance.PlaySound("Button Press");
+
+        _isWritingAnswer = false;
     }
-    public void LaunchPaper(int index)
+    public void AutoLaunchPaper(PaperUI paperUI)
     {
-        if (_writingAnswer)
+        if (CurrentPaperUIInHand == null)
+        {
+            CurrentPaperUIInHand = paperUI;
+
+            _playerBallTransitionController.PutBallInHand(paperUI.StoredPaper);
+
+            paperUI.SelectorActive(true);
+
+            return;
+        }
+
+        if (CurrentPaperUIInHand != paperUI)
+        {
+            CurrentPaperUIInHand.SelectorActive(false);
+            _playerBallTransitionController.RemoveBallFromHand(CurrentPaperUIInHand.StoredPaper);
+
+            CurrentPaperUIInHand = paperUI;
+            CurrentPaperUIInHand.SelectorActive(true);
+            _playerBallTransitionController.PutBallInHand(CurrentPaperUIInHand.StoredPaper);
+        }
+    }
+    public void LaunchPaper(PaperUI paperUI)
+    {
+        if (_isWritingAnswer)
             return;
 
-        Rigidbody2D currentBall = _playerBallTransitionController.GetCurrentBall();
-        if (currentBall != null)
+        if(CurrentPaperUIAtTable != null)
         {
-            currentBall.gameObject.SetActive(false);
+            CurrentPaperUIAtTable.SelectorActive(false);
 
-            answeredQueue.Add(currentBall.GetComponent<BallController>());
-
-            currentBall.GetComponent<BallController>().Student.HolderActive(false);
+            CurrentPaperUIAtTable = null;
         }
-
-        if(CurrentPaper != null)
-        {
-            AddNewPaper(CurrentPaper);
-        }
-
-        _playerBallTransitionController.PutBallInHand(answeredQueue[index].gameObject);
-
 
         CloseTable();
+
+        if (CurrentPaperUIInHand == paperUI)
+            return;
+
+        if(CurrentPaperUIInHand == null)
+        {
+            CurrentPaperUIInHand = paperUI;
+
+            _playerBallTransitionController.PutBallInHand(paperUI.StoredPaper);
+
+            paperUI.SelectorActive(true);
+
+            return;
+        }
+
+        if(CurrentPaperUIInHand != paperUI)
+        {
+            CurrentPaperUIInHand.SelectorActive(false);
+            _playerBallTransitionController.RemoveBallFromHand(CurrentPaperUIInHand.StoredPaper);
+
+            CurrentPaperUIInHand = paperUI;
+            CurrentPaperUIInHand.SelectorActive(true);
+            _playerBallTransitionController.PutBallInHand(CurrentPaperUIInHand.StoredPaper);
+        }
+    }
+
+    public void OpenTable()
+    {
+        mask.DOSizeDelta(new Vector2(mask.sizeDelta.x, openTransform.anchoredPosition.y), animationSpeed);
     }
 
     public void CloseTable()
     {
-        if(CurrentPaper != null)
-        {
-            AddNewPaper(CurrentPaper);
-
-            CurrentPaper = null;
-        }
-
         mask.DOSizeDelta(new Vector2(mask.sizeDelta.x, closeTransform.anchoredPosition.y), animationSpeed);
-
-        paperAnswer.text = "";
-
-        UpdatePaperUI();
     }
 
 
-    public void UpdatePaperUI()
+    public void SetOpenedPaper(BallController ballController)
     {
-        if (toAnswerQueue.Count == 0)
-        {
-            foreach (GameObject item in papersToAnswer)
-            {
-                item.SetActive(false);
-            }
-        }
-        else
-        {
-            foreach (GameObject item in papersToAnswer)
-            {
-                item.SetActive(false);
-            }
+        paperQuestion.text = _finalQuestions[ballController.Question].GetQuestion;
 
-            for (int i = 0; i < toAnswerQueue.Count; i++)
-            {
-                papersToAnswer[i].SetActive(true);
-            }
+        paperAnswer.text = "";
+    }
+
+    public bool IsThereRoomForMoreNewPapers()
+    {
+        foreach (var paperUI in _preAnswerListUI)
+        {
+            if (paperUI.StoredPaper == null)
+                return true;
         }
 
-        //Actualizamos los papeles contestados
-        if (answeredQueue.Count == 0)
-        {
-            foreach (GameObject item in papersDone)
-            {
-                item.SetActive(false);
-            }
-        }
-        else
-        {
-            foreach (GameObject item in papersDone)
-            {
-                item.SetActive(false);
-            }
+        return false;
+    }
 
-            for (int i = 0; i < answeredQueue.Count; i++)
-            {
-                if (papersDone == null)
-                    continue;
-
-                papersDone[i].SetActive(true);
-            }
+    private bool IsThereRoomToAnswerMorePapers()
+    {
+        foreach (var paperUI in _postAnswerListUI)
+        {
+            if (paperUI.StoredPaper == null)
+                return true;
         }
 
+        return false;
     }
 
 }
