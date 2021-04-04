@@ -8,6 +8,8 @@ public class StudentCallLogic : MonoBehaviour
     [SerializeField] private CheckStudent _checkStudentState;
     [SerializeField] private TableBehaviour _tableBehaviour;
 
+    [SerializeField] private Transform _studentCooldownUI;
+
     [Header("Settings")]
     [SerializeField] private float _teacherCallCooldown = 30.0f;
 
@@ -18,15 +20,19 @@ public class StudentCallLogic : MonoBehaviour
 
     public float TeacherCallCounter => _teacherCallCounter;
 
-    public bool IsTableOpened => _tableBehaviour.PaperOpened;
+    public BallController CurrentPaper => _tableBehaviour.CurrentPaper;
     private void Awake()
     {
         if (_checkStudentState == null)
             throw new ArgumentNullException("_teacherCallCooldown");
         if (_tableBehaviour == null)
             throw new ArgumentNullException("_tableBehaviour");
+        if (_studentCooldownUI == null)
+            throw new ArgumentNullException("_studentCooldownUI");
 
         _teacherCallCounter = _teacherCallCooldown;
+
+        HideCooldown();
     }
 
 
@@ -55,5 +61,17 @@ public class StudentCallLogic : MonoBehaviour
     public float GetCurrentCooldownNormalized()
     {
         return _teacherCallCounter / _teacherCallCooldown;
+    }
+
+    public void ShowCooldown(Transform transform)
+    {
+        _studentCooldownUI.position = transform.position;
+
+        _studentCooldownUI.gameObject.SetActive(true);
+    }
+
+    public void HideCooldown()
+    {
+        _studentCooldownUI.gameObject.SetActive(false);
     }
 }

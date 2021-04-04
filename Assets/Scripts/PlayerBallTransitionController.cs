@@ -22,7 +22,7 @@ public class PlayerBallTransitionController : MonoBehaviour
 
     public void PutBallInBox(GameObject ball)
     {
-        if (_table.ToAnserQueueCount >= _table.MaxListSize)
+        if (_table.ToAnserQueueCount + (_table.CurrentPaper == null? 0 : 1) >= _table.MaxListSize)
             return;
 
         _characterAnimation.Animator.SetTrigger("Catch");
