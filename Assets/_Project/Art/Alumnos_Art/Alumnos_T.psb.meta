@@ -1,5 +1,18 @@
 fileFormatVersion: 2
 guid: 932374f1952a24045b834e939a18e578
+labels:
+- name
+- head-e
+- spriteId
+- e0a334fce18905241b7999ed2d4bb8bd
+- name
+- head-1
+- spriteId
+- 221a7920031929e4bb870ebf48ff6cf5
+- name
+- head-2
+- spriteId
+- 21636694805e0bf48a857a7a23091b47
 ScriptedImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -24,6 +37,7 @@ ScriptedImporter:
     isReadable: 0
     streamingMipmaps: 1
     streamingMipmapsPriority: 0
+    vTOnly: 0
     nPOTScale: 1
     sRGBTexture: 1
     spriteMode: 2
@@ -42,6 +56,9 @@ ScriptedImporter:
     textureType: 8
     textureShape: 1
     singleChannelComponent: 0
+    flipbookRows: 0
+    flipbookColumns: 0
+    ignorePngGamma: 0
     filterMode: 1
     aniso: 1
     mipBias: 0
@@ -102,10 +119,14 @@ ScriptedImporter:
     internalID: 0
     spriteBone:
     - name: head
+      guid: 
       position: {x: 64.79065, y: 2.5168457, z: 2}
       rotation: {x: 0, y: 0, z: 0.71570545, w: 0.6984023}
       length: 84.987114
       parentId: -1
+      color:
+        serializedVersion: 2
+        rgba: 0
     spriteOutline: []
     vertices:
     - position: {x: 78.145996, y: 2.7910004}
@@ -602,10 +623,14 @@ ScriptedImporter:
     internalID: 0
     spriteBone:
     - name: head
+      guid: 
       position: {x: 35.79065, y: 8.516846, z: 2}
       rotation: {x: 0, y: 0, z: 0.71570545, w: 0.6984023}
       length: 84.987114
       parentId: -1
+      color:
+        serializedVersion: 2
+        rgba: 0
     spriteOutline: []
     vertices:
     - position: {x: 47.558, y: 1.9609985}
@@ -1036,10 +1061,14 @@ ScriptedImporter:
     internalID: 0
     spriteBone:
     - name: head
+      guid: 
       position: {x: 44.79065, y: 2.5168457, z: 2}
       rotation: {x: 0, y: 0, z: 0.71570545, w: 0.6984023}
       length: 84.987114
       parentId: -1
+      color:
+        serializedVersion: 2
+        rgba: 0
     spriteOutline: []
     vertices:
     - position: {x: 57.767, y: 3.1660004}
@@ -1459,15 +1488,23 @@ ScriptedImporter:
     internalID: 0
     spriteBone:
     - name: hombro-1
+      guid: 
       position: {x: 19.17566, y: 83.61322, z: -4}
       rotation: {x: 0, y: 0, z: 0.7684931, w: -0.6398582}
       length: 57.392746
       parentId: -1
+      color:
+        serializedVersion: 2
+        rgba: 0
     - name: codo-1
+      guid: 
       position: {x: 57.39273, y: -0.000033119046, z: -4}
       rotation: {x: 0, y: 0, z: 0.21071656, w: 0.9775473}
       length: 28.459751
       parentId: 0
+      color:
+        serializedVersion: 2
+        rgba: 0
     spriteOutline: []
     vertices:
     - position: {x: 22, y: 1}
@@ -1854,15 +1891,23 @@ ScriptedImporter:
     internalID: 0
     spriteBone:
     - name: hombro-1
+      guid: 
       position: {x: 14.175644, y: 85.61322, z: -4}
       rotation: {x: 0, y: 0, z: 0.7684931, w: -0.6398582}
       length: 57.392746
       parentId: -1
+      color:
+        serializedVersion: 2
+        rgba: 0
     - name: codo-1
+      guid: 
       position: {x: 57.392727, y: 0.0000020617654, z: -4}
       rotation: {x: 0, y: 0, z: 0.21071656, w: 0.9775473}
       length: 28.459751
       parentId: 0
+      color:
+        serializedVersion: 2
+        rgba: 0
     spriteOutline: []
     vertices:
     - position: {x: 16.473007, y: 0.42200089}
@@ -2238,15 +2283,23 @@ ScriptedImporter:
     internalID: 0
     spriteBone:
     - name: hombro-1
+      guid: 
       position: {x: 16.17566, y: 88.61322, z: -4}
       rotation: {x: 0, y: 0, z: 0.7684931, w: -0.6398582}
       length: 57.392746
       parentId: -1
+      color:
+        serializedVersion: 2
+        rgba: 0
     - name: codo-1
+      guid: 
       position: {x: 57.39272, y: -0.000003733956, z: -4}
       rotation: {x: 0, y: 0, z: 0.21071656, w: 0.9775473}
       length: 28.459751
       parentId: 0
+      color:
+        serializedVersion: 2
+        rgba: 0
     spriteOutline: []
     vertices:
     - position: {x: 17.720001, y: 0.4889984}
@@ -2611,10 +2664,14 @@ ScriptedImporter:
     internalID: 0
     spriteBone:
     - name: mano-1
+      guid: 
       position: {x: 7.6107483, y: 17.542786, z: -3}
       rotation: {x: 0, y: 0, z: 0.712443, w: -0.70173013}
       length: 19.608786
       parentId: -1
+      color:
+        serializedVersion: 2
+        rgba: 0
     spriteOutline: []
     vertices:
     - position: {x: 43, y: 153}
@@ -2792,10 +2849,14 @@ ScriptedImporter:
     internalID: 0
     spriteBone:
     - name: mano-1
+      guid: 
       position: {x: 8.610748, y: 15.542786, z: -3}
       rotation: {x: 0, y: 0, z: 0.712443, w: -0.70173013}
       length: 19.608786
       parentId: -1
+      color:
+        serializedVersion: 2
+        rgba: 0
     spriteOutline: []
     vertices:
     - position: {x: 16.053001, y: 0.51501465}
@@ -3017,10 +3078,14 @@ ScriptedImporter:
     internalID: 0
     spriteBone:
     - name: mano-1
+      guid: 
       position: {x: 11.610748, y: 27.542786, z: -3}
       rotation: {x: 0, y: 0, z: 0.712443, w: -0.70173013}
       length: 19.608786
       parentId: -1
+      color:
+        serializedVersion: 2
+        rgba: 0
     spriteOutline: []
     vertices:
     - position: {x: 8.022999, y: 0.067993164}
@@ -3286,15 +3351,23 @@ ScriptedImporter:
     internalID: 0
     spriteBone:
     - name: hip-1
+      guid: 
       position: {x: 12.337585, y: 92.588165, z: -2}
       rotation: {x: 0, y: 0, z: -0.6638086, w: 0.7479026}
       length: 57.1775
       parentId: -1
+      color:
+        serializedVersion: 2
+        rgba: 0
     - name: knee-1
+      guid: 
       position: {x: 57.177513, y: 0.000053500957, z: -2}
       rotation: {x: 0, y: 0, z: -0.195609, w: 0.98068196}
       length: 34.20817
       parentId: 0
+      color:
+        serializedVersion: 2
+        rgba: 0
     spriteOutline: []
     vertices:
     - position: {x: 8.546997, y: 0.06300354}
@@ -3659,15 +3732,23 @@ ScriptedImporter:
     internalID: 0
     spriteBone:
     - name: hip-1
+      guid: 
       position: {x: 16.337585, y: 93.588165, z: -2}
       rotation: {x: 0, y: 0, z: -0.6638086, w: 0.7479026}
       length: 57.1775
       parentId: -1
+      color:
+        serializedVersion: 2
+        rgba: 0
     - name: knee-1
+      guid: 
       position: {x: 57.177517, y: 0.00007095766, z: -2}
       rotation: {x: 0, y: 0, z: -0.195609, w: 0.98068196}
       length: 34.20817
       parentId: 0
+      color:
+        serializedVersion: 2
+        rgba: 0
     spriteOutline: []
     vertices:
     - position: {x: 7.6360016, y: 0.0019989014}
@@ -4054,15 +4135,23 @@ ScriptedImporter:
     internalID: 0
     spriteBone:
     - name: hip-1
+      guid: 
       position: {x: 16.3376, y: 97.588165, z: -2}
       rotation: {x: 0, y: 0, z: -0.6638086, w: 0.7479026}
       length: 57.1775
       parentId: -1
+      color:
+        serializedVersion: 2
+        rgba: 0
     - name: knee-1
+      guid: 
       position: {x: 57.177494, y: 0.000024342982, z: -2}
       rotation: {x: 0, y: 0, z: -0.195609, w: 0.98068196}
       length: 34.20817
       parentId: 0
+      color:
+        serializedVersion: 2
+        rgba: 0
     spriteOutline: []
     vertices:
     - position: {x: 26, y: 14}
@@ -4482,10 +4571,14 @@ ScriptedImporter:
     internalID: 0
     spriteBone:
     - name: pie-1
+      guid: 
       position: {x: 12.844299, y: 13.889954, z: -1}
       rotation: {x: 0, y: 0, z: -0.11221028, w: 0.9936845}
       length: 30.376488
       parentId: -1
+      color:
+        serializedVersion: 2
+        rgba: 0
     spriteOutline: []
     vertices:
     - position: {x: 32.432007, y: 0.09300041}
@@ -4751,10 +4844,14 @@ ScriptedImporter:
     internalID: 0
     spriteBone:
     - name: pie-1
+      guid: 
       position: {x: 14.844299, y: 15.889954, z: -1}
       rotation: {x: 0, y: 0, z: -0.11221028, w: 0.9936845}
       length: 30.376488
       parentId: -1
+      color:
+        serializedVersion: 2
+        rgba: 0
     spriteOutline: []
     vertices:
     - position: {x: 40.10501, y: 0.00799942}
@@ -5053,10 +5150,14 @@ ScriptedImporter:
     internalID: 0
     spriteBone:
     - name: pie-1
+      guid: 
       position: {x: 16.8443, y: 13.889954, z: -1}
       rotation: {x: 0, y: 0, z: -0.11221028, w: 0.9936845}
       length: 30.376488
       parentId: -1
+      color:
+        serializedVersion: 2
+        rgba: 0
     spriteOutline: []
     vertices:
     - position: {x: 44.385986, y: 0.11800003}
@@ -5377,15 +5478,23 @@ ScriptedImporter:
     internalID: 0
     spriteBone:
     - name: body-up
+      guid: 
       position: {x: 44.36581, y: -0.0000035472167, z: 0}
       rotation: {x: 0, y: 0, z: 0.19190605, w: 0.9814133}
       length: 41.717804
       parentId: 1
+      color:
+        serializedVersion: 2
+        rgba: 0
     - name: bone_1
+      guid: 
       position: {x: 22.246658, y: 15.149292, z: 0}
       rotation: {x: 0, y: 0, z: 0.6580586, w: 0.75296676}
       length: 44.365818
       parentId: -1
+      color:
+        serializedVersion: 2
+        rgba: 0
     spriteOutline: []
     vertices:
     - position: {x: 41.861, y: 0.037994385}
@@ -5805,15 +5914,23 @@ ScriptedImporter:
     internalID: 0
     spriteBone:
     - name: body-up
+      guid: 
       position: {x: 44.36581, y: -0.000004664804, z: 0}
       rotation: {x: 0, y: 0, z: 0.19190605, w: 0.9814133}
       length: 41.717804
       parentId: 1
+      color:
+        serializedVersion: 2
+        rgba: 0
     - name: bone_1
+      guid: 
       position: {x: 17.246658, y: 18.149292, z: 0}
       rotation: {x: 0, y: 0, z: 0.6580586, w: 0.75296676}
       length: 44.365818
       parentId: -1
+      color:
+        serializedVersion: 2
+        rgba: 0
     spriteOutline: []
     vertices:
     - position: {x: 37.220993, y: 0.45600128}
@@ -6244,15 +6361,23 @@ ScriptedImporter:
     internalID: 0
     spriteBone:
     - name: body-up
+      guid: 
       position: {x: 44.365818, y: -0.000015116301, z: 0}
       rotation: {x: 0, y: 0, z: 0.19190605, w: 0.9814133}
       length: 41.717804
       parentId: 1
+      color:
+        serializedVersion: 2
+        rgba: 0
     - name: bone_1
+      guid: 
       position: {x: 19.246658, y: 31.149292, z: 0}
       rotation: {x: 0, y: 0, z: 0.6580586, w: 0.75296676}
       length: 44.365818
       parentId: -1
+      color:
+        serializedVersion: 2
+        rgba: 0
     spriteOutline: []
     vertices:
     - position: {x: 38.783005, y: 21.953003}
@@ -6826,15 +6951,23 @@ ScriptedImporter:
     internalID: 0
     spriteBone:
     - name: hip-2
+      guid: 
       position: {x: 17.695007, y: 91.203125, z: 1}
       rotation: {x: 0, y: 0, z: -0.6842529, w: 0.7292448}
       length: 56.62468
       parentId: -1
+      color:
+        serializedVersion: 2
+        rgba: 0
     - name: knee-2
+      guid: 
       position: {x: 56.624718, y: 0.000020540825, z: 1}
       rotation: {x: 0, y: 0, z: -0.20550184, w: 0.97865677}
       length: 30.67184
       parentId: 0
+      color:
+        serializedVersion: 2
+        rgba: 0
     spriteOutline: []
     vertices:
     - position: {x: 10.52301, y: 0.44000244}
@@ -7199,15 +7332,23 @@ ScriptedImporter:
     internalID: 0
     spriteBone:
     - name: hip-2
+      guid: 
       position: {x: 22.695007, y: 92.203125, z: 1}
       rotation: {x: 0, y: 0, z: -0.6842529, w: 0.7292448}
       length: 56.62468
       parentId: -1
+      color:
+        serializedVersion: 2
+        rgba: 0
     - name: knee-2
+      guid: 
       position: {x: 56.624718, y: 0.00000056581916, z: 1}
       rotation: {x: 0, y: 0, z: -0.20550184, w: 0.97865677}
       length: 30.67184
       parentId: 0
+      color:
+        serializedVersion: 2
+        rgba: 0
     spriteOutline: []
     vertices:
     - position: {x: 7.6359863, y: 0.0019989014}
@@ -7594,15 +7735,23 @@ ScriptedImporter:
     internalID: 0
     spriteBone:
     - name: hip-2
+      guid: 
       position: {x: 19.695007, y: 96.203125, z: 1}
       rotation: {x: 0, y: 0, z: -0.6842529, w: 0.7292448}
       length: 56.62468
       parentId: -1
+      color:
+        serializedVersion: 2
+        rgba: 0
     - name: knee-2
+      guid: 
       position: {x: 56.624733, y: -0.0000035767036, z: 1}
       rotation: {x: 0, y: 0, z: -0.20550184, w: 0.97865677}
       length: 30.67184
       parentId: 0
+      color:
+        serializedVersion: 2
+        rgba: 0
     spriteOutline: []
     vertices:
     - position: {x: 25.371994, y: 14.503998}
@@ -8022,10 +8171,14 @@ ScriptedImporter:
     internalID: 0
     spriteBone:
     - name: pie-2
+      guid: 
       position: {x: 13.76976, y: 16.884033, z: 2}
       rotation: {x: 0, y: 0, z: -0.14314602, w: 0.9897016}
       length: 25.41854
       parentId: -1
+      color:
+        serializedVersion: 2
+        rgba: 0
     spriteOutline: []
     vertices:
     - position: {x: 37, y: 5}
@@ -8280,10 +8433,14 @@ ScriptedImporter:
     internalID: 0
     spriteBone:
     - name: pie-2
+      guid: 
       position: {x: 16.769775, y: 18.884033, z: 2}
       rotation: {x: 0, y: 0, z: -0.14314602, w: 0.9897016}
       length: 25.41854
       parentId: -1
+      color:
+        serializedVersion: 2
+        rgba: 0
     spriteOutline: []
     vertices:
     - position: {x: 40.519012, y: 0.017997742}
@@ -8593,10 +8750,14 @@ ScriptedImporter:
     internalID: 0
     spriteBone:
     - name: pie-2
+      guid: 
       position: {x: 15.769775, y: 16.884033, z: 2}
       rotation: {x: 0, y: 0, z: -0.14314602, w: 0.9897016}
       length: 25.41854
       parentId: -1
+      color:
+        serializedVersion: 2
+        rgba: 0
     spriteOutline: []
     vertices:
     - position: {x: 51, y: 4.224}
@@ -8917,15 +9078,23 @@ ScriptedImporter:
     internalID: 0
     spriteBone:
     - name: hombro-2
+      guid: 
       position: {x: 24.290527, y: 83.023315, z: 3}
       rotation: {x: 0, y: 0, z: 0.77057326, w: -0.63735145}
       length: 56.120914
       parentId: -1
+      color:
+        serializedVersion: 2
+        rgba: 0
     - name: codo-2
+      guid: 
       position: {x: 56.120945, y: -0.000042547224, z: 4}
       rotation: {x: 0, y: 0, z: 0.21287952, w: 0.9770785}
       length: 29.091297
       parentId: 0
+      color:
+        serializedVersion: 2
+        rgba: 0
     spriteOutline: []
     vertices:
     - position: {x: 22, y: 1}
@@ -9312,15 +9481,23 @@ ScriptedImporter:
     internalID: 0
     spriteBone:
     - name: hombro-2
+      guid: 
       position: {x: 19.290527, y: 85.023315, z: 3}
       rotation: {x: 0, y: 0, z: 0.77057326, w: -0.63735145}
       length: 56.120914
       parentId: -1
+      color:
+        serializedVersion: 2
+        rgba: 0
     - name: codo-2
+      guid: 
       position: {x: 56.12092, y: -0.000016919821, z: 4}
       rotation: {x: 0, y: 0, z: 0.21287952, w: 0.9770785}
       length: 29.091297
       parentId: 0
+      color:
+        serializedVersion: 2
+        rgba: 0
     spriteOutline: []
     vertices:
     - position: {x: 14.739014, y: 0.98199844}
@@ -9685,15 +9862,23 @@ ScriptedImporter:
     internalID: 0
     spriteBone:
     - name: hombro-2
+      guid: 
       position: {x: 20.290527, y: 86.023315, z: 3}
       rotation: {x: 0, y: 0, z: 0.77057326, w: -0.63735145}
       length: 56.120914
       parentId: -1
+      color:
+        serializedVersion: 2
+        rgba: 0
     - name: codo-2
+      guid: 
       position: {x: 56.120907, y: -0.000049997805, z: 4}
       rotation: {x: 0, y: 0, z: 0.21287952, w: 0.9770785}
       length: 29.091297
       parentId: 0
+      color:
+        serializedVersion: 2
+        rgba: 0
     spriteOutline: []
     vertices:
     - position: {x: 23, y: 2}
@@ -10058,10 +10243,14 @@ ScriptedImporter:
     internalID: 0
     spriteBone:
     - name: mano-2
+      guid: 
       position: {x: 12.689331, y: 15.643433, z: 5}
       rotation: {x: 0, y: 0, z: 0.7358823, w: -0.6771096}
       length: 20.013832
       parentId: -1
+      color:
+        serializedVersion: 2
+        rgba: 0
     spriteOutline: []
     vertices:
     - position: {x: 19.575012, y: 2.9810028}
@@ -10283,10 +10472,14 @@ ScriptedImporter:
     internalID: 0
     spriteBone:
     - name: mano-2
+      guid: 
       position: {x: 13.689331, y: 15.643433, z: 5}
       rotation: {x: 0, y: 0, z: 0.7358823, w: -0.6771096}
       length: 20.013832
       parentId: -1
+      color:
+        serializedVersion: 2
+        rgba: 0
     spriteOutline: []
     vertices:
     - position: {x: 19.85199, y: 3.078003}
@@ -10508,10 +10701,14 @@ ScriptedImporter:
     internalID: 0
     spriteBone:
     - name: mano-2
+      guid: 
       position: {x: 13.689316, y: 27.643433, z: 5}
       rotation: {x: 0, y: 0, z: 0.7358823, w: -0.6771096}
       length: 20.013832
       parentId: -1
+      color:
+        serializedVersion: 2
+        rgba: 0
     spriteOutline: []
     vertices:
     - position: {x: 13.496002, y: 0.49700928}
@@ -11133,80 +11330,140 @@ ScriptedImporter:
   characterData:
     bones:
     - name: bone_1
+      guid: 
       position: {x: 196.24666, y: 471.1493, z: 0}
       rotation: {x: 0, y: 0, z: 0.6580586, w: 0.75296676}
       length: 44.365814
       parentId: -1
+      color:
+        serializedVersion: 2
+        rgba: 0
     - name: body-up
+      guid: 
       position: {x: 44.365833, y: 0.000000043963155, z: 0}
       rotation: {x: 0, y: 0, z: 0.19190603, w: 0.9814133}
       length: 41.717808
       parentId: 0
+      color:
+        serializedVersion: 2
+        rgba: 0
     - name: head
+      guid: 
       position: {x: 41.71781, y: 0.0000013628342, z: 2}
       rotation: {x: 0, y: 0, z: -0.11346286, w: 0.9935423}
       length: 84.987114
       parentId: 1
+      color:
+        serializedVersion: 2
+        rgba: 0
     - name: hombro-1
+      guid: 
       position: {x: 24.58942, y: 13.303747, z: -4}
       rotation: {x: 0, y: -0, z: 0.9765418, w: 0.21532805}
       length: 57.392746
       parentId: 1
+      color:
+        serializedVersion: 2
+        rgba: 0
     - name: codo-1
+      guid: 
       position: {x: 57.39273, y: -0.0000111546115, z: -4}
       rotation: {x: 0, y: 0, z: 0.21071658, w: 0.9775472}
       length: 28.459753
       parentId: 3
+      color:
+        serializedVersion: 2
+        rgba: 0
     - name: mano-1
+      guid: 
       position: {x: 28.459726, y: -0.0000041626918, z: -3}
       rotation: {x: 0, y: 0, z: -0.12844281, w: 0.991717}
       length: 19.608784
       parentId: 4
+      color:
+        serializedVersion: 2
+        rgba: 0
     - name: hip-1
+      guid: 
       position: {x: -0.2224974, y: 4.9236116, z: -2}
       rotation: {x: 0, y: -0, z: -0.9919895, w: 0.12632084}
       length: 57.17749
       parentId: 0
+      color:
+        serializedVersion: 2
+        rgba: 0
     - name: knee-1
+      guid: 
       position: {x: 57.17749, y: 0.000024790945, z: -2}
       rotation: {x: 0, y: 0, z: -0.19560899, w: 0.98068196}
       length: 34.20817
       parentId: 6
+      color:
+        serializedVersion: 2
+        rgba: 0
     - name: pie-1
+      guid: 
       position: {x: 34.20818, y: -0.0000028604836, z: -1}
       rotation: {x: 0, y: 0, z: 0.7245153, w: 0.6892587}
       length: 30.376476
       parentId: 7
+      color:
+        serializedVersion: 2
+        rgba: 0
     - name: hip-2
+      guid: 
       position: {x: -0.07410292, y: -6.516974, z: 1}
       rotation: {x: 0, y: -0, z: -0.9951055, w: 0.09881862}
       length: 56.624676
       parentId: 0
+      color:
+        serializedVersion: 2
+        rgba: 0
     - name: knee-2
+      guid: 
       position: {x: 56.624702, y: 0.0000067531814, z: 1}
       rotation: {x: 0, y: 0, z: -0.20550184, w: 0.97865677}
       length: 30.671835
       parentId: 9
+      color:
+        serializedVersion: 2
+        rgba: 0
     - name: pie-2
+      guid: 
       position: {x: 30.671844, y: 0.000008933705, z: 2}
       rotation: {x: 0, y: 0, z: 0.72903824, w: 0.68447304}
       length: 25.41853
       parentId: 10
+      color:
+        serializedVersion: 2
+        rgba: 0
     - name: hombro-2
+      guid: 
       position: {x: 22.743343, y: 8.497308, z: 3}
       rotation: {x: 0, y: -0, z: 0.9758352, w: 0.21850789}
       length: 56.120907
       parentId: 1
+      color:
+        serializedVersion: 2
+        rgba: 0
     - name: codo-2
+      guid: 
       position: {x: 56.12092, y: -0.0000126673385, z: 4}
       rotation: {x: 0, y: 0, z: 0.2128795, w: 0.9770785}
       length: 29.091291
       parentId: 12
+      color:
+        serializedVersion: 2
+        rgba: 0
     - name: mano-2
+      guid: 
       position: {x: 29.091297, y: 0.0000030196416, z: 5}
       rotation: {x: 0, y: 0, z: -0.1610453, w: 0.98694706}
       length: 20.013832
       parentId: 13
+      color:
+        serializedVersion: 2
+        rgba: 0
     parts:
     - spritePosition:
         x: 127

@@ -24,6 +24,7 @@ ScriptedImporter:
     isReadable: 0
     streamingMipmaps: 1
     streamingMipmapsPriority: 0
+    vTOnly: 0
     nPOTScale: 1
     sRGBTexture: 1
     spriteMode: 2
@@ -42,6 +43,9 @@ ScriptedImporter:
     textureType: 8
     textureShape: 1
     singleChannelComponent: 0
+    flipbookRows: 0
+    flipbookColumns: 0
+    ignorePngGamma: 0
     filterMode: 1
     aniso: 1
     mipBias: 0
@@ -102,10 +106,14 @@ ScriptedImporter:
     internalID: 0
     spriteBone:
     - name: head
+      guid: 
       position: {x: 79.01523, y: 11.260529, z: 2}
       rotation: {x: 0, y: 0, z: 0.7176452, w: 0.696409}
       length: 68.7237
       parentId: -1
+      color:
+        serializedVersion: 2
+        rgba: 0
     spriteOutline: []
     vertices:
     - position: {x: 97.998, y: 8.001999}
@@ -481,15 +489,23 @@ ScriptedImporter:
     internalID: 0
     spriteBone:
     - name: elbow_1
+      guid: 
       position: {x: 53.469585, y: 0.0000013298068, z: -4}
       rotation: {x: 0, y: 0, z: 0.122392885, w: 0.99248177}
       length: 54.83355
       parentId: 1
+      color:
+        serializedVersion: 2
+        rgba: 0
     - name: shoulder_1
+      guid: 
       position: {x: 20.948105, y: 116.58014, z: -4}
       rotation: {x: 0, y: 0, z: 0.76226956, w: -0.6472597}
       length: 53.469593
       parentId: -1
+      color:
+        serializedVersion: 2
+        rgba: 0
     spriteOutline: []
     vertices:
     - position: {x: 19.970001, y: 0.31799316}
@@ -865,10 +881,14 @@ ScriptedImporter:
     internalID: 0
     spriteBone:
     - name: hand_1
+      guid: 
       position: {x: 8.80278, y: 33.17108, z: -3}
       rotation: {x: 0, y: 0, z: 0.6454226, w: -0.7638257}
       length: 24.845192
       parentId: -1
+      color:
+        serializedVersion: 2
+        rgba: 0
     spriteOutline: []
     vertices:
     - position: {x: 12.042999, y: 0.07299805}
@@ -1123,20 +1143,32 @@ ScriptedImporter:
     internalID: 0
     spriteBone:
     - name: body_down
+      guid: 
       position: {x: 44.046097, y: 14.225403, z: 0}
       rotation: {x: 0, y: 0, z: 0.7064124, w: 0.7078005}
       length: 55.78911
       parentId: -1
+      color:
+        serializedVersion: 2
+        rgba: 0
     - name: body_up
+      guid: 
       position: {x: 55.789104, y: -0.0000052809773, z: 0}
       rotation: {x: 0, y: 0, z: 0.049192637, w: 0.9987893}
       length: 47.639713
       parentId: 0
+      color:
+        serializedVersion: 2
+        rgba: 0
     - name: neck
+      guid: 
       position: {x: 47.639698, y: 0.00000071736804, z: 1}
       rotation: {x: 0, y: 0, z: 0.097487666, w: 0.99523675}
       length: 12.349745
       parentId: 1
+      color:
+        serializedVersion: 2
+        rgba: 0
     spriteOutline: []
     vertices:
     - position: {x: 57.622, y: 4.4120026}
@@ -1545,15 +1577,23 @@ ScriptedImporter:
     internalID: 0
     spriteBone:
     - name: shoulder_2
+      guid: 
       position: {x: 19.947998, y: 117.204956, z: 3}
       rotation: {x: 0, y: 0, z: 0.7641306, w: -0.64506155}
       length: 53.90581
       parentId: -1
+      color:
+        serializedVersion: 2
+        rgba: 0
     - name: elbow_2
+      guid: 
       position: {x: 53.905807, y: -0.0000019739587, z: 4}
       rotation: {x: 0, y: 0, z: 0.12211029, w: 0.9925166}
       length: 54.428078
       parentId: 0
+      color:
+        serializedVersion: 2
+        rgba: 0
     spriteOutline: []
     vertices:
     - position: {x: 18.880005, y: 0.32900238}
@@ -1929,10 +1969,14 @@ ScriptedImporter:
     internalID: 0
     spriteBone:
     - name: hand_2
+      guid: 
       position: {x: 8.048813, y: 33.793427, z: 5}
       rotation: {x: 0, y: 0, z: 0.64738774, w: -0.7621608}
       length: 23.296173
       parentId: -1
+      color:
+        serializedVersion: 2
+        rgba: 0
     spriteOutline: []
     vertices:
     - position: {x: 14.914001, y: 0.4750061}
@@ -2187,15 +2231,23 @@ ScriptedImporter:
     internalID: 0
     spriteBone:
     - name: knee_1
+      guid: 
       position: {x: 70.10659, y: 0.00008450061, z: -2}
       rotation: {x: 0, y: 0, z: -0.10650762, w: 0.9943119}
       length: 54.158615
       parentId: 1
+      color:
+        serializedVersion: 2
+        rgba: 0
     - name: hip_1
+      guid: 
       position: {x: 17.828934, y: 126.91754, z: -2}
       rotation: {x: 0, y: 0, z: -0.68641037, w: 0.72721446}
       length: 70.1066
       parentId: -1
+      color:
+        serializedVersion: 2
+        rgba: 0
     spriteOutline: []
     vertices:
     - position: {x: 15.459999, y: 0.96099854}
@@ -2582,10 +2634,14 @@ ScriptedImporter:
     internalID: 0
     spriteBone:
     - name: foot_1
+      guid: 
       position: {x: 14.474075, y: 16.424255, z: -1}
       rotation: {x: 0, y: 0, z: -0.11388923, w: 0.99349344}
       length: 31.615713
       parentId: -1
+      color:
+        serializedVersion: 2
+        rgba: 0
     spriteOutline: []
     vertices:
     - position: {x: 50.225, y: 0.1579895}
@@ -2895,20 +2951,32 @@ ScriptedImporter:
     internalID: 0
     spriteBone:
     - name: knee_2
+      guid: 
       position: {x: 70.8245, y: 0.000010190157, z: 1}
       rotation: {x: 0, y: 0, z: -0.11979197, w: 0.99279904}
       length: 52.97297
       parentId: 1
+      color:
+        serializedVersion: 2
+        rgba: 0
     - name: hip_2
+      guid: 
       position: {x: 16.285461, y: 126.66318, z: 1}
       rotation: {x: 0, y: 0, z: -0.68326765, w: 0.7301681}
       length: 70.82448
       parentId: -1
+      color:
+        serializedVersion: 2
+        rgba: 0
     - name: shoulder_2
+      guid: 
       position: {x: 4.947998, y: 219.20496, z: 3}
       rotation: {x: 0, y: 0, z: 0.7641306, w: -0.64506155}
       length: 53.90581
       parentId: -1
+      color:
+        serializedVersion: 2
+        rgba: 0
     spriteOutline: []
     vertices:
     - position: {x: 14.234001, y: 0.47499847}
@@ -3295,10 +3363,14 @@ ScriptedImporter:
     internalID: 0
     spriteBone:
     - name: foot_2
+      guid: 
       position: {x: 12.818939, y: 16.819763, z: 2}
       rotation: {x: 0, y: 0, z: -0.071374685, w: 0.99744964}
       length: 35.54568
       parentId: -1
+      color:
+        serializedVersion: 2
+        rgba: 0
     spriteOutline: []
     vertices:
     - position: {x: 51.017, y: 0.102996826}
@@ -3755,85 +3827,149 @@ ScriptedImporter:
   characterData:
     bones:
     - name: body_down
+      guid: 
       position: {x: 161.0461, y: 277.2254, z: 0}
       rotation: {x: 0, y: 0, z: 0.7064124, w: 0.7078005}
       length: 55.78911
       parentId: -1
+      color:
+        serializedVersion: 2
+        rgba: 0
     - name: body_up
+      guid: 
       position: {x: 55.789104, y: -0.000007188326, z: 0}
       rotation: {x: 0, y: 0, z: 0.049192667, w: 0.9987893}
       length: 47.63971
       parentId: 0
+      color:
+        serializedVersion: 2
+        rgba: 0
     - name: hip_1
+      guid: 
       position: {x: 2.679926, y: 6.222435, z: -2}
       rotation: {x: 0, y: -0, z: -0.9995549, w: 0.029833972}
       length: 70.106606
       parentId: 0
+      color:
+        serializedVersion: 2
+        rgba: 0
     - name: knee_1
+      guid: 
       position: {x: 70.106606, y: 0.00008014355, z: -2}
       rotation: {x: 0, y: 0, z: -0.10650761, w: 0.9943119}
       length: 54.158615
       parentId: 2
+      color:
+        serializedVersion: 2
+        rgba: 0
     - name: foot_1
+      guid: 
       position: {x: 54.15861, y: 0.0000061496867, z: -1}
       rotation: {x: 0, y: 0, z: 0.6809906, w: 0.7322923}
       length: 31.615707
       parentId: 3
+      color:
+        serializedVersion: 2
+        rgba: 0
     - name: hip_2
+      guid: 
       position: {x: 2.4244955, y: 6.7654066, z: 1}
       rotation: {x: 0, y: -0, z: -0.99941695, w: 0.034144633}
       length: 70.82447
       parentId: 0
+      color:
+        serializedVersion: 2
+        rgba: 0
     - name: knee_2
+      guid: 
       position: {x: 70.82447, y: -0.000008086254, z: 1}
       rotation: {x: 0, y: 0, z: -0.11979198, w: 0.99279904}
       length: 52.972958
       parentId: 5
+      color:
+        serializedVersion: 2
+        rgba: 0
     - name: foot_2
+      guid: 
       position: {x: 52.972965, y: 0.000010785875, z: 2}
       rotation: {x: 0, y: 0, z: 0.71796435, w: 0.69607997}
       length: 35.545666
       parentId: 6
+      color:
+        serializedVersion: 2
+        rgba: 0
     - name: neck
+      guid: 
       position: {x: 47.639725, y: -0.0000136883855, z: 1}
       rotation: {x: 0, y: 0, z: 0.09748765, w: 0.99523675}
       length: 12.349745
       parentId: 1
+      color:
+        serializedVersion: 2
+        rgba: 0
     - name: head
+      guid: 
       position: {x: 12.349736, y: -0.0000068439876, z: 2}
       rotation: {x: 0, y: 0, z: -0.13048372, w: 0.9914505}
       length: 68.72371
       parentId: 8
+      color:
+        serializedVersion: 2
+        rgba: 0
     - name: shoulder_1
+      guid: 
       position: {x: -3.6034315, y: 15.30231, z: -4}
       rotation: {x: 0, y: -0, z: 0.97428113, w: 0.22533596}
       length: 53.46959
       parentId: 8
+      color:
+        serializedVersion: 2
+        rgba: 0
     - name: elbow_1
+      guid: 
       position: {x: 53.469574, y: -0.0000067506917, z: -4}
       rotation: {x: 0, y: 0, z: 0.122392885, w: 0.99248177}
       length: 54.833553
       parentId: 10
+      color:
+        serializedVersion: 2
+        rgba: 0
     - name: hand_1
+      guid: 
       position: {x: 54.833565, y: 0.0000005183442, z: -3}
       rotation: {x: 0, y: 0, z: 0.042522594, w: 0.99909556}
       length: 24.845192
       parentId: 11
+      color:
+        serializedVersion: 2
+        rgba: 0
     - name: shoulder_2
+      guid: 
       position: {x: -3.9627297, y: 15.410324, z: 3}
       rotation: {x: 0, y: -0, z: 0.9736281, w: 0.22814117}
       length: 53.905804
       parentId: 8
+      color:
+        serializedVersion: 2
+        rgba: 0
     - name: elbow_2
+      guid: 
       position: {x: 53.905807, y: -0.0000002111924, z: 4}
       rotation: {x: 0, y: 0, z: 0.12211034, w: 0.9925165}
       length: 54.428066
       parentId: 13
+      color:
+        serializedVersion: 2
+        rgba: 0
     - name: hand_2
+      guid: 
       position: {x: 54.428074, y: -0.000001116654, z: 5}
       rotation: {x: 0, y: 0, z: 0.043111335, w: 0.99907035}
       length: 23.296167
       parentId: 14
+      color:
+        serializedVersion: 2
+        rgba: 0
     parts:
     - spritePosition:
         x: 74
